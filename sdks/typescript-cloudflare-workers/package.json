@@ -1,0 +1,27 @@
+{
+  "name": "@ledgerproof/workers",
+  "version": "1.0.0",
+  "description": "Cloudflare Workers binding for LedgerProof — auto-issue Article 50 receipts from edge inference.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist", "src", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+  },
+  "keywords": ["cloudflare", "workers", "edge", "ledgerproof", "eu-ai-act"],
+  "author": "Veronica S. Dawkins <veronica@ledgerproofhq.io>",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "dependencies": {
+    "@ledgerproof/sdk": "^1.0.0"
+  }
+}

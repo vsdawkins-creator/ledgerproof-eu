@@ -1,0 +1,17 @@
+{
+  "name": "@ledgerproof/docs-site",
+  "version": "1.0.0",
+  "description": "docs.ledgerproofhq.io — Astro Starlight documentation site.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@astrojs/starlight": "^0.21.0",
+    "astro": "^4.5.0"
+  }
+}

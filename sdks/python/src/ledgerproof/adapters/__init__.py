@@ -36,16 +36,24 @@ def attach(target: Any, **kwargs: Any) -> None:
         openai_adapter.attach(target, **kwargs)
         return
     if vendor == "anthropic":
-        # Sprint 2.
-        raise ConfigurationError(
-            "Anthropic adapter not yet shipped in this SDK release. "
-            "Use the direct LedgerProof.publish_ai_article_50() API for now. "
-            "Track: https://github.com/vsdawkins-creator/ledgerproof-python/issues"
-        )
+        from . import anthropic as anthropic_adapter
+
+        anthropic_adapter.attach(target, **kwargs)
+        return
+    if vendor == "google":
+        from . import google as google_adapter
+
+        google_adapter.attach(target, **kwargs)
+        return
+    if vendor == "mistral":
+        from . import mistral as mistral_adapter
+
+        mistral_adapter.attach(target, **kwargs)
+        return
     raise ConfigurationError(
         f"Don't know how to attach to {target!r}. "
-        f"Pass the openai module or an openai client. "
-        f"For other AI providers, use LedgerProof.publish_ai_article_50() directly."
+        f"Supported: openai, anthropic, google.generativeai, mistralai. "
+        f"For other providers, use LedgerProof.publish_ai_article_50() directly."
     )
 
 
@@ -57,7 +65,21 @@ def detach(target: Any) -> None:
 
         openai_adapter.detach(target)
         return
-    # Unknown target — silently no-op (matches detach idempotency contract).
+    if vendor == "anthropic":
+        from . import anthropic as anthropic_adapter
+
+        anthropic_adapter.detach(target)
+        return
+    if vendor == "google":
+        from . import google as google_adapter
+
+        google_adapter.detach(target)
+        return
+    if vendor == "mistral":
+        from . import mistral as mistral_adapter
+
+        mistral_adapter.detach(target)
+        return
 
 
 def _identify_vendor(target: Any) -> str | None:

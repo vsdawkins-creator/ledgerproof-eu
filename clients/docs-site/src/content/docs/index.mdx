@@ -1,0 +1,69 @@
+---
+title: LedgerProof
+description: EU AI Act Article 50 cryptographic transparency receipts, anchored to Bitcoin.
+template: splash
+hero:
+  tagline: Three lines of code. Article 50 compliance, anchored to Bitcoin, GDPR-safe by design.
+  actions:
+    - text: Get started
+      link: /start/your-first-receipt/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/vsdawkins-creator/ledgerproof-eu
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Why LedgerProof
+
+The EU AI Act's Article 50 enforces on **2 August 2026**. Penalties reach
+**€15 million or 3% of global revenue**. Article 50(2) requires AI-generated
+content to be marked in machine-readable format. LedgerProof is the open
+protocol that does this — and it works in three lines of code.
+
+<CardGrid stagger>
+  <Card title="Python" icon="seti:python">
+    ```python
+    import openai, ledgerproof
+    ledgerproof.attach(openai_client, publisher_id="LEI:...",
+                       deployer_country="DE", deployer_name="Acme")
+    # Every chat completion auto-issues an LPR receipt.
+    ```
+  </Card>
+  <Card title="TypeScript" icon="seti:typescript">
+    ```ts
+    import OpenAI from "openai";
+    import { attach } from "@ledgerproof/sdk/adapters/openai";
+    attach(new OpenAI(), { publisherId: "LEI:...", deployerCountry: "DE",
+                            deployerName: "Acme" });
+    ```
+  </Card>
+  <Card title="Vercel AI SDK" icon="seti:typescript">
+    ```ts
+    import { ledgerproof } from "@ledgerproof/vercel-ai";
+    streamText({ ..., experimental_telemetry: ledgerproof({ ... }) });
+    ```
+  </Card>
+  <Card title="WordPress" icon="seti:php">
+    Install the LedgerProof plugin. Flag AI-assisted posts. Done.
+  </Card>
+</CardGrid>
+
+## Choose your path
+
+<CardGrid>
+  <Card title="Developers" icon="rocket">
+    Build with LedgerProof in 5 minutes. SDKs for Python, TypeScript, edge runtimes.
+    [Start here →](/start/your-first-receipt/)
+  </Card>
+  <Card title="Regulators" icon="approve-check">
+    Verify any LPR receipt. No login required. Bulk lookup API.
+    [Verifier docs →](/for-regulators/verify-a-receipt/)
+  </Card>
+  <Card title="Lawyers" icon="document">
+    Article 50 explained. LPR as evidence. GDPR compliance posture.
+    [Legal docs →](/for-lawyers/article-50-overview/)
+  </Card>
+</CardGrid>

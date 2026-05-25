@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-ledgerproof"
+version = "1.0.0"
+description = "LangChain callback that auto-issues LPR Article 50 receipts for every LLM call."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Veronica S. Dawkins", email = "veronica@ledgerproofhq.io" }]
+keywords = ["langchain", "ledgerproof", "eu-ai-act", "article-50", "compliance"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "ledgerproof>=1.0",
+  "langchain-core>=0.1",
+]
+
+[project.urls]
+Homepage = "https://ledgerproofhq.io"
+Documentation = "https://docs.ledgerproofhq.io/integrations/langchain"
+Repository = "https://github.com/vsdawkins-creator/ledgerproof-python"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/langchain_ledgerproof"]
