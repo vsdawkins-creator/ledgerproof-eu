@@ -65,7 +65,7 @@ Veronica S. Dawkins, founder/editor of the LedgerProof Foundation. Building LPR 
 3. ✅ ~~Install fly CLI~~ — v0.4.54, authenticated.
 4. ✅ ~~DNS: `api-eu CNAME ledgerproof-api-eu.fly.dev` + TLS cert~~ — Done 2026-05-25. `https://api-eu.ledgerproofhq.io` live, Let's Encrypt cert issued.
 5. ✅ ~~Push `feat/lpr-1.0-eu-spec-conformant` + open PR to main~~ — Pushed. Open PR at GitHub.
-6. **Run full smoke suite**: `cd 13-api-backend && ./run-eu-smoke-tests.sh` (after fly CLI installed)
+6. ✅ ~~**Run full smoke suite**~~ — **PASS 7 / FAIL 0 / SKIP 2** (T3 WireGuard/network). DEMO-READY. Fixes: counter bug, ADMIN_SECRET head-1, unique KEY_ID per run, artifact_hash/content_type/bytes fields. Committed 2026-05-25.
 7. Decide EU anchor worker timing (fund EU hot wallet) — Phase 2.
 8. Rate limiting (tower-governor) — pre-scale hardening.
 9. §8.5 spec-code field divergence — resolve before IETF draft (flagged, deferred).
