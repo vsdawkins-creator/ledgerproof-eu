@@ -1,0 +1,115 @@
+# LedgerProof — Fly.io EU Region Deployment Configuration
+# Calendar operator + API backend for EU data residency (DORA/GDPR compliance)
+# Region: fra (Frankfurt) — primary EU deployment
+# Backup region: ams (Amsterdam)
+#
+# Deploy: fly deploy --config fly-eu.toml
+# Set secrets first: fly secrets set --config fly-eu.toml BITCOIN_HOT_WALLET_WIF=... DATABASE_URL=...
+
+app = "ledgerproof-api-eu"
+primary_region = "fra"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+  dockerfile = "Dockerfile.api"
+
+[env]
+  LEDGERPROOF_REGION = "eu"
+  LEDGERPROOF_DATA_RESIDENCY = "EU"
+  BITCOIN_NETWORK = "mainnet"
+  ANCHOR_SUBSTRATE = "bitcoin-mainnet"
+  ANCHOR_WINDOW_HOURS = "24"
+  LPR_VERSION = "1.0"
+  LOG_LEVEL = "info"
+  GDPR_MODE = "true"
+  EU_AI_ACT_50_ENABLED = "true"
+  CORS_ORIGINS = "https://publish.ledgerproofhq.io,https://verify.ledgerproofhq.io"
+  # Data residency assertion — included in all EU receipts
+  CALENDAR_OPERATOR_JURISDICTION = "EU"
+  CALENDAR_OPERATOR_COUNTRY = "DE"
+
+# Secrets — set via: fly secrets set --config fly-eu.toml KEY=VALUE
+# Required secrets (NEVER commit these):
+#   DATABASE_URL          — PostgreSQL connection string (Fly Postgres EU instance)
+#   BITCOIN_HOT_WALLET_WIF — Hot wallet key for OP_RETURN transactions (Fly secrets only)
+#   API_KEY_SALT          — Salt for API key hashing
+#   SIGNING_KEY_PATH      — Path to Ed25519 signing key in Fly volume
+#   BTCD_RPC_HOST         — Bitcoin node RPC host
+#   BTCD_RPC_USER         — Bitcoin node RPC username
+#   BTCD_RPC_PASS         — Bitcoin node RPC password
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 2  # EU data residency requires HA
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 500
+    soft_limit = 400
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 2
+  memory_mb = 1024
+
+[[regions]]
+  name = "fra"  # Frankfurt — primary EU region (GDPR, DORA compliant)
+
+[[regions]]
+  name = "ams"  # Amsterdam — secondary EU region (failover)
+
+[mounts]
+  # Persistent volume for Ed25519 signing key and receipt WAL
+  source = "ledgerproof_eu_data"
+  destination = "/data"
+  initial_size = "10gb"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    [services.ports.force_https]
+      enabled = true
+
+  [services.concurrency]
+    type = "requests"
+    hard_limit = 500
+    soft_limit = 400
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "5s"
+
+  [[services.http_checks]]
+    interval = "30s"
+    timeout = "2s"
+    grace_period = "5s"
+    method = "GET"
+    path = "/health"
+    protocol = "https"
+    tls_skip_verify = false
+
+# Postgres database — EU region
+# Provision with: fly postgres create --name ledgerproof-db-eu --region fra --initial-cluster-size 2
+# Attach with: fly postgres attach ledgerproof-db-eu --app ledgerproof-api-eu
+
+# DNS
+# api-eu.ledgerproofhq.io → this app
+# Add CNAME: api-eu.ledgerproofhq.io → ledgerproof-api-eu.fly.dev
+# The main api.ledgerproofhq.io should route EU requests to api-eu via geo-routing
+
+[deploy]
+  release_command = "python -m alembic upgrade head"
+  strategy = "rolling"
