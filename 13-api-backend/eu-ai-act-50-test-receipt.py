@@ -198,13 +198,23 @@ def main():
     # Required fields: ai_system_id, deployer_id, content_category
     # Optional: ai_system_version, deployer_name, deployer_country
     # Omit: artifact_hash, artifact_content_type, artifact_bytes (not needed for smoke test)
+    # Required fields per AiArticle50Content struct (quantum-edge-2/src/schemas.rs):
+    #   ai_system_id, deployer_id, deployer_name, deployer_country,
+    #   content_category, artifact_hash, artifact_content_type, artifact_bytes
+    # Optional (skip_serializing_if = None): ai_system_version, supervisory_authority
+    SMOKE_TEXT = b"LedgerProof EU smoke test artifact"
+    artifact_hash_val = sha256_hex(SMOKE_TEXT)
+
     content = {
-        "ai_system_id":       "test-ai-system-ledgerproof-smoke-001",
-        "ai_system_version":  "1.0.0",
-        "content_category":   "SYNTHETIC_TEXT",
-        "deployer_country":   "US",
-        "deployer_id":        "LedgerProof-Foundation-EU-Pilot",
-        "deployer_name":      "LedgerProof Foundation",
+        "ai_system_id":           "test-ai-system-ledgerproof-smoke-001",
+        "ai_system_version":      "1.0.0",
+        "artifact_bytes":         len(SMOKE_TEXT),
+        "artifact_content_type":  "text/plain",
+        "artifact_hash":          artifact_hash_val,
+        "content_category":       "SYNTHETIC_TEXT",
+        "deployer_country":       "US",
+        "deployer_id":            "LedgerProof-Foundation-EU-Pilot",
+        "deployer_name":          "LedgerProof Foundation",
     }
 
     # content_hash = SHA-256 of the canonical (sorted-key) JSON of the content object.
