@@ -1,6 +1,6 @@
 {
   "name": "@ledgerproof/vercel-ai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vercel AI SDK plug-in that auto-issues EU AI Act Article 50 receipts for every model call.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -13,20 +13,37 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "src", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
     "test": "vitest run"
   },
-  "keywords": ["vercel", "ai-sdk", "ledgerproof", "eu-ai-act", "article-50"],
+  "keywords": [
+    "vercel",
+    "ai-sdk",
+    "ledgerproof",
+    "eu-ai-act",
+    "article-50"
+  ],
   "author": "Veronica S. Dawkins <veronica@ledgerproofhq.io>",
   "license": "Apache-2.0",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "sideEffects": false,
   "dependencies": {
     "@ledgerproof/sdk": "^1.0.0"
   },
   "peerDependencies": {
     "ai": ">=3.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
   }
 }

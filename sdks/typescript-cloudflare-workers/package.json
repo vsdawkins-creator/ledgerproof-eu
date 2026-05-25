@@ -1,7 +1,7 @@
 {
   "name": "@ledgerproof/workers",
   "version": "1.0.0",
-  "description": "Cloudflare Workers binding for LedgerProof — auto-issue Article 50 receipts from edge inference.",
+  "description": "Cloudflare Workers binding for LedgerProof \u2014 auto-issue Article 50 receipts from edge inference.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -13,15 +13,31 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "src", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean"
   },
-  "keywords": ["cloudflare", "workers", "edge", "ledgerproof", "eu-ai-act"],
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "edge",
+    "ledgerproof",
+    "eu-ai-act"
+  ],
   "author": "Veronica S. Dawkins <veronica@ledgerproofhq.io>",
   "license": "Apache-2.0",
   "sideEffects": false,
   "dependencies": {
     "@ledgerproof/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "@cloudflare/workers-types": "^4.20240502.0"
   }
 }
