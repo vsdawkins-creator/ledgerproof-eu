@@ -202,10 +202,14 @@ def main():
     #   ai_system_id, deployer_id, deployer_name, deployer_country,
     #   content_category, artifact_hash, artifact_content_type, artifact_bytes
     # Optional (skip_serializing_if = None): ai_system_version, supervisory_authority
+    # LPR v1.1 additions (all optional, server-side defaults apply if omitted):
+    #   generation_type, source_content_hash, perceptual_hash, transparency_marker,
+    #   is_public_interest, enforcement_date, profile_version
     SMOKE_TEXT = b"LedgerProof EU smoke test artifact"
     artifact_hash_val = sha256_hex(SMOKE_TEXT)
 
     content = {
+        # v1.0 base fields
         "ai_system_id":           "test-ai-system-ledgerproof-smoke-001",
         "ai_system_version":      "1.0.0",
         "artifact_bytes":         len(SMOKE_TEXT),
@@ -215,6 +219,12 @@ def main():
         "deployer_country":       "US",
         "deployer_id":            "LedgerProof-Foundation-EU-Pilot",
         "deployer_name":          "LedgerProof Foundation",
+        # v1.1 additions — exercise the new fields end-to-end
+        "generation_type":        "FULLY_GENERATED",
+        "transparency_marker":    "AI-GENERATED: LedgerProof smoke-test artifact (LPR v1.1)",
+        "is_public_interest":     False,
+        "enforcement_date":       "2026-08-02",
+        "profile_version":        "EU-AI-ACT-50-v1.1",
     }
 
     # content_hash = SHA-256 of the canonical (sorted-key) JSON of the content object.

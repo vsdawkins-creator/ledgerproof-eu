@@ -44,20 +44,44 @@ Veronica S. Dawkins, founder/editor of the LedgerProof Foundation. Building LPR 
 ## Key Docs (this dir)
 | File | Purpose |
 |---|---|
-| `04-lpr-spec/LPR-1.0-SPECIFICATION.md` | The spec itself — §8.5 = EU AI Act 50 profile |
-| `12-eu-compliance/01-EU-AI-ACT-50-PROFILE.md` | Source of §8.5 field definitions |
-| `EU-SPRINT-STATUS.md` | Source-of-truth sprint status |
+| `04-lpr-spec/LPR-1.0-SPECIFICATION.md` | v1.0 base spec |
+| `04-lpr-spec/LPR-1.1-SPECIFICATION.md` | **v1.1 — full Article 50 coverage (50(1),(2),(4))** |
+| `04-lpr-spec/IETF-DRAFT-DAWKINS-SCITT-AI-ARTICLE50-00.txt` | **IETF draft — submit to SCITT WG** |
+| `04-lpr-spec/C2PA-ASSERTION-SPEC.md` | **C2PA assertion mapping — `org.ledgerproof.receipt.v1`** |
+| `12-eu-compliance/01-EU-AI-ACT-50-PROFILE.md` | Article 50 profile (v1.0) |
+| `12-eu-compliance/02-C2PA-COMPATIBILITY.md` | C2PA compatibility (existing) |
+| `12-eu-compliance/07-EIDAS-COMPATIBILITY.md` | **eIDAS compatibility statement** |
+| `12-eu-compliance/08-EU-COP-SIGNATORY-APPLICATION.md` | **EU AI Act Code of Practice signatory application** |
+| `07-coalition/03-LPR-V1.1-ADOPTION-LETTER.md` | **Founding-adopter coalition letter template** |
+| `09-capital/outreach/01-LANGCHAIN-PARTNERSHIP-PROPOSAL.md` | **LangChain partnership proposal** |
+| `EU-SPRINT-STATUS.md` | Sprint status |
 | `WHAT-LEDGERPROOF-EU-DOES.md` | Institution/investor explainer |
 | `HOW-LEDGERPROOF-HANDLES-DEEPFAKES.md` | Regulator/journalist explainer (Art. 50(2)) |
 | `13-api-backend/CONTRACTOR-AUDIT-MAY24.md` | Senior Rust audit |
 | `13-api-backend/EU-SMOKE-TEST-PLAN.md` | 7-test EU validation plan |
 | `13-api-backend/EU-DNS-PLAN.md` | DNS wire-up for api-eu.ledgerproofhq.io |
-| `13-api-backend/eu-ai-act-50-test-receipt.py` | End-to-end receipt issuance script (Test 5) |
-| `13-api-backend/run-eu-smoke-tests.sh` | Full 7-test smoke runner |
-| `13-api-backend/POSTGRES-PASSWORD-ROTATION.md` | Step-by-step password rotation runbook |
+| `13-api-backend/eu-ai-act-50-test-receipt.py` | E2E receipt issuance (v1.1 fields) |
+| `13-api-backend/run-eu-smoke-tests.sh` | 7-test smoke runner |
+| `13-api-backend/POSTGRES-PASSWORD-ROTATION.md` | Password rotation runbook |
 
 → Full project detail: `memory/projects/ledgerproof-eu.md`
 → Glossary: `memory/glossary.md`
+
+## LPR v1.1 Sprint Status (2026-05-25)
+- ✅ **v1.1 spec written** — `04-lpr-spec/LPR-1.1-SPECIFICATION.md` (Article 50(1),(2),(4))
+- ✅ **Rust schema updated** — `vendor/quantum-edge-2/src/schemas.rs` — 29 tests pass (18 new)
+- ✅ **Backwards compat verified** — v1.0 receipts parse under v1.1 with serde defaults
+- ✅ **GDPR-safe new types** — `AiHumanReviewContent`, `AiChatbotSessionContent` (no PII, role identifiers, email rejection)
+- ✅ **Public API endpoints added** — `GET /v1/verify/:seq` and `GET /v1/receipts/by-content-hash/:sha256` (unauthenticated, for regulators)
+- ✅ **Production smoke** — 7/7 pass with v1.1 fields against v1.0 production (backwards compat live)
+- ✅ **IETF draft** — `draft-dawkins-scitt-ai-article50-00` ready for submission
+- ✅ **C2PA assertion spec** — `org.ledgerproof.receipt.v1` mapping ready for CAWG submission
+- ✅ **eIDAS compatibility statement** — published
+- ✅ **EU Code of Practice signatory application** — package complete
+- ✅ **Coalition adoption letter** — template ready for TVP portfolio (target: 5 signatories by July 6)
+- ✅ **LangChain partnership proposal** — email ready to send
+- ⏳ **Deploy v1.1 to production** — Veronica must `cargo build` + `fly deploy --app ledgerproof-api-eu` to enable new API endpoints
+- ⏳ **Push quantum-edge-2 v1.1 upstream** — vendor edits need to land in `vsdawkins-creator/quantum-edge-2` then bump the `rev =` pin in workspace Cargo.toml
 
 ## Open Founder Actions (priority order)
 1. ✅ ~~Rotate EU Postgres password~~ — Rotated 2026-05-23 22:31 PDT. Original password (`lVsM03xlM99aS0w`) dead. New password in `eu-postgres.txt`, never appeared in chat. `db: ok` confirmed.
