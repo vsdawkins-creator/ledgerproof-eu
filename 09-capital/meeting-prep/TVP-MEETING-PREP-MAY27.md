@@ -3,6 +3,38 @@
 
 ---
 
+## ⚡ May 26 refresh — new credentials since prep was written
+
+Three material developments in the last 24 hours that strengthen the pitch. Work each into the conversation **only if natural** — do not lead with a credential list.
+
+### 1. IETF Internet-Draft is live
+- **`draft-dawkins-scitt-ai-article50-00`** posted and confirmed on Datatracker (May 25)
+- Companion to `draft-dawkins-scitt-lpr-00`
+- Cite when:
+  - Christopher asks about the "open standard" claim
+  - The "what's the moat" question comes up
+  - Anyone questions whether this is real protocol work or marketing
+- One-liner: *"The IETF draft was accepted yesterday. The standards-body process is no longer aspirational — it's in motion."*
+- This is the single biggest credibility upgrade since the deck was written. Impervious is the structural comp — and Impervious is in TVP's portfolio.
+
+### 2. Python SDK is live on PyPI
+- **`pip install ledgerproof`** works globally as of May 26, 11:53 AM PT
+- `pip install langchain-ledgerproof` also live
+- Cite when:
+  - "What's the developer-adoption story?"
+  - "How fast can a customer integrate?"
+  - Aryan asks anything about technical traction
+- One-liner: *"As of an hour ago, any Python developer in the world can install LedgerProof from PyPI and emit a compliant Article 50 receipt in three lines of code."*
+- Christopher or Aryan can verify in real time during the call.
+
+### 3. Stillmark and Fulgur both reaching out same week
+- **DO NOT volunteer this.** Wait for "what other conversations are you having?"
+- Honest answer when asked:
+  > "Three Bitcoin-native funds reached out the same week — TVP, Stillmark, and Fulgur. I'm taking all three meetings. Stillmark is later today, Fulgur this week or next. The round can comfortably accommodate all three if all three want in. I'm not running a competitive process to extract optimal valuation — I'm running parallel evaluations because the signal is genuine cross-fund interest."
+- Signals: you respect them too much to play games; you also have leverage. State it cleanly, then move on. Do not dwell.
+
+---
+
 ## The room
 
 **Christopher Calicott — Managing Director**
@@ -165,13 +197,34 @@ Do not say "let me know if you have questions." Name the next concrete step and 
 
 ## Day-of checklist
 
-- [ ] Have the live verifier open in a tab: https://verify.ledgerproofhq.io/r/founding-declaration
-- [ ] Have the LPR 1.0 spec open: `~/Documents/LedgerProof-Launch-July6/04-lpr-spec/`
-- [ ] Know the exact OP_RETURN txid from the May 18 anchor: `5db5c68e…` (confirm full txid from anchor record)
-- [ ] Know the SAFE terms cold: $5M / $30M post-money / pro-rata / board observer / June 25 close
-- [ ] Have the Voltage / Unchained / Galoy / Impervious portfolio context ready for natural drop-in
-- [ ] Be ready to send SAFE + data room link immediately after the call if he's a yes
+**Browser tabs to have open before the call:**
+- [ ] Live verifier: https://verify.ledgerproofhq.io/r/founding-declaration
+- [ ] PyPI package page: https://pypi.org/project/ledgerproof/
+- [ ] IETF draft: https://datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/
+- [ ] npm package: https://www.npmjs.com/package/@ledgerproof/sdk
+
+**Local files to have open:**
+- [ ] LPR 1.0 spec: `~/Documents/LedgerProof-Launch-July6/04-lpr-spec/`
+- [ ] SAFE doc (signing-ready): `~/Documents/LedgerProof-Launch-July6/09-capital/safe-template.pdf`
+- [ ] Data room access link (Box folder): ready to paste
+
+**Numbers to know cold:**
+- [ ] OP_RETURN txid from May 18 anchor: `5db5c68e…` (confirm full txid)
+- [ ] SAFE terms: $5M / $30M post-money / pro-rata / board observer / June 25 close
+- [ ] Per-receipt economics: ~$0.0003 Bitcoin fee at batched anchor, 97% margin at scale
+- [ ] Launch date: July 6 (40 days after close)
+
+**Context to have ready for natural drop-in:**
+- [ ] Voltage / Unchained / Galoy / Impervious portfolio parallels
+- [ ] Three-fund situation (only if asked)
+- [ ] IETF draft posting yesterday
+- [ ] PyPI live as of this morning
+
+**Action queue immediately after call (if he's a yes):**
+- [ ] Send SAFE + data room link within 60 minutes
+- [ ] Email Aryan separately thanking him for routing it through
+- [ ] Update task #30 with TVP's stated timeline
 
 ---
 
-*Prepared May 21, 2026 · LedgerProof Growth Engine — Meeting Prep Agent*
+*Prepared May 21, 2026 · Refreshed May 26, 2026 with IETF + PyPI + three-fund situation*
