@@ -1,0 +1,31 @@
+Subject: SDK that adds <50ms P99 to your AI pipeline and produces Article 50 receipts
+
+{{ contact_name }},
+
+You are the person who has to actually integrate whatever the compliance team buys. So I will skip the pitch and tell you the integration shape.
+
+**LedgerProof SDK:**
+- `pip install ledgerproof` or `npm install @ledgerproof/sdk`
+- Wrap any model output → SDK computes SHA-256 + canonical CBOR locally, signs Ed25519, returns receipt
+- Single HTTPS POST to EU operator (Frankfurt) — no content data leaves your perimeter, only the hash
+- P99 latency overhead: ≤50ms (we contract to this in the pilot SOW)
+- LangChain integration: `langchain-ledgerproof` 1.0.0 on PyPI
+- Failure mode: SDK degrades to local queue + async retry; never blocks the inference path
+
+**What the receipt is:**
+- Open IETF-tracked format: `draft-dawkins-scitt-ai-article50-00`
+- Anchored to Bitcoin mainnet via OP_RETURN (LPR1 prefix + 32-byte Merkle root, 36 bytes)
+- GDPR-safe: schema rejects email addresses in `deployer_id` at parse time
+- Verifiable by any third party without trusting LedgerProof
+
+The protocol is open. Your team can self-host the operator if you prefer not to use ours. The Foundation will publish the reference implementation under Apache 2.0 in Q3.
+
+I am proposing a 30-day pilot on one pipeline at {{ account_name }}. The pilot SOW commits to specific latency and availability SLOs and refunds 100% if we miss either. Your compliance team gets a Board-ready PDF on Day 30. You get a working integration with documented runbooks.
+
+Spec: https://spec.ledgerproofhq.io
+GitHub: https://github.com/ledgerproof/ledgerproof-platform
+
+Worth 30 minutes?
+
+Veronica S. Dawkins · Founder, LedgerProof Foundation
+veronica@ledgerproofhq.io · spec@ledgerproofhq.io

@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lpr-gtm"
+version = "0.1.0"
+description = "Executable GTM workflows for LedgerProof Foundation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Veronica S. Dawkins", email = "veronica@ledgerproofhq.io" }]
+dependencies = [
+    "click>=8.1",
+    "jinja2>=3.1",
+    "pydantic>=2.6",
+    "sqlmodel>=0.0.16",
+    "python-dateutil>=2.9",
+    "pytz>=2024.1",
+    "rich>=13.7",
+    "weasyprint>=61.0",
+]
+
+[project.optional-dependencies]
+real = ["ledgerproof>=1.1"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "freezegun>=1.4",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+lpr-gtm = "gtm.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gtm"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "W", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --cov=gtm --cov-report=term-missing"

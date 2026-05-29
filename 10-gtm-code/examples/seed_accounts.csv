@@ -1,0 +1,23 @@
+account,sector,jurisdiction,tier,persona,contact_name,contact_title,contact_email,verified
+Deutsche Bank,banking,DE,1,gc,[name TBD],General Counsel,[email TBD],false
+Deutsche Bank,banking,DE,1,cro_cco,[name TBD],Chief Risk Officer,[email TBD],false
+Deutsche Bank,banking,DE,1,mlops,[name TBD],Head of AI Engineering,[email TBD],false
+BNP Paribas,banking,FR,1,gc,[name TBD],General Counsel,[email TBD],false
+BNP Paribas,banking,FR,1,cro_cco,[name TBD],Chief Compliance Officer,[email TBD],false
+ING Group,banking,NL,1,gc,[name TBD],General Counsel,[email TBD],false
+ING Group,banking,NL,1,cro_cco,[name TBD],Chief Risk Officer,[email TBD],false
+UniCredit,banking,IT,1,gc,[name TBD],General Counsel,[email TBD],false
+Allianz,insurance,DE,1,gc,[name TBD],General Counsel,[email TBD],false
+Allianz,insurance,DE,1,cro_cco,[name TBD],Chief Risk Officer,[email TBD],false
+AXA,insurance,FR,1,gc,[name TBD],General Counsel,[email TBD],false
+Amundi,asset_management,FR,1,cro_cco,[name TBD],Chief Compliance Officer,[email TBD],false
+Schroders,asset_management,UK,1,cro_cco,[name TBD],Chief Compliance Officer,[email TBD],false
+Sky Group,media,UK,1,gc,[name TBD],General Counsel,[email TBD],false
+RTL Group,media,LU,1,gc,[name TBD],General Counsel,[email TBD],false
+Mediaset,media,IT,1,gc,[name TBD],General Counsel,[email TBD],false
+Vivendi,media,FR,1,gc,[name TBD],General Counsel,[email TBD],false
+Siemens,industrial,DE,1,gc,[name TBD],General Counsel,[email TBD],false
+Bayer,pharma,DE,1,cro_cco,[name TBD],Chief Compliance Officer,[email TBD],false
+Sanofi,pharma,FR,1,cro_cco,[name TBD],Chief Compliance Officer,[email TBD],false
+Vodafone,telecom,UK,1,mlops,[name TBD],Head of AI Infrastructure,[email TBD],false
+Orange,telecom,FR,1,mlops,[name TBD],Head of AI Engineering,[email TBD],false
