@@ -1,0 +1,632 @@
+
+
+
+
+Network Working Group                                        V. Dawkins
+Internet-Draft                                  LedgerProof Foundation
+Intended status: Informational                            July 6, 2026
+Expires: January 6, 2027
+
+
+   A Bitcoin-Anchored SCITT Transparency Profile: The LedgerProof
+                       Receipt (LPR), Version 1.0
+                   draft-dawkins-scitt-lpr-00
+
+
+Abstract
+
+   This document specifies the LedgerProof Receipt (LPR), version 1.0,
+   as a profile of the IETF Supply Chain Integrity, Transparency, and
+   Trust (SCITT) architecture [I-D.ietf-scitt-architecture].  LPR
+   defines an open cryptographic format that binds a document or
+   AI-generated artifact to its asserted authorship, its precise moment
+   of finalization, and its chain of subsequent modification, in a form
+   independently verifiable by any party without reliance on a trusted
+   custodian.  LPR receipts are anchored, through Merkle-tree
+   aggregation following the construction of RFC 6962, on the Bitcoin
+   blockchain, which functions as the SCITT Transparency Log substrate.
+
+   The specification is intended for use in document provenance,
+   AI-generated-content disclosure under regulatory frameworks such as
+   the European Union Artificial Intelligence Act Article 50,
+   audit-evidence integrity, and the cryptographic accountability of
+   autonomous AI-agent tool calls under the Model Context Protocol.
+   The Long-Horizon profile defined in this document provides a
+   migration path to post-quantum cryptography using composite
+   ML-DSA-65+Ed25519 signatures [I-D.ietf-lamps-pq-composite-sigs]
+   for receipts intended to remain verifiable beyond the estimated
+   cryptographically-relevant quantum computing (CRQC) threat horizon.
+
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current
+   Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six
+   months and may be updated, replaced, or obsoleted by other documents
+   at any time.  It is inappropriate to use Internet-Drafts as
+   reference material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on December 12, 2026.
+
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 1]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with
+   respect to this document.  Code Components extracted from this
+   document must include Simplified BSD License text as described in
+   Section 4.e of the Trust Legal Provisions and are provided without
+   warranty as described in the Simplified BSD License.
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  Conventions and Definitions . . . . . . . . . . . . . . . . .  4
+   3.  Receipt Structure . . . . . . . . . . . . . . . . . . . . . .  5
+     3.1.  Required Fields . . . . . . . . . . . . . . . . . . . . .  5
+     3.2.  Additional Signatures (PQC Extension Point) . . . . . . .  6
+     3.3.  Signature Scope . . . . . . . . . . . . . . . . . . . . .  7
+     3.4.  Canonical Encoding  . . . . . . . . . . . . . . . . . . .  7
+   4.  Chain Semantics . . . . . . . . . . . . . . . . . . . . . . .  8
+   5.  Anchoring . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.1.  Substrate . . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.2.  Merkle Aggregation  . . . . . . . . . . . . . . . . . . .  9
+     5.3.  OP_RETURN Format  . . . . . . . . . . . . . . . . . . . .  9
+   6.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+     6.1.  Core Profile  . . . . . . . . . . . . . . . . . . . . . . 10
+     6.2.  Long-Horizon Profile (PQC)  . . . . . . . . . . . . . . . 10
+     6.3.  High-Assurance Profile  . . . . . . . . . . . . . . . . . 11
+   7.  SCITT Mapping . . . . . . . . . . . . . . . . . . . . . . . . 11
+   8.  Verification  . . . . . . . . . . . . . . . . . . . . . . . . 12
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . . 12
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . . 13
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . . 13
+     11.1. Normative References  . . . . . . . . . . . . . . . . . . 13
+     11.2. Informative References  . . . . . . . . . . . . . . . . . 14
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+
+1.  Introduction
+
+   The integrity of the documentary record is no longer self-evident.
+   In contemporary practice, a document held by a custodial system can
+   be modified after the fact by the custodian, by an insider with
+   sufficient privilege, or by an external actor who has obtained that
+   privilege, without leaving evidence accessible to outside parties.
+   The asserted authorship of a document, including AI-generated
+   content, may be presented under a claim the document itself cannot
+   independently corroborate.  Timestamp manipulation, vendor-dependent
+   verification, and the long-term decay of cryptographic primitives
+   compound these threats.
+
+   This document defines the LedgerProof Receipt (LPR), version 1.0,
+   as a profile of the IETF SCITT architecture.  LPR receipts function
+   as SCITT Statements wrapped in a SCITT-compatible envelope; the
+   Foundation-operated calendar server functions as a SCITT
+   Transparency Service, with the Bitcoin blockchain as the backing
+   append-only log.  This positioning allows LPR to interoperate with
+   other SCITT profiles, including [I-D.kamimura-scitt-vcp], while
+   providing the unique properties of Bitcoin-anchored verification:
+   permissionless, custodian-independent, and provably ordered.
+
+   The specification also defines a Long-Horizon profile that adds
+   composite ML-DSA-65+Ed25519 signatures to receipts intended to
+   remain verifiable beyond the estimated CRQC threat horizon, and a
+   High-Assurance profile for legal-submission and BFSI use cases.
+
+   This document defines the LedgerProof Receipt (LPR), version 1.0:
+   an open cryptographic format that binds an artifact's content hash,
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 2]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+   an authorship signature, a precise timestamp, a cryptographic chain
+   to predecessor receipts, and a Merkle inclusion proof anchored on
+   the Bitcoin blockchain.  Verification proceeds without trust in any
+   single custodian, vendor, or authority.
+
+   LPR is intentionally composable with established work, including
+   OpenTimestamps [OTS], the Coalition for Content Provenance and
+   Authenticity (C2PA), the VeritasChain Verifiable Content Protocol
+   [I-D.kamimura-scitt-vcp], and the Microsoft Agent Governance Toolkit
+   [MSAGT].  It is intended to be used as a Bitcoin-anchored SCITT
+   profile that complements rather than competes with these efforts.
+
+   The specification is published by the LedgerProof Foundation, a
+   nonprofit corporation organized under U.S. Internal Revenue Code
+   Section 501(c)(3), under the Creative Commons Attribution 4.0
+   International license.  Reference implementations in Python and
+   TypeScript are published under the MIT license.
+
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   For the purposes of this document, the following terms apply:
+
+   Artifact:  Any byte sequence with a stable canonical form that can
+       be hashed under SHA-256.  Typical artifacts include documents,
+       images, AI model outputs, structured data files, and the
+       canonical serializations of JSON-RPC tool-call invocations.
+
+   Receipt:  An LPR data structure as defined in Section 3.
+
+   Authorial Chain:  A sequence of receipts sharing a common trace_id,
+       each receipt's chain.prev_receipt_hash field referring to the
+       SHA-256 of the canonical encoding of the immediately preceding
+       receipt in the sequence.
+
+   Anchor:  The act of including a receipt's Merkle leaf hash in a
+       Merkle tree whose root is committed to the Bitcoin blockchain
+       via an OP_RETURN transaction output.
+
+   Verifier:  Any party in possession of a receipt, the underlying
+       artifact bytes (or a hash equivalent), and connectivity to any
+       Bitcoin node sufficient to verify the OP_RETURN containing the
+       receipt's anchor.
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 3]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+3.  Receipt Structure
+
+3.1.  Required Fields
+
+   A conformant LPR v1.0 receipt MUST be a canonical CBOR object
+   ([RFC8949]) containing all of the following top-level fields:
+
+      lpr_version        unsigned integer; MUST be 1 for v1.0.
+      receipt_id         UUID v7 ([RFC9562]).
+      trace_id           UUID v7; MAY equal receipt_id for the first
+                         receipt in an authorial chain.
+      timestamp_ns       64-bit signed integer; nanoseconds since the
+                         Unix epoch (1970-01-01T00:00:00Z).
+      timestamp_iso      string; RFC 3339 ([RFC3339]) representation
+                         in UTC, nanosecond precision.
+      artifact           map containing:
+         content_hash       32-byte SHA-256 of the canonical artifact
+                            bytes.
+         hash_algo          string; MUST be "SHA-256" for v1.0.
+         content_type       string; MIME type or named profile.
+         content_bytes      unsigned integer; length of the artifact.
+      authorship         map containing:
+         actor_type         string; MUST be one of "HUMAN", "AI_MODEL",
+                            "HYBRID", "INSTITUTION".
+         actor_id           string; public-key, DID, or named entity.
+         actor_assertion    string; the assertion the actor is making.
+         tool_chain         array; optional list of tool descriptors.
+      chain              map containing:
+         prev_receipt_hash  32-byte SHA-256 of the canonical CBOR
+                            encoding of the preceding receipt in the
+                            authorial chain, or null for the first
+                            receipt.
+      signature          map containing:
+         sig_algo           string; MUST be "Ed25519" for v1.0.
+         sig_bytes          64-byte Ed25519 signature ([RFC8032]).
+         signer_pubkey      32-byte Ed25519 public key.
+      anchor             map containing:
+         merkle_leaf_hash   32-byte SHA-256 leaf hash of the receipt
+                            in the daily Merkle tree.
+         anchor_status      string; "PENDING" or "ANCHORED".
+         btc_txid           hex string; present iff ANCHORED.
+         btc_block_height   unsigned integer; present iff ANCHORED.
+         merkle_path        array of 32-byte hashes; present iff
+                            ANCHORED.
+
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 4]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+3.2.  Signature Scope
+
+   The Ed25519 signature MUST be computed over the canonical CBOR
+   encoding of the receipt object with both the signature field and
+   the anchor field omitted.  This separates signing (which occurs at
+   receipt creation) from anchoring (which occurs in a subsequent
+   batch operation and adds the anchor field to a receipt that is
+   otherwise complete and signed).
+
+
+3.3.  Canonical Encoding
+
+   The canonical form of a receipt MUST be the deterministic CBOR
+   encoding under [RFC8949] Section 4.2, with definite-length items,
+   sorted map keys (length-then-lexicographic), and integers encoded
+   in their shortest form.
+
+   Implementations MAY represent receipts in JSON for transport in
+   contexts that do not support CBOR.  The SHA-256 hash of a receipt
+   for purposes of chain linkage MUST always be computed over the
+   canonical CBOR form.  An equivalent JSON serialization MUST use
+   the JSON Canonicalization Scheme ([RFC8785]).
+
+   All numeric values in the JSON form MUST be encoded as strings to
+   avoid precision loss in implementations that map JSON numbers to
+   IEEE 754 binary64.  The CBOR form preserves numeric types
+   natively.
+
+
+4.  Chain Semantics
+
+   Receipts sharing a common trace_id form an authorial chain
+   representing a sequence of related authorial events.
+
+   The first receipt in a chain MUST set chain.prev_receipt_hash to
+   null.  Every subsequent receipt sharing the same trace_id MUST set
+   chain.prev_receipt_hash to the 32-byte SHA-256 of the canonical
+   CBOR encoding of the immediately preceding receipt (with that
+   receipt's signature and anchor fields included in the encoding).
+
+   This construction provides:
+
+   o  Insertion detection: inserting a receipt into the middle of an
+      existing chain breaks the chain because the receipt following
+      the insertion has prev_receipt_hash referring to a hash that no
+      longer matches the inserted receipt.
+
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 5]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+   o  Deletion detection: deleting a receipt from the middle of an
+      existing chain breaks the chain because the receipt following
+      the deletion has prev_receipt_hash referring to a hash for
+      which no receipt can be produced.
+
+
+5.  Anchoring
+
+5.1.  Substrate
+
+   The default and REQUIRED anchoring substrate for LPR v1.0 is the
+   Bitcoin main chain.  An LPR v1.0 receipt with anchor_status =
+   "ANCHORED" MUST reference a Bitcoin transaction on the main chain.
+
+   Future LPR profiles MAY define additional anchoring substrates
+   (e.g., Bitcoin testnet for development; alternative public chains
+   for jurisdictional purposes).  Any non-default substrate MUST be
+   distinguished by a profile-specific OP_RETURN prefix.
+
+
+5.2.  Merkle Aggregation
+
+   Receipts produced during a given anchor window MUST be aggregated
+   into a Merkle tree following the construction of [RFC6962]
+   Section 2.1:
+
+      Leaf(D)     =  SHA-256(0x00 || D)
+      Node(L, R)  =  SHA-256(0x01 || L || R)
+
+   The domain-separating prefixes (0x00 and 0x01) are REQUIRED.
+
+   The leaf data D for a given receipt is the canonical CBOR
+   encoding of the receipt with the anchor field omitted.  The
+   receipt's anchor.merkle_leaf_hash MUST equal Leaf(D) for that D.
+
+
+5.3.  OP_RETURN Format
+
+   The anchor transaction's OP_RETURN output MUST contain exactly
+   36 bytes, in the following form:
+
+      0..3:   ASCII "LPR1" (0x4c 0x50 0x52 0x31)
+      4..35:  32-byte Merkle root
+
+   The 4-byte prefix distinguishes LPR anchors from other OP_RETURN
+   data and from OpenTimestamps [OTS] anchors (which use a distinct
+   prefix).
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 6]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+6.  Profiles
+
+6.1.  Core Profile
+
+   The LPR v1.0 Core profile requires SHA-256, Ed25519, CBOR
+   canonical encoding [RFC8949], RFC 6962 Merkle aggregation, and
+   Bitcoin mainnet OP_RETURN anchoring.  All other profiles defined
+   in this document are strict supersets of Core.
+
+6.2.  Long-Horizon Profile
+
+   The Long-Horizon profile is designed for receipts that must remain
+   verifiable after a cryptographically-relevant quantum computer
+   (CRQC) becomes available.  Current NIST and NSA guidance (CNSA 2.0)
+   targets a migration deadline of 2035 for national-security systems.
+
+   In addition to all Core requirements, the Long-Horizon profile:
+
+   o  REQUIRES a composite ML-DSA-65+Ed25519 signature entry in the
+      additional_signatures array, using the algorithm identifier
+      "Composite-ML-DSA-65+Ed25519" as defined in
+      [I-D.ietf-lamps-pq-composite-sigs].
+
+   o  REQUIRES a standalone ML-DSA-65 entry for verifiers that do
+      not support composite signatures.
+
+   o  REQUIRES the receipt to carry "profile": "LongHorizon-v1" in
+      the profile field.
+
+   Core verifiers MUST NOT reject Long-Horizon receipts; they MUST
+   treat unrecognized additional_signatures entries as unknown
+   extensions and ignore them.
+
+6.3.  High-Assurance Profile
+
+   The High-Assurance profile is designed for legal-submission, court-
+   admissibility, BFSI, and regulatory-compliance use cases.  In
+   addition to all Core requirements, this profile:
+
+   o  REQUIRES hardware-backed signing (HSM or FIPS 140-3 Level 3).
+
+   o  REQUIRES anchor window <= 60 minutes.
+
+   o  REQUIRES inclusion in at least two independent calendar
+      operators' Merkle trees.
+
+   o  REQUIRES the receipt to carry "profile": "HighAssurance-v1".
+
+
+7.  SCITT Mapping
+
+   LPR receipts map to the IETF SCITT architecture
+   [I-D.ietf-scitt-architecture] as follows:
+
+      SCITT concept            LPR equivalent
+      -----------------------  -----------------------------------------
+      Statement                LPR receipt (the signed CBOR object)
+      Envelope                 The receipt's outer CBOR map
+      Transparency Log         Bitcoin blockchain (OP_RETURN entries)
+      Transparency Service     Foundation calendar operator (or any
+                               independent operator per Section 5.5
+                               of the LPR specification)
+      Receipt (SCITT sense)    The anchor object (Merkle inclusion
+                               proof + btc_txid + btc_block_height)
+      Verifier                 Any party with a Bitcoin node and
+                               possession of the receipt
+
+   This mapping allows SCITT-compliant verification tooling to process
+   LPR receipts by adapting the Transparency Log substrate from a
+   conventional Certificate Transparency log to the Bitcoin blockchain.
+   No changes to SCITT statement semantics are required.
+
+
+8.  Verification
+
+   A receipt is valid if and only if all of the following checks
+   pass:
+
+   1.  The canonical CBOR encoding of the receipt with signature and
+       anchor omitted is recomputed, and the Ed25519 signature in
+       signature.sig_bytes verifies against signature.signer_pubkey
+       for that encoded byte string ([RFC8032]).
+
+   2.  The asserted artifact.content_hash is recomputed by hashing
+       the canonical artifact bytes and matches the value in the
+       receipt.
+
+   3.  If chain.prev_receipt_hash is non-null, the predecessor
+       receipt is independently fetched, its canonical CBOR is
+       computed (including its signature and anchor fields), and the
+       resulting SHA-256 matches chain.prev_receipt_hash.
+
+   4.  If anchor.anchor_status is "ANCHORED", the Merkle inclusion
+       proof in anchor.merkle_path is verified to demonstrate
+       inclusion of anchor.merkle_leaf_hash in a tree whose root
+       appears, prefixed by "LPR1", in the OP_RETURN output of the
+       Bitcoin transaction at anchor.btc_txid, included in the block
+       at anchor.btc_block_height.
+
+   Verifiers MUST reject receipts whose timestamp_ns is later than
+   the Bitcoin block time of the asserted anchor.  This bound
+   prevents predated assertions.
+
+
+9.  Security Considerations
+
+   LPR v1.0 relies on the collision resistance of SHA-256 and the
+   signature security of Ed25519.  Both primitives have no known
+   practical attacks at the time of publication.  Migration paths to
+   post-quantum primitives are provided in the Long-Horizon profile
+   (Section 6.2), which adds composite ML-DSA-65+Ed25519 signatures
+   [I-D.ietf-lamps-pq-composite-sigs] for receipts requiring
+   verifiability beyond the estimated CRQC threat horizon.
+
+   The security of an LPR receipt against authorship spoofing
+   reduces to the secrecy of the signer's Ed25519 private key.
+   Signers handling high-value receipts SHOULD use hardware-backed
+   key storage.
+
+   Implementations MUST use constant-time Ed25519 signature
+   verification to mitigate timing side-channel attacks.
+
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 7]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+   The artifact.content_hash field is the hash of an off-chain
+   artifact.  Implementers handling personal data MUST evaluate
+   whether the hash itself constitutes personal data under
+   applicable data-protection law, including the European Union
+   General Data Protection Regulation and successor regimes.
+   Receipts SHOULD NOT contain personal data in any field beyond the
+   hash; implementer-operated off-chain storage SHOULD support
+   deletion of the underlying artifact in response to GDPR Article
+   17 requests, in which case the on-chain receipt continues to
+   exist but references a hash for which the underlying artifact is
+   no longer available.
+
+   Denial-of-service against an operator-run calendar server is
+   possible.  Implementations SHOULD permit operation of redundant
+   calendars and SHOULD NOT make verification dependent on a single
+   calendar's availability.
+
+
+10.  IANA Considerations
+
+   This document requests the following registrations from IANA upon
+   publication:
+
+   o  A CBOR tag (TBD) for canonical LPR receipts under the CBOR Tags
+      registry.
+
+   o  The media types "application/lpr+cbor" and "application/lpr+
+      json" under [RFC6838].
+
+   The 4-byte OP_RETURN prefix "LPR1" is a Bitcoin-network-level
+   convention and does not require IANA action.
+
+
+11.  References
+
+11.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997.
+
+   [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the
+              Internet: Timestamps", RFC 3339, July 2002.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, January 2013.
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 8]
+
+Internet-Draft           draft-dawkins-scitt-lpr-00             July 2026
+
+
+   [RFC6962]  Laurie, B., Langley, A., and E. Kasper, "Certificate
+              Transparency", RFC 6962, June 2013.
+
+   [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
+              Signature Algorithm (EdDSA)", RFC 8032, January 2017.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in
+              RFC 2119 Key Words", BCP 14, RFC 8174, May 2017.
+
+   [RFC8785]  Rundgren, A., Jordan, B., and S. Erdtman, "JSON
+              Canonicalization Scheme (JCS)", RFC 8785, June 2020.
+
+   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949, December
+              2020.
+
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally
+              Unique IDentifiers (UUIDs)", RFC 9562, May 2024.
+
+
+11.2.  Informative References
+
+   [EU-AIA]   Regulation (EU) 2024/1689 of the European Parliament
+              and of the Council laying down harmonised rules on
+              artificial intelligence (Artificial Intelligence Act),
+              June 2024.
+
+   [MSAGT]    Microsoft Open Source, "Agent Governance Toolkit",
+              https://github.com/microsoft/agent-governance-toolkit,
+              April 2026.
+
+   [OTS]      Todd, P., "OpenTimestamps", https://opentimestamps.org,
+              2016.
+
+   [I-D.ietf-scitt-architecture]
+              Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
+              Y., and S. Lasker, "An Architecture for Trustworthy and
+              Transparent Digital Supply Chains", Work in Progress,
+              Internet-Draft, draft-ietf-scitt-architecture-22, 2026.
+
+   [I-D.ietf-lamps-pq-composite-sigs]
+              Ounsworth, M., Gray, J., Pala, M., Klaussner, J., and
+              S. Fluhrer, "Composite ML-DSA for use in Internet PKI",
+              Work in Progress, Internet-Draft,
+              draft-ietf-lamps-pq-composite-sigs-13, 2026.
+
+   [I-D.kamimura-scitt-vcp]
+              Kamimura, R., et al., "Verifiable Content Protocol (VCP)
+              SCITT Profile", Work in Progress, Internet-Draft,
+              draft-kamimura-scitt-vcp-01, 2026.
+
+   [CNSA-2.0] National Security Agency, "Commercial National Security
+              Algorithm Suite 2.0 Advisory", September 2022
+              (revised 2024).
+
+
+Author's Address
+
+   Veronica S. Dawkins
+   LedgerProof Foundation
+   Los Angeles, CA
+   United States of America
+
+   Email: veronica@ledgerproofhq.io
+
+
+
+
+
+
+
+
+
+
+Dawkins                  Expires January 6, 2027                  [Page 9]
