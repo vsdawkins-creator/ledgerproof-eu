@@ -1,0 +1,61 @@
+# LedgerProof Receipt API — Production Docker image
+# Multi-stage build: builder installs deps, runtime image is minimal.
+#
+# Build: docker build -f Dockerfile.api -t ledgerproof-api .
+# Run:   docker run --env-file .env -p 8080:8080 ledgerproof-api
+#
+# Fly.io deploy: fly deploy --config 12-eu-compliance/05-FLY-EU-DEPLOYMENT.toml
+
+# ---- Stage 1: dependency builder ----
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+# Install build deps for asyncpg (C extension) and cryptography.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libffi-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+
+# ---- Stage 2: runtime ----
+FROM python:3.11-slim AS runtime
+
+# Security: run as non-root.
+RUN adduser --disabled-password --gecos "" lpr
+
+WORKDIR /app
+
+# Copy installed packages from builder.
+COPY --from=builder /install /usr/local
+
+# Copy application source.
+COPY lpr_api/ ./lpr_api/
+COPY alembic/ ./alembic/
+COPY alembic.ini .
+
+# Persistent data volume mount point (signing key lives here).
+RUN mkdir -p /data && chown lpr:lpr /data
+
+USER lpr
+
+# Health check (matches Fly.io http_checks path).
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"
+
+# Expose API port.
+EXPOSE 8080
+
+# Run with uvicorn. Workers=2 per Fly.io vm (2 vCPU, 1024 MB).
+CMD ["uvicorn", "lpr_api.main:app", \
+     "--host", "0.0.0.0", \
+     "--port", "8080", \
+     "--workers", "2", \
+     "--log-level", "info", \
+     "--proxy-headers", \
+     "--forwarded-allow-ips", "*"]

@@ -1,0 +1,40 @@
+# LedgerProof Receipt API — Python dependencies
+# Pin exact versions for reproducible production builds.
+# Update with: pip-compile requirements.in
+
+# Web framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Async PostgreSQL
+asyncpg==0.29.0
+
+# CBOR encoding (canonical per RFC 8949 §4.2)
+cbor2==5.6.3
+
+# Ed25519 and cryptographic primitives
+cryptography==42.0.8
+
+# Data validation
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# HTTP client (for Bitcoin RPC and outbound requests)
+aiohttp==3.9.5
+
+# Database migrations
+alembic==1.13.1
+SQLAlchemy==2.0.30  # alembic dependency
+
+# Monitoring / observability
+prometheus-fastapi-instrumentator==7.0.0
+
+# Optional — install only when Long-Horizon (PQC) profile needed:
+# pqcrypto-dilithium>=0.3
+
+# Development only (not in production image):
+# pytest>=8.0
+# pytest-asyncio>=0.23
+# httpx>=0.27  # async test client for FastAPI
+# black>=24.0
+# ruff>=0.4

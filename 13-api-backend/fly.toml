@@ -1,0 +1,72 @@
+# LedgerProof EU API — Phase 1 (cost-minimal pre-customer deploy)
+#
+# This is the smallest viable EU deployment:
+#   - Single machine, smallest shared CPU, 512 MB RAM
+#   - Anchor worker DISABLED in phase 1 (receipts queue in PENDING)
+#   - No Bitcoin RPC dependency
+#   - Signing key delivered via Fly secret (OPERATOR_KEY_PEM), not volume
+#
+# Scale up to HA / multi-region per 12-eu-compliance/05-FLY-EU-DEPLOYMENT.toml
+# once first EU customer is signed.
+
+app = "ledgerproof-api-eu"
+primary_region = "fra"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+  dockerfile = "Dockerfile.api"
+
+[env]
+  ENV = "production"
+  LEDGERPROOF_REGION = "eu"
+  LEDGERPROOF_DATA_RESIDENCY = "EU"
+  ANCHOR_SUBSTRATE = "bitcoin-mainnet"
+  ANCHOR_WINDOW_HOURS = "24"
+  LPR_VERSION = "1.0"
+  LOG_LEVEL = "info"
+  GDPR_MODE = "true"
+  EU_AI_ACT_50_ENABLED = "true"
+  CORS_ORIGINS = "https://publish.ledgerproofhq.io,https://verify.ledgerproofhq.io,https://ledgerproofhq.io"
+  CALENDAR_OPERATOR_JURISDICTION = "EU"
+  CALENDAR_OPERATOR_COUNTRY = "DE"
+  OPERATOR_NAME = "LedgerProof Foundation EU Calendar"
+  OPERATOR_DID = "did:web:api-eu.ledgerproofhq.io"
+  OPERATOR_COUNTRY = "DE"
+  OPERATOR_CONTACT = "operators@ledgerproofhq.io"
+  # Phase 1: anchor worker disabled — receipts queue but don't broadcast.
+  # The presence of BITCOIN_RPC_HOST env var triggers the worker to start;
+  # absent in phase 1, the API still serves and queues receipts.
+
+# Secrets set via: fly secrets set --app ledgerproof-api-eu KEY=VALUE
+# Required:
+#   DATABASE_URL          — set by `fly postgres attach`
+#   API_KEY_SALT          — random 32-byte hex
+#   OPERATOR_KEY_PEM      — full PEM contents of operator_key.pem (preferred over volume)
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 200
+    soft_limit = 150
+
+  [[http_service.checks]]
+    grace_period = "20s"
+    interval = "30s"
+    method = "GET"
+    path = "/health"
+    timeout = "5s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+[deploy]
+  release_command = "python -m alembic upgrade head"
+  strategy = "rolling"
