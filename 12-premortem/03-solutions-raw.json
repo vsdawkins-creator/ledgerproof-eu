@@ -1,0 +1,834 @@
+[
+  {
+    "id": "SOL-TECH-01",
+    "cluster": "Cryptography & Protocol",
+    "title": "Canonicalization Test Vectors as IETF Normative Reference + Public Differential Fuzz Harness",
+    "failures": [
+      "TECH-01",
+      "TECH-05",
+      "PLAN GAP 1",
+      "PLAN GAP 3"
+    ]
+  },
+  {
+    "id": "SOL-TECH-02",
+    "cluster": "Cryptography & Protocol",
+    "title": "Federated Anchor Aggregation with OpenTimestamps Calendar Fallback + Capped Fee Policy",
+    "failures": [
+      "TECH-02",
+      "TECH-06",
+      "PLAN GAP 2",
+      "PLAN GAP 3"
+    ]
+  },
+  {
+    "id": "SOL-TECH-03",
+    "cluster": "Cryptography & Protocol",
+    "title": "Vendored Crypto with Reproducible Build, SLSA L3 Provenance, and a Bounded Verifier",
+    "failures": [
+      "TECH-03",
+      "TECH-04",
+      "PLAN GAP 4"
+    ]
+  },
+  {
+    "id": "SOL-TECH-05",
+    "cluster": "Cryptography & Protocol",
+    "title": "Forward-Compatible Receipt Envelope + Written Versioning Policy with Foundation Stewardship",
+    "failures": [
+      "TECH-05",
+      "TECH-07",
+      "PLAN GAP 1",
+      "PLAN GAP 5"
+    ]
+  },
+  {
+    "id": "SOL-TECH-06",
+    "cluster": "Cryptography & Protocol",
+    "title": "Operator Conformance Spec + Cross-Region Reconciliation Proofs in the Public Log",
+    "failures": [
+      "TECH-06",
+      "TECH-02",
+      "PLAN GAP 3",
+      "PLAN GAP 4"
+    ]
+  },
+  {
+    "id": "SOL-PROTOCOL-GOV",
+    "cluster": "Cryptography & Protocol",
+    "title": "Public Bug-Bounty + Pre-Disclosure CSIRT with \u20ac100K Pool Funded by Foundation",
+    "failures": [
+      "TECH-03",
+      "TECH-04",
+      "TECH-01",
+      "PLAN GAP 4"
+    ]
+  },
+  {
+    "id": "SOL-FOUNDATION-GOV",
+    "cluster": "Cryptography & Protocol",
+    "title": "Anchor-of-Last-Resort: Foundation-Held Cold-Storage Anchor Key + Spec-as-Survivable-Asset",
+    "failures": [
+      "TECH-02",
+      "TECH-05",
+      "TECH-07",
+      "PLAN GAP 5"
+    ]
+  },
+  {
+    "id": "SOL-OPS-01",
+    "cluster": "Operational & Security",
+    "title": "Canonicalization Errata RFC + Entry #0 Public Postmortem as Protocol Maturity Signal",
+    "failures": [
+      "OPS-01"
+    ]
+  },
+  {
+    "id": "SOL-OPS-02",
+    "cluster": "Operational & Security",
+    "title": "Federated On-Call via PagerDuty + Two External SRE Contractors Under Foundation MoU",
+    "failures": [
+      "OPS-02",
+      "OPS-03",
+      "OPS-06"
+    ]
+  },
+  {
+    "id": "SOL-OPS-03",
+    "cluster": "Operational & Security",
+    "title": "RBF-Aware Anchor Pipeline + Published Worst-Case SLO + Mempool.space Partnership",
+    "failures": [
+      "OPS-03",
+      "OPS-01"
+    ]
+  },
+  {
+    "id": "SOL-OPS-04",
+    "cluster": "Operational & Security",
+    "title": "Hardware-Backed Identity Migration: GitHub Enterprise + YubiKey + Foundation-Owned Org",
+    "failures": [
+      "OPS-04",
+      "OPS-07"
+    ]
+  },
+  {
+    "id": "SOL-OPS-05",
+    "cluster": "Operational & Security",
+    "title": "Canary-Channel SDK Release Train + Tier-1 Customer Replay Suite",
+    "failures": [
+      "OPS-05",
+      "OPS-06"
+    ]
+  },
+  {
+    "id": "SOL-OPS-06",
+    "cluster": "Operational & Security",
+    "title": "Multi-Region Active-Active + Static Verifier Fallback + Cloudflare DNS Steering",
+    "failures": [
+      "OPS-06",
+      "OPS-03"
+    ]
+  },
+  {
+    "id": "SOL-OPS-07",
+    "cluster": "Operational & Security",
+    "title": "Tigris Secrets Vault + In-Process Redaction + Doppler-Backed CI With Per-Job Ephemeral Tokens",
+    "failures": [
+      "OPS-07",
+      "OPS-04"
+    ]
+  },
+  {
+    "id": "SOL-COMM-01",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Big-4 Audit Methodology Co-Authorship Program (Value-for-Value as IP Anchor)",
+    "failures": [
+      "COMM-01",
+      "COMM-03",
+      "COMM-05",
+      "COMM-07"
+    ]
+  },
+  {
+    "id": "SOL-COMM-02",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Article 50 Watchlist Newsletter as Warm-Inbound Engine (Replace Cold Outbound)",
+    "failures": [
+      "COMM-02",
+      "COMM-05",
+      "COMM-07"
+    ]
+  },
+  {
+    "id": "SOL-COMM-03",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Open-Protocol License Trap (Defeat Closed-Vendor Competitor by Definition)",
+    "failures": [
+      "COMM-03",
+      "COMM-01",
+      "COMM-04"
+    ]
+  },
+  {
+    "id": "SOL-COMM-04",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Land-Expand-Standardize Pricing Ladder with Built-In Exit Ramps",
+    "failures": [
+      "COMM-04",
+      "COMM-06",
+      "COMM-05"
+    ]
+  },
+  {
+    "id": "SOL-COMM-05",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Anchor-Tenant Design-Partner Program \u2014 Equity-for-Reference (Manufactured Logos)",
+    "failures": [
+      "COMM-05",
+      "COMM-03",
+      "COMM-06"
+    ]
+  },
+  {
+    "id": "SOL-COMM-06",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Reframe Pricing Page as Standards-Body Schedule, Not SaaS Pricing",
+    "failures": [
+      "COMM-06",
+      "COMM-04",
+      "COMM-03"
+    ]
+  },
+  {
+    "id": "SOL-COMM-07",
+    "cluster": "Commercial / Enterprise Sales",
+    "title": "Manufactured Regulator Examination Surface \u2014 FOIA + Sandbox + Public Tracker",
+    "failures": [
+      "COMM-07",
+      "COMM-05",
+      "COMM-02"
+    ]
+  },
+  {
+    "id": "SOL-FIN-01",
+    "cluster": "Financial / Fundraising",
+    "title": "Pre-Diligence Cryptographic Transparency Pack + Trail of Bits Attestation Letter",
+    "failures": [
+      "FIN-01",
+      "FIN-02",
+      "FIN-06",
+      "FIN-04"
+    ]
+  },
+  {
+    "id": "SOL-FIN-02",
+    "cluster": "Financial / Fundraising",
+    "title": "Two-Stage Locked Tranche Structure with Milestone-Based Second Close",
+    "failures": [
+      "FIN-02",
+      "FIN-01",
+      "FIN-07"
+    ]
+  },
+  {
+    "id": "SOL-FIN-03",
+    "cluster": "Financial / Fundraising",
+    "title": "Pre-Marketed Series A with December 7 Hard Stop \u2014 Run as a Banker-Run Process via Qatalyst",
+    "failures": [
+      "FIN-03",
+      "FIN-07",
+      "FIN-02"
+    ]
+  },
+  {
+    "id": "SOL-FIN-04",
+    "cluster": "Financial / Fundraising",
+    "title": "Foundation IP-Transfer Pre-Wired via Adler & Colvin + Public Investor Memo Before Close",
+    "failures": [
+      "FIN-04",
+      "FIN-01",
+      "FIN-02"
+    ]
+  },
+  {
+    "id": "SOL-FIN-05",
+    "cluster": "Financial / Fundraising",
+    "title": "Bitcoin Anchoring Treasury Hedge + Foundation-Subsidized Legal via Pro Bono Pool",
+    "failures": [
+      "FIN-05",
+      "FIN-07",
+      "FIN-06"
+    ]
+  },
+  {
+    "id": "SOL-FIN-06",
+    "cluster": "Financial / Fundraising",
+    "title": "Three-Person Founder-Insurance Quorum: Interim COO, Interim Treasurer, Interim CTO-of-Protocol",
+    "failures": [
+      "FIN-06",
+      "FIN-01",
+      "FIN-03",
+      "FIN-07"
+    ]
+  },
+  {
+    "id": "SOL-FIN-07",
+    "cluster": "Financial / Fundraising",
+    "title": "Pre-Authorized $8M Venture Debt Facility via Hercules Capital \u2014 Triggered only if Series A Slips Past Dec 21",
+    "failures": [
+      "FIN-07",
+      "FIN-03",
+      "FIN-02"
+    ]
+  },
+  {
+    "id": "SOL-FG-01",
+    "cluster": "Foundation Governance",
+    "title": "Fiscal Sponsorship Bridge via New Venture Fund / Open Collective Foundation (Day 0 to IRS Letter)",
+    "failures": [
+      "FG-01",
+      "FG-07",
+      "PLAN-GAP-7"
+    ]
+  },
+  {
+    "id": "SOL-FG-02",
+    "cluster": "Foundation Governance",
+    "title": "Two-Step Foundation IP Transfer via Independent Fair-Value Appraisal (Houlihan Lokey + Adler & Colvin)",
+    "failures": [
+      "FG-02",
+      "FG-04",
+      "FG-06"
+    ]
+  },
+  {
+    "id": "SOL-FG-03",
+    "cluster": "Foundation Governance",
+    "title": "Three Pre-Committed Independent Board Members from the Open-Standards Reserve (Mozilla / Linux Foundation / IETF talent pool)",
+    "failures": [
+      "FG-03",
+      "FG-05",
+      "FG-04"
+    ]
+  },
+  {
+    "id": "SOL-FG-04",
+    "cluster": "Foundation Governance",
+    "title": "EU Contractual Counterparty via Stichting LedgerProof EU (Dutch Foundation) by Sep 30, 2026 \u2014 Pulled Forward from Q1 2027",
+    "failures": [
+      "FG-04",
+      "PLAN-GAP-6"
+    ]
+  },
+  {
+    "id": "SOL-FG-05",
+    "cluster": "Foundation Governance",
+    "title": "Executive Director Hire via Russell Reynolds Nonprofit Practice + 90-Day Interim ED via On-Deck or Bridgespan",
+    "failures": [
+      "FG-05",
+      "FG-06",
+      "PLAN-GAP-7"
+    ]
+  },
+  {
+    "id": "SOL-FG-06",
+    "cluster": "Foundation Governance",
+    "title": "Multi-Signer Foundation Formation Quorum via Adler & Colvin + Pre-Authorized Backup Incorporators",
+    "failures": [
+      "FG-06",
+      "FG-02"
+    ]
+  },
+  {
+    "id": "SOL-FG-07",
+    "cluster": "Foundation Governance",
+    "title": "Two-Track Tax-Deductible Grant Pipeline via DAFs and a Pre-Filed Form 1023-EZ Companion Entity",
+    "failures": [
+      "FG-07",
+      "FG-01"
+    ]
+  },
+  {
+    "id": "SOL-FP-01",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Unchained Capital Collaborative Custody + Casa Inheritance \u2014 institutionalize key custody before seed closes",
+    "failures": [
+      "FP-02",
+      "FP-07",
+      "FP-06"
+    ]
+  },
+  {
+    "id": "SOL-FP-02",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Chief of Staff + Fractional COO hire by July 1 \u2014 Eliza Madrigal model",
+    "failures": [
+      "FP-01",
+      "FP-04",
+      "FP-05",
+      "FP-07"
+    ]
+  },
+  {
+    "id": "SOL-FP-03",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Mark Beeston relationship protocol \u2014 Illuminate Financial gets first-look on every EU regulator engagement",
+    "failures": [
+      "FP-03",
+      "FP-04",
+      "FP-05"
+    ]
+  },
+  {
+    "id": "SOL-FP-04",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Forwardable Diligence Vault \u2014 every investor reads the same primary documents instead of taking another founder call",
+    "failures": [
+      "FP-01",
+      "FP-04",
+      "FP-06"
+    ]
+  },
+  {
+    "id": "SOL-FP-05",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Frankfurt EU Operating Hub \u2014 physical presence, Schengen-resident COS, and a Foundation-EU shell entity by August 2",
+    "failures": [
+      "FP-05",
+      "FP-03",
+      "FP-07"
+    ]
+  },
+  {
+    "id": "SOL-FP-06",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Founder Bridge Financing \u2014 convert personal financial fragility into a deliberate cash-runway program before Day 1 of fundraise",
+    "failures": [
+      "FP-06",
+      "FP-01"
+    ]
+  },
+  {
+    "id": "SOL-FP-07",
+    "cluster": "Founder Bandwidth & Personal Resilience",
+    "title": "Founder Continuity Protocol \u2014 succession, health, and protocol-survives-founder published as a Foundation governance document",
+    "failures": [
+      "FP-07",
+      "FP-01",
+      "FP-02"
+    ]
+  },
+  {
+    "id": "SOL-DIST-01",
+    "cluster": "Distribution & Channel",
+    "title": "Article 50 Watchlist \u2014 The Compliance-Officer Newsletter That Replaces Cold Outbound",
+    "failures": [
+      "DIST-01",
+      "DIST-04",
+      "DIST-07"
+    ]
+  },
+  {
+    "id": "SOL-DIST-02",
+    "cluster": "Distribution & Channel",
+    "title": "Big-4 Co-Authored Methodology \u2014 Make the Spec Their Spec",
+    "failures": [
+      "DIST-02",
+      "DIST-05",
+      "DIST-07"
+    ]
+  },
+  {
+    "id": "SOL-DIST-03",
+    "cluster": "Distribution & Channel",
+    "title": "Cloud Marketplace Sherpa Triple-Track \u2014 Pre-emptive Listing via Buyer Demand",
+    "failures": [
+      "DIST-03",
+      "DIST-07"
+    ]
+  },
+  {
+    "id": "SOL-DIST-04",
+    "cluster": "Distribution & Channel",
+    "title": "Editorial Independence via Foundation \u2014 Risto Uuk Co-Authored Policy Briefs",
+    "failures": [
+      "DIST-04",
+      "DIST-05",
+      "DIST-07"
+    ]
+  },
+  {
+    "id": "SOL-DIST-05",
+    "cluster": "Distribution & Channel",
+    "title": "Verifier Portal as the Anti-Failure \u2014 Each Receipt Becomes a Distribution Event",
+    "failures": [
+      "DIST-06",
+      "DIST-01",
+      "DIST-07"
+    ]
+  },
+  {
+    "id": "SOL-DIST-06",
+    "cluster": "Distribution & Channel",
+    "title": "Cross-Regulatory Schema Bridge \u2014 DORA, MiFID II, NIS2, MAS, NIST in One Codebase",
+    "failures": [
+      "DIST-05",
+      "DIST-02"
+    ]
+  },
+  {
+    "id": "SOL-DIST-07",
+    "cluster": "Distribution & Channel",
+    "title": "Distributed Founder via Pre-Recorded Forwardable Artifacts",
+    "failures": [
+      "DIST-07",
+      "DIST-01",
+      "DIST-04"
+    ]
+  },
+  {
+    "id": "SOL-NAR-01",
+    "cluster": "Narrative & Positioning",
+    "title": "Reframe Bitcoin anchor as 'public-good timestamping commons' via a co-signed FT op-ed with Adam Back + a former ECB official",
+    "failures": [
+      "NAR-01",
+      "NAR-05",
+      "NAR-07"
+    ]
+  },
+  {
+    "id": "SOL-NAR-02",
+    "cluster": "Narrative & Positioning",
+    "title": "Convert Entry #0 from defect to founding artifact via the 'Honest Ledger' museum page + a SCITT WG-published canonicalization erratum",
+    "failures": [
+      "NAR-02",
+      "NAR-06",
+      "NAR-04"
+    ]
+  },
+  {
+    "id": "SOL-NAR-03",
+    "cluster": "Narrative & Positioning",
+    "title": "Solve the 'no throat to choke' objection with a published Operator SLA + IndemnityCo wrapper backed by Munich Re / Lloyd's syndicate",
+    "failures": [
+      "NAR-03",
+      "NAR-07",
+      "NAR-01"
+    ]
+  },
+  {
+    "id": "SOL-NAR-04",
+    "cluster": "Narrative & Positioning",
+    "title": "Replace the thin founder open letter with a serialized Stripe-Press-grade essay collection: 'Notes on a Verifiable Ledger'",
+    "failures": [
+      "NAR-04",
+      "NAR-02",
+      "NAR-07"
+    ]
+  },
+  {
+    "id": "SOL-NAR-05",
+    "cluster": "Narrative & Positioning",
+    "title": "Pre-empt analyst miscategorization with a Forrester + Gartner briefing tour and a self-published 'Verifiable AI Compliance Wave' reference architecture",
+    "failures": [
+      "NAR-05",
+      "NAR-01",
+      "NAR-07"
+    ]
+  },
+  {
+    "id": "SOL-NAR-06",
+    "cluster": "Narrative & Positioning",
+    "title": "Replace 'click this URL to verify we exist' with a regulator-grade Verifier Console + a CLI artifact bundle that procurement can run offline",
+    "failures": [
+      "NAR-06",
+      "NAR-02",
+      "NAR-03"
+    ]
+  },
+  {
+    "id": "SOL-NAR-07",
+    "cluster": "Narrative & Positioning",
+    "title": "Make 'open protocol' legible to regulators by getting LPR cited in an ENISA / CEN-CENELEC technical report and an ISO/IEC 42001 implementation guidance addendum",
+    "failures": [
+      "NAR-07",
+      "NAR-01",
+      "NAR-05"
+    ]
+  },
+  {
+    "id": "SOL-REG-01",
+    "cluster": "Regulatory & Standards",
+    "title": "Article 50 Implementing Act Co-Drafting Coalition (Bruegel + CEPS + ECNL)",
+    "failures": [
+      "REG-01",
+      "REG-06",
+      "REG-07",
+      "PLAN-GAP-9"
+    ]
+  },
+  {
+    "id": "SOL-REG-02",
+    "cluster": "Regulatory & Standards",
+    "title": "GDPR Article 17 Crypto-Shredding Protocol Extension \u2014 Pre-Cleared with CNIL Sandbox",
+    "failures": [
+      "REG-02",
+      "PLAN-GAP-10",
+      "REG-05"
+    ]
+  },
+  {
+    "id": "SOL-REG-03",
+    "cluster": "Regulatory & Standards",
+    "title": "Civil Society Enforcement Watchdog (noyb + AlgorithmWatch + EDRi shadow report)",
+    "failures": [
+      "REG-03",
+      "PLAN-GAP-9",
+      "REG-06"
+    ]
+  },
+  {
+    "id": "SOL-REG-04",
+    "cluster": "Regulatory & Standards",
+    "title": "CEN-CENELEC JTC 21 Working Item \u2014 Convert LPR into a Harmonized Standard Citation",
+    "failures": [
+      "REG-04",
+      "REG-07",
+      "REG-01"
+    ]
+  },
+  {
+    "id": "SOL-REG-05",
+    "cluster": "Regulatory & Standards",
+    "title": "ECB-Style Position Paper on 'Crypto-Anchoring is Not Crypto-Assets' (MiCA Decontamination)",
+    "failures": [
+      "REG-05",
+      "REG-02"
+    ]
+  },
+  {
+    "id": "SOL-REG-06",
+    "cluster": "Regulatory & Standards",
+    "title": "The 'Open Public Infrastructure' Doctrine \u2014 Pre-emptive Donation to a European Public-Interest Trust",
+    "failures": [
+      "REG-06",
+      "REG-03",
+      "REG-01"
+    ]
+  },
+  {
+    "id": "SOL-REG-07",
+    "cluster": "Regulatory & Standards",
+    "title": "Soft-Enforcement Insurance \u2014 The B+ Track 'Voluntary Code' Pre-Built and Ready",
+    "failures": [
+      "PLAN-GAP-9",
+      "REG-03",
+      "REG-01"
+    ]
+  },
+  {
+    "id": "SOL-COMP-01",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Make LPR the Reference Implementation Microsoft Purview HAS to Ship",
+    "failures": [
+      "COMP-01",
+      "COMP-07",
+      "COMP-03"
+    ]
+  },
+  {
+    "id": "SOL-COMP-02",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Formal C2PA <> LPR Liaison Statement \u2014 Make Them Layer on Top, Not Compete",
+    "failures": [
+      "COMP-02",
+      "COMP-06",
+      "COMP-01"
+    ]
+  },
+  {
+    "id": "SOL-COMP-03",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Big-4 Methodology Partnership \u2014 Make LPR the Audit Procedure, Not the Audited Tool",
+    "failures": [
+      "COMP-03",
+      "COMP-04",
+      "COMP-01"
+    ]
+  },
+  {
+    "id": "SOL-COMP-04",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Marketplace Federation \u2014 Make Forking the Protocol Unprofitable",
+    "failures": [
+      "COMP-04",
+      "COMP-06",
+      "COMP-01"
+    ]
+  },
+  {
+    "id": "SOL-COMP-05",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Foundation IP Firewall \u2014 Trademark Plus Spec License Makes Hostile Forks Toothless",
+    "failures": [
+      "COMP-06",
+      "COMP-04",
+      "COMP-03"
+    ]
+  },
+  {
+    "id": "SOL-COMP-06",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "Anthropic & OpenAI Native SDK Integration \u2014 Be the Receipt Inside Their Receipt",
+    "failures": [
+      "COMP-07",
+      "COMP-01",
+      "COMP-04"
+    ]
+  },
+  {
+    "id": "SOL-COMP-07",
+    "cluster": "Adversarial & Competitor Response",
+    "title": "AWS Partner-Not-Compete Pact \u2014 Bedrock Native LPR Emission",
+    "failures": [
+      "COMP-05-noted",
+      "COMP-01",
+      "COMP-07"
+    ]
+  },
+  {
+    "id": "SOL-GEO-01",
+    "cluster": "Geopolitical & Macro",
+    "title": "Anchor-Agnostic Multi-Chain Notarization Layer with Bitcoin as Primary, Ethereum L1 + Internet Computer NNS as Standby",
+    "failures": [
+      "GEO-01",
+      "GEO-06"
+    ]
+  },
+  {
+    "id": "SOL-GEO-02",
+    "cluster": "Geopolitical & Macro",
+    "title": "Convert the Foundation into the EU AI Office's De Facto Conformity Assessment Body for Article 50 Provenance",
+    "failures": [
+      "GEO-02",
+      "GEO-05",
+      "GEO-07"
+    ]
+  },
+  {
+    "id": "SOL-GEO-03",
+    "cluster": "Geopolitical & Macro",
+    "title": "Dual-Domicile Counterparty Architecture: Swiss Foundation as Primary Contract Counterparty for EU Customers, Delaware Inc as US-Only Operating Entity",
+    "failures": [
+      "GEO-03",
+      "GEO-07"
+    ]
+  },
+  {
+    "id": "SOL-GEO-04",
+    "cluster": "Geopolitical & Macro",
+    "title": "Pre-Position 'Deepfake Election Defense Stack' as the Foundation's Public-Interest Wing \u2014 Activate on First Incident",
+    "failures": [
+      "GEO-05",
+      "GEO-07",
+      "GEO-02"
+    ]
+  },
+  {
+    "id": "SOL-GEO-05",
+    "cluster": "Geopolitical & Macro",
+    "title": "UK Pace-Setting via FCA AI Sandbox + Bank of England Reciprocity \u2014 Decouple UK Strategy from EU Schedule",
+    "failures": [
+      "GEO-04"
+    ]
+  },
+  {
+    "id": "SOL-GEO-06",
+    "cluster": "Geopolitical & Macro",
+    "title": "Anchor Economics Hedge: Pre-Paid 36-Month Anchor Budget + Fee-Market Diversification + Lightning/L2 Fallback",
+    "failures": [
+      "GEO-06",
+      "GEO-01"
+    ]
+  },
+  {
+    "id": "SOL-GEO-07",
+    "cluster": "Geopolitical & Macro",
+    "title": "EU-Sovereign Operator Network: Federated Operators in Each Major Member State Owned by Local Foundations",
+    "failures": [
+      "GEO-07",
+      "GEO-03",
+      "GEO-02"
+    ]
+  },
+  {
+    "id": "SOL-META-01",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The One-Page Operating Surface (lpr-status.json + status.ledgerproofhq.io)",
+    "failures": [
+      "META-PLAN-TOO-LONG",
+      "META-WIN-CONDITIONS-ILLEGIBLE",
+      "META-PREMORTEM-NO-FORUM"
+    ]
+  },
+  {
+    "id": "SOL-META-02",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Solo-Founder Critical Path (CRIT_PATH.md + Friday 17:00 CET Circuit Breaker Review)",
+    "failures": [
+      "META-19-ARTIFACTS-ASSUME-ORG",
+      "META-NO-CIRCUIT-BREAKERS",
+      "META-PLAN-TOO-LONG"
+    ]
+  },
+  {
+    "id": "SOL-META-03",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Investor Relationship Engine (Attio + Cal.com + Monthly Forwardable Memo)",
+    "failures": [
+      "META-NO-VC-CADENCE",
+      "META-PLAN-TOO-LONG",
+      "META-WIN-CONDITIONS-ILLEGIBLE"
+    ]
+  },
+  {
+    "id": "SOL-META-04",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Friday Governance Forum (Foundation + Inc. + Premortem in One Hour)",
+    "failures": [
+      "META-PREMORTEM-NO-FORUM",
+      "META-NO-FOUNDATION-INC-CONFLICT-RESOLUTION",
+      "META-NO-CIRCUIT-BREAKERS"
+    ]
+  },
+  {
+    "id": "SOL-META-05",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Single-Point-of-Failure Decomposition (Unchained + Vouch + Continuum CoS)",
+    "failures": [
+      "META-VERONICA-AS-SPOF",
+      "META-19-ARTIFACTS-ASSUME-ORG",
+      "META-PLAN-TOO-LONG"
+    ]
+  },
+  {
+    "id": "SOL-META-06",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Public Win-Conditions Wall (win.ledgerproofhq.io, anchored quarterly)",
+    "failures": [
+      "META-WIN-CONDITIONS-ILLEGIBLE",
+      "META-PLAN-TOO-LONG",
+      "META-PREMORTEM-NO-FORUM"
+    ]
+  },
+  {
+    "id": "SOL-META-07",
+    "cluster": "Meta \u2014 Plan-Level Gaps Not Already Addressed",
+    "title": "The Forwardable Executive Surface (1-pager.pdf, regenerated weekly, hash in every footer)",
+    "failures": [
+      "META-PLAN-TOO-LONG",
+      "META-WIN-CONDITIONS-ILLEGIBLE",
+      "META-NO-VC-CADENCE"
+    ]
+  }
+]

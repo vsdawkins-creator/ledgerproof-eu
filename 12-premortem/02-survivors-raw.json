@@ -1,0 +1,458 @@
+{
+  "total_finders": 11,
+  "total_failure_modes": 77,
+  "survivors_count": 75,
+  "refuted_count": 2,
+  "survivors": [
+    {
+      "id": "REG-01",
+      "lens": "REGULATORY",
+      "title": "EU AI Office issues Article 50 guidance that defines compliance as 'machine-readable disclosure metadata' without mentioning cryptographic anchoring",
+      "severity": 5
+    },
+    {
+      "id": "REG-02",
+      "lens": "REGULATORY",
+      "title": "A national DPA (CNIL, AP, or BfDI) publicly flags Bitcoin-anchored receipts as GDPR Article 17 incompatible",
+      "severity": 4
+    },
+    {
+      "id": "REG-03",
+      "lens": "REGULATORY",
+      "title": "August 2 enforcement passes with zero visible enforcement action \u2014 Article 50 becomes a 'paper tiger' for 6+ months",
+      "severity": 5
+    },
+    {
+      "id": "REG-04",
+      "lens": "REGULATORY",
+      "title": "Code of Practice on General-Purpose AI (Transparency chapter) explicitly names a competing standard, locking out LPR",
+      "severity": 4
+    },
+    {
+      "id": "REG-05",
+      "lens": "REGULATORY",
+      "title": "MiCA-driven 'crypto is risky' framing contaminates LPR perception inside EU financial supervisors",
+      "severity": 4
+    },
+    {
+      "id": "REG-06",
+      "lens": "REGULATORY",
+      "title": "DG-CNECT or AI Office signals preference for a Commission-blessed central compliance registry, displacing decentralized protocols",
+      "severity": 4
+    },
+    {
+      "id": "REG-07",
+      "lens": "REGULATORY",
+      "title": "Article 50 'state of the art' clause gets interpreted narrowly, excluding novel cryptographic approaches",
+      "severity": 3
+    },
+    {
+      "id": "TECH-01",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Entry #0 canonicalization bug becomes the public proof that LedgerProof is broken",
+      "severity": 5
+    },
+    {
+      "id": "TECH-02",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Bitcoin fee spike makes OP_RETURN anchoring economically non-viable mid-pilot",
+      "severity": 4
+    },
+    {
+      "id": "TECH-03",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "@noble/* supply-chain compromise or CVE breaks the browser verifier",
+      "severity": 5
+    },
+    {
+      "id": "TECH-04",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Slug resolver becomes an authorization-bypass attack surface",
+      "severity": 4
+    },
+    {
+      "id": "TECH-05",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Receipt format breaking change (v1.1 \u2192 v1.2) strands the 50K already-anchored receipts",
+      "severity": 4
+    },
+    {
+      "id": "TECH-06",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Cross-region operator state drift produces conflicting verification results",
+      "severity": 4
+    },
+    {
+      "id": "TECH-07",
+      "lens": "TECHNICAL-CRYPTOGRAPHIC",
+      "title": "Post-quantum migration debate fractures the protocol before v1.1 has critical mass",
+      "severity": 3
+    },
+    {
+      "id": "COMM-01",
+      "lens": "COMMERCIAL",
+      "title": "Big-4 reject value-for-value; demand revenue share or exclusivity",
+      "severity": 4
+    },
+    {
+      "id": "COMM-02",
+      "lens": "COMMERCIAL",
+      "title": "Cold outbound to 17 EU GCs returns <2% positive reply rate",
+      "severity": 5
+    },
+    {
+      "id": "COMM-03",
+      "lens": "COMMERCIAL",
+      "title": "Closed-vendor competitor with VC distribution wins the procurement standard",
+      "severity": 5
+    },
+    {
+      "id": "COMM-04",
+      "lens": "COMMERCIAL",
+      "title": "30-Day pilots fail to convert because the $25K SOW has no exit ramp to $120K",
+      "severity": 4
+    },
+    {
+      "id": "COMM-05",
+      "lens": "COMMERCIAL",
+      "title": "No named reference customer by Day 120; Series A pipeline collapses",
+      "severity": 5
+    },
+    {
+      "id": "COMM-06",
+      "lens": "COMMERCIAL",
+      "title": "Pilot pricing of $25K signals 'toy', not 'compliance infrastructure'",
+      "severity": 3
+    },
+    {
+      "id": "COMM-07",
+      "lens": "COMMERCIAL",
+      "title": "Regulator examination request rate stays near-zero through Day 90; the urgency thesis evaporates",
+      "severity": 4
+    },
+    {
+      "id": "FIN-01",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Co-lead drops out after diligence surfaces verifier failure on Entry #0",
+      "severity": 5
+    },
+    {
+      "id": "FIN-02",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Round downsizes from $15M to sub-$10M as co-leads renegotiate post-launch",
+      "severity": 4
+    },
+    {
+      "id": "FIN-03",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Series A window closes before December 7 as 2026 H2 AI-compliance category cools",
+      "severity": 4
+    },
+    {
+      "id": "FIN-04",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Foundation 501(c)(3) IP transfer triggers investor pause or repricing",
+      "severity": 4
+    },
+    {
+      "id": "FIN-05",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Burn outpaces plan due to Bitcoin anchoring fees + Foundation legal at scale",
+      "severity": 3
+    },
+    {
+      "id": "FIN-06",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Founder concentration triggers key-person insurance demand or close delay",
+      "severity": 3
+    },
+    {
+      "id": "FIN-07",
+      "lens": "FINANCIAL-FUNDRAISING",
+      "title": "Bridge round needed Q1 2027 at flat or down terms",
+      "severity": 3
+    },
+    {
+      "id": "FG-01",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "501(c)(3) determination letter arrives after Series A diligence cutoff",
+      "severity": 4
+    },
+    {
+      "id": "FG-02",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Inc.-to-Foundation IP assignment creates private-benefit / inurement problem",
+      "severity": 5
+    },
+    {
+      "id": "FG-03",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Cannot recruit three credible independent board members in time",
+      "severity": 4
+    },
+    {
+      "id": "FG-04",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Tier-1 enterprise legal-committee review rejects 'US Delaware Foundation in formation' as the regulatory perimeter owner",
+      "severity": 4
+    },
+    {
+      "id": "FG-05",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Foundation Executive Director hire fails or stalls \u2014 leaves the Foundation as a paper tiger Veronica still runs",
+      "severity": 4
+    },
+    {
+      "id": "FG-06",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Founder-as-sole-signer single point of failure on Foundation formation",
+      "severity": 3
+    },
+    {
+      "id": "FG-07",
+      "lens": "FOUNDATION-GOVERNANCE",
+      "title": "Foundation cannot accept tax-deductible grants in time to fund the operator network, starving the open-protocol claim of substance",
+      "severity": 3
+    },
+    {
+      "id": "FP-01",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Founder burnout collapse between fundraise close and public launch",
+      "severity": 4
+    },
+    {
+      "id": "FP-02",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Single-key-holder concentration on protocol, anchor wallet, and cloud accounts",
+      "severity": 5
+    },
+    {
+      "id": "FP-03",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Loss of Mark Beeston / Illuminate relationship before SAFE signs",
+      "severity": 4
+    },
+    {
+      "id": "FP-04",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Diligence call hand-off failure under simultaneous-call load",
+      "severity": 4
+    },
+    {
+      "id": "FP-05",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "EU travel/visa friction blocks in-person closes and IETF presence",
+      "severity": 3
+    },
+    {
+      "id": "FP-06",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Personal financial stress forces dilutive or principle-compromising moves",
+      "severity": 3
+    },
+    {
+      "id": "FP-07",
+      "lens": "FOUNDER-PERSONAL",
+      "title": "Family or health emergency in the 60-90 day critical window",
+      "severity": 5
+    },
+    {
+      "id": "DIST-01",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Cold outbound to Tier-1 EU GCs converts at <1%, not the modeled 10%",
+      "severity": 4
+    },
+    {
+      "id": "DIST-02",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Big-4 partnerships stall at LOI stage, blocking the only credible enterprise distribution channel",
+      "severity": 4
+    },
+    {
+      "id": "DIST-03",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Cloud marketplace listings rejected or delayed past Article 50 enforcement window",
+      "severity": 3
+    },
+    {
+      "id": "DIST-04",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Editorial channel (Risto Uuk / Politico Europe / EuroAct / FLI) declines to cover or partner",
+      "severity": 4
+    },
+    {
+      "id": "DIST-05",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Article 50 wedge fails to generalize to DORA / MiFID II / MAS / NIST, capping TAM at Series A pitch",
+      "severity": 4
+    },
+    {
+      "id": "DIST-06",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "Verifier portal URL goes viral but doesn't convert because the live entries fail verification",
+      "severity": 5
+    },
+    {
+      "id": "DIST-07",
+      "lens": "DISTRIBUTION-CHANNEL",
+      "title": "All distribution channels concentrate on one person (Veronica) and bottleneck during launch week",
+      "severity": 4
+    },
+    {
+      "id": "NAR-01",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "Bitcoin anchor reads as 'crypto-bro project' to Tier-1 bank GC",
+      "severity": 4
+    },
+    {
+      "id": "NAR-02",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "Entry #0 'Failed' verification becomes the defining meme of the project",
+      "severity": 5
+    },
+    {
+      "id": "NAR-03",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "'Foundation-governed' reads as 'no throat to choke' to procurement",
+      "severity": 4
+    },
+    {
+      "id": "NAR-04",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "Founder open letter lands flat \u2014 May 18 declaration too thin to carry the story",
+      "severity": 3
+    },
+    {
+      "id": "NAR-05",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "Competitor reframes LedgerProof as 'Bitcoin-maximalist edge case' in analyst category",
+      "severity": 4
+    },
+    {
+      "id": "NAR-06",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "'10-second proof we exist' verifier URL becomes a meme for the wrong reason",
+      "severity": 5
+    },
+    {
+      "id": "NAR-07",
+      "lens": "NARRATIVE-POSITIONING",
+      "title": "'Open protocol' frame is illegible to regulators and procurement",
+      "severity": 3
+    },
+    {
+      "id": "OPS-01",
+      "lens": "OPERATIONAL",
+      "title": "Legacy entry #0 hash failure surfaces during regulator/investor demo",
+      "severity": 5
+    },
+    {
+      "id": "OPS-02",
+      "lens": "OPERATIONAL",
+      "title": "Founder is sole on-call through July 6 launch window \u2014 single human SPOF",
+      "severity": 5
+    },
+    {
+      "id": "OPS-03",
+      "lens": "OPERATIONAL",
+      "title": "Bitcoin mempool congestion blows the anchor SLO with no published fallback",
+      "severity": 4
+    },
+    {
+      "id": "OPS-04",
+      "lens": "OPERATIONAL",
+      "title": "Unrevoked PAT + Dropbox-synced .git/config = supply-chain compromise vector",
+      "severity": 5
+    },
+    {
+      "id": "OPS-05",
+      "lens": "OPERATIONAL",
+      "title": "SDK regression breaks a paying pilot mid-flight with no release safety net",
+      "severity": 4
+    },
+    {
+      "id": "OPS-06",
+      "lens": "OPERATIONAL",
+      "title": "Vercel/Fly.io launch-day outage during July 6 spotlight with no graceful degradation",
+      "severity": 4
+    },
+    {
+      "id": "OPS-07",
+      "lens": "OPERATIONAL",
+      "title": "Secret leakage through CI logs, error reporting, and third-party libs not in the threat model",
+      "severity": 4
+    },
+    {
+      "id": "COMP-01",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "Microsoft Purview ships native Article 50 receipt format pre-August 2",
+      "severity": 5
+    },
+    {
+      "id": "COMP-02",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "C2PA absorbs synthetic-media Article 50 surface before LPR formalizes it",
+      "severity": 4
+    },
+    {
+      "id": "COMP-03",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "Big-4 endorses Vanta/Drata-style closed competitor first, foreclosing the audit channel",
+      "severity": 4
+    },
+    {
+      "id": "COMP-04",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "YC-backed stealth competitor with US-based seed launches a directly comparable wedge",
+      "severity": 4
+    },
+    {
+      "id": "COMP-06",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "Hostile open-source fork weaponizes Foundation IP to fragment the standard",
+      "severity": 3
+    },
+    {
+      "id": "COMP-07",
+      "lens": "ADVERSARIAL-COMPETITOR",
+      "title": "Anthropic / OpenAI ship native 'tool-call receipts' that capture the developer mindshare wedge",
+      "severity": 4
+    },
+    {
+      "id": "GEO-01",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "Bitcoin price crash discredits anchor narrative during fundraise",
+      "severity": 4
+    },
+    {
+      "id": "GEO-02",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "Next EU Commission cycle softens Article 50 enforcement",
+      "severity": 5
+    },
+    {
+      "id": "GEO-03",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "US-EU divergence makes Delaware-corp counterparty toxic to EU GCs",
+      "severity": 4
+    },
+    {
+      "id": "GEO-05",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "Deepfake incident reframes Article 50 toward security-only obligations",
+      "severity": 3
+    },
+    {
+      "id": "GEO-06",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "Bitcoin OP_RETURN policy or fee regime change breaks anchor economics",
+      "severity": 4
+    },
+    {
+      "id": "GEO-07",
+      "lens": "GEOPOLITICAL-MACRO",
+      "title": "Cyber operation triggers EU sovereignty preference for AI vendors",
+      "severity": 3
+    }
+  ]
+}
