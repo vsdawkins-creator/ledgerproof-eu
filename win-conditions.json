@@ -1,0 +1,96 @@
+{
+  "$schema": "https://spec.ledgerproofhq.io/schemas/win-conditions-v1.json",
+  "version": "1.0.0",
+  "issued_at": "2026-06-01",
+  "anchor_cadence": "quarterly",
+  "next_anchor_date": "2026-09-01",
+  "doctrine": "Nine binary pre-commitments. Each is a single boolean we declare true or false at quarter end. The list does not change between anchors — only the values do. Declaring false on a win condition is allowed; declaring it ambiguously is not.",
+
+  "win_conditions": [
+    {
+      "id": "WC-01-FOUNDATION-OWNS-PROTOCOL",
+      "statement": "The LedgerProof Foundation owns the LPR specification, conformance test vectors, reference verifier, reference operator, regulation mappings, and Foundation-of-last-resort anchor key. LedgerProof Inc. is one of multiple operators, not the IP owner.",
+      "doctrine_principle": "P1",
+      "target_date": "2026-12-07",
+      "measurement": "USPTO IP-license filing confirms Foundation ownership; Foundation governance records published; at least one non-Inc operator certified to the conformance spec.",
+      "current_state": "false-in-progress",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-02-VERIFIER-INDEPENDENT-OF-OPERATOR",
+      "statement": "A regulator can verify any LPR receipt using the public reference verifier and the public Bitcoin chain alone, without depending on LedgerProof Inc.'s service. Static fallback bundle (<32KB single-file HTML) is downloadable from a Foundation-owned domain.",
+      "doctrine_principle": "P1",
+      "target_date": "2026-07-06",
+      "measurement": "verifier-core vendored under Foundation org; static fallback live at verify.ledgerproofhq.io/static-fallback.html; bundle size verified ≤32KB; Cure53 audit published.",
+      "current_state": "false-in-progress",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-03-OPERATING-IN-PUBLIC",
+      "statement": "Every governance decision, errata, incident report, transparency report, and Code-of-Practice consultation submission published by the Foundation is itself anchored as a LedgerProof receipt. Public errata register live.",
+      "doctrine_principle": "P2",
+      "target_date": "2026-06-30",
+      "measurement": "spec.ledgerproofhq.io/errata/ live with LPR-ERRATA-001; status.ledgerproofhq.io live with weekly-anchored lpr-status.json; first quarterly transparency report published and anchored.",
+      "current_state": "false-in-progress",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-04-EU-CONTRACTUAL-COUNTERPARTY",
+      "statement": "The Foundation has a registered EU legal entity (Dutch Stichting) capable of signing contracts with Tier-1 EU enterprises, separate from LedgerProof Inc. (Delaware).",
+      "doctrine_principle": "P1",
+      "target_date": "2026-09-30",
+      "measurement": "KvK registration confirmed; ING Bank account open; first commercial agreement signed by Stichting (not Inc.).",
+      "current_state": "false-not-started",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-05-INDEPENDENT-BOARD-SEATED",
+      "statement": "Three independent Foundation board members (Choudhary chair, Randal audit, Moerel compliance) have signed director acceptance letters, attended at least one quarterly meeting, and bound D&O insurance is in force.",
+      "doctrine_principle": "P1",
+      "target_date": "2026-08-30",
+      "measurement": "Director acceptances on file; meeting minutes published as receipts; D&O policy binder issued.",
+      "current_state": "false-not-started",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-06-FOUNDER-NOT-SPOF",
+      "statement": "Veronica S. Dawkins is not the single point of failure on: production on-call, release signing, anchor key custody, SAFE/contract signing, or Foundation board action. Foundation Continuity Protocol has been dry-run successfully.",
+      "doctrine_principle": "P3",
+      "target_date": "2026-08-30",
+      "measurement": "Federated on-call rotation operating; Sigstore signing with at least 2 designated keyholders; 2-of-3 multisig anchor key; CoS with co-signer authority hired; Foundation Continuity Protocol 72-hour dry-run completed with zero customer-visible incident.",
+      "current_state": "false-in-progress",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-07-INDEPENDENT-CRYPTO-ATTESTATIONS",
+      "statement": "Three independent Tier-1 cryptography firms (Trail of Bits + Latacora + Cure53) have publicly attested to the correctness of LPR v1.1 canonicalization, supply-chain integrity, and verifier correctness. Memos published at security.ledgerproofhq.io.",
+      "doctrine_principle": "P2",
+      "target_date": "2026-09-30",
+      "measurement": "Three signed audit memos published on Foundation-owned domain; bug bounty live with €100K Foundation-funded pool.",
+      "current_state": "false-in-progress",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-08-TIER-1-EU-DESIGN-PARTNERS-LIVE",
+      "statement": "Three named Tier-1 EU financial-services design partners have signed MSAs at $1 + warrant, with contractually-bound reference rights, deployed LPR in at least one production AI workflow, and consented to public attribution in launch press release.",
+      "doctrine_principle": "P2",
+      "target_date": "2026-08-30",
+      "measurement": "Three signed MSAs; three production deployments confirmed in operator metrics; three customer logos in launch press release.",
+      "current_state": "false-not-started",
+      "anchored_quarterly": null
+    },
+    {
+      "id": "WC-09-SERIES-A-CLOSED-OR-OPTIONALITY-INTACT",
+      "statement": "By December 7, 2026, LedgerProof has either (a) closed Series A at $30M / $180M post with three signed term sheets via Qatalyst process, OR (b) drawn the Hercules $8M facility and extended runway to Q3 2027 without a flat-or-down round, while continuing the Qatalyst process.",
+      "doctrine_principle": "P3",
+      "target_date": "2026-12-07",
+      "measurement": "Either Series A SAFE/preferred-stock wire confirmed, OR Hercules draw notice + Qatalyst term-sheet pipeline confirmed.",
+      "current_state": "false-not-started",
+      "anchored_quarterly": null
+    }
+  ],
+
+  "anchor_history": [],
+
+  "review_protocol": "Friday 17:00 CET weekly review of progress against each win condition. Quarterly anchor on the first Tuesday after Sep 1, Dec 1, Mar 1, Jun 1. Anchoring publishes the boolean state and the receipt sequence to anchor_history."
+}
