@@ -5,10 +5,10 @@
 **Horizon:** June 25, 2026 (seed close) → December 7, 2026 (Series A open)
 **Fixed external constraint:** EU AI Act Article 50 enforces August 2, 2026
 
-This is the single document that wires the **GTM plan** ([`08-gtm/`](08-gtm/00-MASTER-PLAN.md)) and the **code plan** ([`09-code-plan/`](09-code-plan/00-MASTER-CODE-PLAN.md)) into one integrated view. Each milestone gate shows the commercial deliverables and the engineering deliverables side by side. Where one depends on the other, the dependency is named.
+This is the single document that wires the **GTM plan** ([`08-gtm/`](08-gtm/00-MASTER-PLAN.md)) and the **code plan** ([`09-code-plan/`](09-code-plan/00-MASTER-CODE-PLAN-V2.md)) into one integrated view. Each milestone gate shows the commercial deliverables and the engineering deliverables side by side. Where one depends on the other, the dependency is named.
 
 For commercial-only detail: [`08-gtm/00-MASTER-PLAN.md`](08-gtm/00-MASTER-PLAN.md)
-For engineering-only detail: [`09-code-plan/00-MASTER-CODE-PLAN.md`](09-code-plan/00-MASTER-CODE-PLAN.md)
+For engineering-only detail: [`09-code-plan/00-MASTER-CODE-PLAN-V2.md`](09-code-plan/00-MASTER-CODE-PLAN-V2.md) (V2, converged with the [10X Playbook](12-premortem/04-10X-PLAYBOOK-MAY31.md); V1 archived)
 
 ---
 
@@ -304,7 +304,10 @@ If any of these surface as questions in a Series A diligence call, the answer is
 
 ### By function
 - Commercial master: [08-gtm/00-MASTER-PLAN.md](08-gtm/00-MASTER-PLAN.md)
-- Engineering master: [09-code-plan/00-MASTER-CODE-PLAN.md](09-code-plan/00-MASTER-CODE-PLAN.md)
+- Engineering master (V2 — canonical): [09-code-plan/00-MASTER-CODE-PLAN-V2.md](09-code-plan/00-MASTER-CODE-PLAN-V2.md)
+- Engineering master (V1 — archived): [09-code-plan/00-MASTER-CODE-PLAN.md](09-code-plan/00-MASTER-CODE-PLAN.md)
+- 10X Playbook: [12-premortem/04-10X-PLAYBOOK-MAY31.md](12-premortem/04-10X-PLAYBOOK-MAY31.md)
+- Premortem: [12-premortem/01-PREMORTEM-MAY31.md](12-premortem/01-PREMORTEM-MAY31.md)
 - ISO/IEC 42001 mapping: [08-gtm/shared/iso-42001-ledgerproof-mapping.md](08-gtm/shared/iso-42001-ledgerproof-mapping.md)
 - Repo conventions: [09-code-plan/shared/repo-conventions.md](09-code-plan/shared/repo-conventions.md)
 - Release process: [09-code-plan/shared/release-process.md](09-code-plan/shared/release-process.md)

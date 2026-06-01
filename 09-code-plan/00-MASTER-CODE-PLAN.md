@@ -1,3 +1,9 @@
+> **⚠ ARCHIVED — May 31, 2026.** This document is the originally-conceived 7-track gate-grid plan. It has been superseded by [`00-MASTER-CODE-PLAN-V2.md`](00-MASTER-CODE-PLAN-V2.md), which converges the engineering plan with the [10X Playbook](../12-premortem/04-10X-PLAYBOOK-MAY31.md) — doctrine-first, bandwidth-audited, with an explicit kill list and Foundation/Inc. boundary map. V1 survives only for historical reference. New engineering decisions read against V2.
+>
+> **What V2 changes:** the 7-track × 5-gate grid is dropped as a planning instrument (it implied a parallel-shipping team that doesn't exist); replaced by a 7-day hot path + 30-day compounding wedge + 90-day moat construction grouped by doctrine principle. The seven cross-track invariants and the inviolable constraints survive verbatim.
+
+---
+
 # LedgerProof Code Plan — Master (Seed Close → Series A)
 
 **Document version:** v1.0 (May 28, 2026)
