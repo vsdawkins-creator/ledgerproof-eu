@@ -3,7 +3,8 @@
 **Generated:** Monday June 1, 2026
 **Cadence:** 3 deliverables per week, week-indexed. **One row = one Tuesday.** Friday 17:00 CET = circuit-breaker review.
 **Reads against:** [`PLAN.md`](PLAN.md) (integrator), [`09-code-plan/00-MASTER-CODE-PLAN-V2.md`](09-code-plan/00-MASTER-CODE-PLAN-V2.md) (engineering), [`12-premortem/04-10X-PLAYBOOK-MAY31.md`](12-premortem/04-10X-PLAYBOOK-MAY31.md) (operations).
-**Operational substrate:** [`lpr-status.json`](lpr-status.json) (weekly anchor), [`win-conditions.json`](win-conditions.json) (quarterly anchor).
+**Operational substrate:** [`lpr-status.json`](lpr-status.json) (protocol state, weekly anchor), [`win-conditions.json`](win-conditions.json) (quarterly boolean win conditions), [`ops-state.json`](ops-state.json) (corporate ops state: phase, corrections C1-C8, kill switches KS1-KS8, workstreams W1-W7).
+**Master operating document:** [`14-seed-close-pack/04-atomic-explosion-master-plan.md`](14-seed-close-pack/04-atomic-explosion-master-plan.md).
 
 **Reading key:** ⚡ = single-founder action (cannot be delegated). 🤝 = depends on a contractor or counsel. 🌐 = depends on a counterparty (regulator, customer, investor). ⭕ = circuit-breaker observable.
 
@@ -39,6 +40,22 @@
 | **W26** | Nov 24 | 🌐 Three+ Series A term sheets received; selection process underway | 🤝 LPR v2.0 PQ design RFC circulated to IETF WG | 🌐 Big-4 LP-Conformant program announcement |
 | **W27** | Dec 01 | **Q2 QUARTERLY ANCHOR**: `win-conditions.json` boolean state declared and anchored | ⭕ ≥3 Series A term sheets received via Qatalyst process (Dec 1 circuit-breaker — if <2, draw Hercules $8M, extend runway to Q3 2027) | 🌐 Foundation transparency report Q4 2026 published and anchored |
 | **W28** | Dec 08 | **SERIES A OPEN Dec 7**: Selected lead; term sheet signed; closing process begins | 🌐 Asia expansion brief signed off; Singapore non-profit registration Q1 2027 confirmed | 🌐 Plan reads from `lpr-status.json` + `win-conditions.json`; PLAN.md V1 fully retired |
+
+---
+
+## Inter-week milestones (off-Tuesday-grid)
+
+### Foundation Root-Key Ceremony — Friday Aug 15, 2026
+
+Falls between W11 (Aug 11) and W12 (Aug 18) — does not fit the Tuesday-grid above. Tracked here as a discrete milestone.
+
+- **Objective**: Establish un-compromised genesis state for the Foundation key hierarchy (2-of-3 multisig anchor key + Foundation root signing key).
+- **Allocation**: $15K G&A (HSMs, independent legal witnesses, physical secure facility, ceremony video documentation, post-ceremony hash anchored to Bitcoin as a Foundation receipt).
+- **Dependency (UPSTREAM)**: Threat-model briefing §11 ceremony recommendations incorporated into the design by Aug 1 (target). Senior Security Advisor sign-off Aug 8.
+- **Dependency (DOWNSTREAM)**: Combined NCC + Trail of Bits + Cure53 audit memo Aug 31 references the ceremony and includes the ceremony hash as a verifiable receipt. Sequencing: Aug 15 ceremony → Aug 31 memo. Not reversed.
+- **Owner**: Veronica + Foundation Executive Director (post Aug 1 start) + Senior Security Advisor + independent observers (target: 2 of 3 from {Mishi Choudhary, Allison Randal, Lokke Moerel}).
+- **Circuit breaker**: If ceremony slips past Aug 22, the Aug 31 combined memo also slips; Big-4 + Series A diligence compounds the delay. Replan within 48 hours of any slip.
+- **Reference**: See [`14-seed-close-pack/04-atomic-explosion-master-plan.md`](14-seed-close-pack/04-atomic-explosion-master-plan.md) §5 Phase D.
 
 ---
 

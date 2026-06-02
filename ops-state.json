@@ -1,0 +1,122 @@
+{
+  "$schema": "https://spec.ledgerproofhq.io/schemas/ops-state-v1.json",
+  "title": "LedgerProof Corporate Operations State",
+  "doctrine": "Operational and execution state for the company. Distinct from lpr-status.json (protocol state) and win-conditions.json (quarterly boolean win conditions). This file captures phase, load-bearing corrections, active workstreams, kill switches, and the current operating reference document.",
+  "last_updated": "2026-06-01T20:15:00-07:00",
+  "current_phase": "Phase A - Seed Close Sprint",
+  "phase_window": {
+    "phase_a_seed_close": "2026-06-01 to 2026-06-25",
+    "phase_b_launch_window": "2026-06-25 to 2026-07-06",
+    "phase_c_pre_enforcement": "2026-07-06 to 2026-08-02",
+    "phase_d_enforcement_audit_memo": "2026-08-02 to 2026-08-31",
+    "phase_e_series_a_setup": "2026-09-01 to 2026-11-29"
+  },
+  "operating_document": "14-seed-close-pack/04-atomic-explosion-master-plan.md",
+
+  "load_bearing_corrections": [
+    {
+      "id": "C1",
+      "statement": "Article 95 confers reputational signal only — NOT presumption of conformity. Only Article 40 harmonized standards published in the Official Journal under M/593 confer presumption of conformity.",
+      "applies_to": ["press_kit", "regulatory_briefs", "investor_pitch", "press_releases"]
+    },
+    {
+      "id": "C2",
+      "statement": "Kong / Envoy sit on outbound enterprise API publication. Snowflake UDFs / Databricks notebooks / Airflow operators / Prefect tasks are the inbound third-party-data verification surface. Two distinct architectures, two distinct plugin paths.",
+      "applies_to": ["protocol_distribution_specs", "customer_demos", "engineering_roadmap"]
+    },
+    {
+      "id": "C3",
+      "statement": "LangChain Inc. and LlamaIndex Inc. are commercial entities. Engagement model is integration partnership (with their core teams), not fractional-equity committer recruitment. Off-market equity + employer conflict-of-interest both apply.",
+      "applies_to": ["protocol_distribution_specs", "advisor_cap_table", "outreach_plan"]
+    },
+    {
+      "id": "C4",
+      "statement": "Receipt verification must be LOCAL (Merkle proof + Ed25519 signature + Bitcoin anchor — all offline-verifiable). LedgerProof verification nodes are an OPTIONAL CONVENIENCE, not a requirement.",
+      "applies_to": ["plugin_specs", "sdk_documentation", "press_kit", "investor_pitch"]
+    },
+    {
+      "id": "C5",
+      "statement": "Enterprise compliance dashboard = customer's SIEM (Splunk / Datadog / ServiceNow / Vanta / Drata / custom SIEM). /v/{slug} is the LedgerProof PUBLIC verifier portal. Two distinct surfaces; two distinct integration paths.",
+      "applies_to": ["protocol_distribution_specs", "customer_demos", "siem_connector_spec"]
+    },
+    {
+      "id": "C6",
+      "statement": "Kong body_filter kills streaming AI latency (50-200ms p99). Stream-aware signing required: commit on stream-start, sign on stream-end. HSM per-request signing is prohibitive at AI inference volumes; Merkle-batch architecture (N requests → 1 HSM signature) required.",
+      "applies_to": ["kong_plugin_spec", "envoy_filter_spec", "engineering_roadmap"]
+    },
+    {
+      "id": "C7",
+      "statement": "LangChain has migrated to LangGraph for production agents. Integration targets BOTH callback handlers (legacy inference loops) AND LangGraph node middleware (current agentic workflows). Receipts emit to a side channel (log/queue/webhook) — callback handlers cannot modify response payloads.",
+      "applies_to": ["langchain_integration_spec"]
+    },
+    {
+      "id": "C8",
+      "statement": "Tencent parent ownership of Riot Games creates EU-press vulnerability. A US or EU counterweight anchor customer must confirm in the same window as Riot before Riot becomes the public launch story.",
+      "applies_to": ["commercial_plan", "pr_plan", "launch_press_kit"]
+    }
+  ],
+
+  "active_workstreams": [
+    {"id": "W1", "name": "Commercial — customers + revenue", "lead": "Veronica → EU AE (Sep)", "cadence": "Daily standup post-CoS-hire"},
+    {"id": "W2", "name": "Regulatory / Standards", "lead": "Veronica + fractional EU regulatory affairs strategist", "cadence": "Weekly tracker update"},
+    {"id": "W3", "name": "Engineering / Protocol", "lead": "Veronica + Senior Protocol Engineer (Jul 13)", "cadence": "Daily; weekly demo Friday"},
+    {"id": "W4", "name": "Legal / Finance", "lead": "Cooley + Adler & Colvin + fractional CFO", "cadence": "Weekly Tuesday sync"},
+    {"id": "W5", "name": "PR / Comms", "lead": "Brunswick (or eq.) + Veronica", "cadence": "Weekly Wednesday sync"},
+    {"id": "W6", "name": "Hiring", "lead": "Veronica + CoS (Jul 6)", "cadence": "Weekly Monday pipeline review"},
+    {"id": "W7", "name": "Security / Audit", "lead": "Veronica + NCC + ToB + Cure53 + Senior Security Advisor", "cadence": "Weekly Thursday sync"}
+  ],
+
+  "kill_switches": {
+    "KS1_AUDIT_ENGAGEMENT": {
+      "trigger": "No NCC Group + Trail of Bits engagement letters returned",
+      "deadline": "2026-06-08",
+      "status": "PENDING",
+      "branch": "Switch to Cure53-only + Latacora contingency; extend audit-memo publication +30 days; tranche-trigger Sep 30 becomes conditional on Cure53 memo only."
+    },
+    "KS2_SEED_CAPITAL_FLOOR": {
+      "trigger": "Less than $8M raised at seed close",
+      "deadline": "2026-06-25",
+      "status": "PENDING",
+      "branch": "Drop one of: senior protocol engineer hire, Brussels counsel retainer, or full audit. Default drop: Brussels counsel — keep audit + senior engineer."
+    },
+    "KS3_TENCENT_LEAK_PREVENTION": {
+      "trigger": "Riot/Tencent press leak before US/EU counterweight anchor confirms",
+      "deadline": "Continuous",
+      "status": "ACTIVE",
+      "branch": "Brunswick crisis response within 4 hours; Foundation independence FAQ deployed; founder media silence until counterweight confirms."
+    },
+    "KS4_DIN_APPLICATION_DEADLINE": {
+      "trigger": "DIN SME membership application not filed",
+      "deadline": "2026-06-21",
+      "status": "PENDING",
+      "branch": "Switch primary standards path to AFNOR (France) or NEN (Netherlands); both have member-org NWIP authority. Cost: ~4 weeks of standards-timeline delay."
+    },
+    "KS5_KONG_PLUGIN_SHIP": {
+      "trigger": "Kong plugin v0.1 not open-sourced by Aug 2 (Article 50 enforcement)",
+      "deadline": "2026-08-02",
+      "status": "PENDING",
+      "branch": "Ship Snowflake UDF + LangChain integration first; defer Kong to Q4 2026; reframe enterprise narrative around data-plane (not API-plane) per C2."
+    },
+    "KS6_ENFORCEMENT_SOFT": {
+      "trigger": "Zero visible Article 50 enforcement action by Aug 16 (T+14 days post-enforcement)",
+      "deadline": "2026-08-16",
+      "status": "PENDING",
+      "branch": "Activate second-narrative track: pre-drafted op-ed published; commercial narrative shifts to 'voluntary adoption now reduces future enforcement exposure'."
+    },
+    "KS7_LANGCHAIN_PARTNERSHIP_REFUSED": {
+      "trigger": "LangChain Inc. partnership conversation declines integration",
+      "deadline": "On-event",
+      "status": "PENDING",
+      "branch": "Ship as community integration outside main; pursue LlamaIndex Inc. partnership as primary; reset adoption-curve assumption -6 months."
+    },
+    "KS8_FORM_1023_DEFICIENCY": {
+      "trigger": "IRS Form 1023 returned with substantive deficiency",
+      "deadline": "On-event",
+      "status": "PENDING",
+      "branch": "Adler & Colvin response within 14 days; fiscal sponsorship via New Venture Fund continues as bridge; charitable contributions flow uninterrupted."
+    }
+  },
+
+  "anchored": false,
+  "review_protocol": "Friday 17:00 PT weekly review of phase status, kill-switch status, and workstream momentum. Updates committed Sunday evening for the upcoming week. Quarterly anchor as a Foundation receipt at the same cadence as win-conditions.json (first Tuesday after Sep 1, Dec 1, Mar 1, Jun 1)."
+}

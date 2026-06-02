@@ -5,6 +5,8 @@
 **Horizon:** June 25, 2026 (seed close) → December 7, 2026 (Series A open)
 **Fixed external constraint:** EU AI Act Article 50 enforces August 2, 2026
 
+> **Master operating document as of Jun 1, 2026 — read this first**: [`14-seed-close-pack/04-atomic-explosion-master-plan.md`](14-seed-close-pack/04-atomic-explosion-master-plan.md). Five sequenced phases, seven workstreams, eight load-bearing corrections (C1-C8), eight kill switches (KS1-KS8). Synthesizes the reality-check ([`12-premortem/05-EXPLOSIVE-ADOPTION-REALITY-CHECK.md`](12-premortem/05-EXPLOSIVE-ADOPTION-REALITY-CHECK.md)), CFO model ([`14-seed-close-pack/01-cfo-24-month-model.md`](14-seed-close-pack/01-cfo-24-month-model.md)), and threat-model briefing ([`14-seed-close-pack/02-threat-model-briefing.md`](14-seed-close-pack/02-threat-model-briefing.md)) into a single execution spine. Corporate ops state in [`ops-state.json`](ops-state.json).
+
 This is the single document that wires the **GTM plan** ([`08-gtm/`](08-gtm/00-MASTER-PLAN.md)) and the **code plan** ([`09-code-plan/`](09-code-plan/00-MASTER-CODE-PLAN-V2.md)) into one integrated view. Each milestone gate shows the commercial deliverables and the engineering deliverables side by side. Where one depends on the other, the dependency is named.
 
 For commercial-only detail: [`08-gtm/00-MASTER-PLAN.md`](08-gtm/00-MASTER-PLAN.md)
