@@ -34,7 +34,7 @@ Channel: LinkedIn DM, founder-to-founder, no broker. Sebastian replies to direct
 >
 > EU AI Act Article 50 enforcement starts Tuesday August 2 — 62 days from today. Article 50 is the transparency obligation on deployers of GPAI systems: every AI-touched interaction with an EU resident has to be machine-readable as AI-generated, auditable, and provable to a supervisory authority on request. The penalty ceiling is 3% of global turnover.
 >
-> Klarna sits squarely inside that scope. The AI customer-service deployment you publicized in 2024, the risk-decisioning models, dynamic credit pricing — each one of those is an Article 50 surface. Your S-1 filing will be read by underwriters who now have a regulatory peg to ask "show me the evidence trail." Today that answer is logs in a CloudWatch bucket. After Aug 2 that answer needs to be cryptographic.
+> Klarna sits squarely inside that scope. Your public AI-native positioning across customer experience, risk decisioning, and dynamic credit pricing — each surface is an Article 50 obligation from Aug 2 forward. Your S-1 filing will be read by underwriters who now have a regulatory peg to ask "show me the evidence trail." Today that answer is logs in a CloudWatch bucket. After Aug 2 that answer needs to be cryptographic.
 >
 > LedgerProof is the open protocol that produces that evidence. Every AI-touched interaction emits a signed receipt; receipts are Merkle-batched and anchored hourly to Bitcoin via OP_RETURN. Verification is local — anyone can re-derive a receipt's validity from the Bitcoin chain, the public key, and the published Merkle root, with no call to our servers. The protocol is stewarded by LedgerProof Foundation (US 501(c)(3) public charity, Delaware, in formation; with Dutch Stichting EU subsidiary in formation, Amsterdam); LedgerProof Inc. is the commercial operator that ships the SDKs and SIEM connectors. Integration into a customer-service AI stack is roughly five minutes via our Python or TypeScript SDK plus a Splunk/Datadog connector.
 >
@@ -52,7 +52,7 @@ N/A — direct to Sebastian via LinkedIn DM. Fallback if no response by Day 5: r
 
 > Sebastian —
 >
-> Following up on Wednesday's note. Aug 2 is 57 days out and our anchor slate locks Jun 22 for the Jul 6 launch press kit.
+> Following up on Wednesday's note. Aug 2 is 57 days out; our Jul 6 launch anchor slate locks Jun 22 (the press kit itself finalizes Jun 30, but anchor logos confirm at slate lock).
 >
 > Other public-listed EU fintechs are in conversation; I would rather Klarna anchor than slot in later as second. Ten minutes this week works on my side any time between 09:00 and 18:00 CET.
 >
@@ -86,7 +86,7 @@ Channel: email via warm intro broker. Adyen does not respond to founder cold out
 >
 > Verification is local. The protocol does not require a call to LedgerProof servers — any party with the Bitcoin chain, the published Foundation root key, and the receipt itself can verify offline. That property is the deliberate condition for credible EU regulatory positioning.
 >
-> Aug 2 is 62 days from today. The seed closes Jun 25. The Jul 6 launch press kit locks Jun 22. Forty-five minutes on a call this week or next would let me walk Ingo or Alexa through the technical surface and your compliance side through the Foundation governance structure in parallel.
+> Aug 2 is 62 days from today. The seed closes Jun 25. The Jul 6 launch anchor slate locks Jun 22 (press kit finalizes Jun 30; anchor logos confirm at slate lock). Forty-five minutes on a call this week or next would let me walk Ingo or Alexa through the technical surface and your compliance side through the Foundation governance structure in parallel.
 >
 > Veronica S. Dawkins
 > Founder, LedgerProof
@@ -183,7 +183,7 @@ Channel: LinkedIn DM, founder-to-founder, no broker. Kristo replies to direct fo
 >
 > EU AI Act Article 50 enforcement starts Tuesday August 2, 62 days from today. It is the transparency obligation on deployers of GPAI systems — every AI-touched interaction with an EU resident has to be machine-readable as AI-generated, auditable, and provable to a supervisory authority. Wise is in scope structurally: roughly ten million EU customers, FX prediction models, fraud scoring, KYC automation, customer-service AI. The UK domicile does not exempt the exposure for EU-customer-touch surface area.
 >
-> LedgerProof is the open Bitcoin-anchored protocol that produces evidence for that exposure. Every AI-touched interaction emits a signed receipt; receipts are Merkle-batched and anchored hourly to Bitcoin via OP_RETURN. Anyone can verify a receipt locally with no call to our servers — Bitcoin chain plus published Foundation root key plus the receipt itself is sufficient. Protocol stewarded by LedgerProof Foundation (US 501(c)(3) public charity, Delaware, in formation; with Dutch Stichting EU subsidiary in formation, Amsterdam); LedgerProof Inc. is the commercial operator that ships the SDKs and SIEM connectors. Five-minute integration into a Python or TypeScript stack.
+> LedgerProof is the open Bitcoin-anchored protocol that produces evidence for that exposure. Every AI-touched interaction emits a signed receipt; receipts are Merkle-batched and anchored hourly to Bitcoin via OP_RETURN. Anyone can verify a receipt locally with no call to our servers — Bitcoin chain plus the published protocol public key plus the receipt itself is sufficient (the Foundation root-key ceremony Aug 15 rotates the current interim signing key to a 2-of-3 multisig anchored as a public receipt — verification mechanics are unchanged through and after the rotation). Protocol stewarded by LedgerProof Foundation (US 501(c)(3) public charity, Delaware, in formation; with Dutch Stichting EU subsidiary in formation, Amsterdam); LedgerProof Inc. is the commercial operator that ships the SDKs and SIEM connectors. Five-minute integration into a Python or TypeScript stack.
 >
 > The specific ask: anchor with us as a Founding Member by Jun 22. $250K commitment, 0.25% warrant in LedgerProof Inc., reference rights on the Jul 6 launch press release, a seat on the Foundation Advisory Council with an explicit UK-jurisdiction representation role on Council governance. Wise is the natural UK voice on a Foundation whose other Council members are EU-domiciled — the post-Brexit framing actually works in your favor here: UK fintech committed to EU regulatory rigor on its own initiative.
 >
@@ -199,11 +199,19 @@ N/A — direct to Kristo via LinkedIn DM. Fallback if no response by Day 5: rout
 
 > Kristo —
 >
-> Following up on last Thursday's note. Aug 2 is 56 days out and we lock the Jul 6 launch press slate Jun 22.
+> Following up on last Thursday's note. Aug 2 is 56 days out; the Jul 6 launch anchor slate locks Jun 22 (press kit finalizes Jun 30).
 >
 > If Harsh is the cleaner first conversation for the technical side, glad to start there directly — happy to put the SDK and the local-verification surface in front of him this week. Twenty minutes is enough to know whether we should go further.
 >
 > Veronica
+
+### Operator note — post-Brexit framing fallback
+
+The Wise primary (line 188 area) leans on a load-bearing rhetorical move: "the post-Brexit framing actually works in your favor here: UK fintech committed to EU regulatory rigor on its own initiative." This is good when Kristo accepts it; failure mode is Wise's comms team having a more cautious posture on Brexit framing in 2026 than this assumes.
+
+**If Kristo's first-call response to this framing is anything other than affirmative** — even subtle ("interesting frame" without buy-in, or pivot to a different angle), do NOT push it. Pivot to Variant V1 (regulator-anxious lede) for the second-touch material send. The V1 variant for Wise leads with "Article 50 enforcement begins Aug 2; UK companies with EU-customer touch face the same evidentiary obligations as EU-domiciled companies" — which is structurally true and avoids the Brexit framing entirely.
+
+Forbidden words in any Wise follow-up if V1 pivot is active: "Brexit", "post-Brexit", "leaving the EU", "EU departure".
 
 ---
 
@@ -217,7 +225,7 @@ Channel: email via Lokke Moerel warm intro. This is the single critical-path hum
 >
 > Thank you to Lokke for the introduction. She has been advising me on the LedgerProof Foundation governance structure and indicated that the Article 50 evidence question is one you are already considering on the AGCS and Trade boards.
 >
-> I am Veronica Dawkins, founder of LedgerProof. We are the open Bitcoin-anchored cryptographic protocol that produces verifiable evidence for AI-touched interactions in the meaning of EU AI Act Article 50. Enforcement begins Tuesday August 2, 2026, 62 days from today. The protocol is stewarded by LedgerProof Foundation (Dutch Stichting, in formation under Amsterdam counsel and with Mishi Choudhary as prospective board chair); LedgerProof Inc. (Delaware) is the commercial operator that ships the SDKs and SIEM connectors. The two entities are deliberately separated — Foundation owns the specification, the test vectors, and the Bitcoin anchoring key custody, and is structurally non-controlled by Inc.
+> I am Veronica Dawkins, founder of LedgerProof. We are the open Bitcoin-anchored cryptographic protocol that produces verifiable evidence for AI-touched interactions in the meaning of EU AI Act Article 50. Enforcement begins Tuesday August 2, 2026, 62 days from today. The protocol is stewarded by LedgerProof Foundation (US 501(c)(3) public charity, Delaware, in formation under Adler & Colvin counsel; with Dutch Stichting EU subsidiary in formation under NautaDutilh Amsterdam counsel); LedgerProof Inc. (Delaware) is the commercial operator that ships the SDKs and SIEM connectors. The two entities are deliberately separated — Foundation owns the specification, the test vectors, and the Bitcoin anchoring key custody, and is structurally non-controlled by Inc.
 >
 > The reason I am reaching out to Allianz specifically: insurance is one of the highest AI-density sectors in EU financial services. Underwriting decisioning, claims triage, fraud scoring, dispute adjudication, customer-service automation — every one of those is an Article 50 surface from Aug 2. EIOPA's 2026-2027 supervisory cycle is going to put insurer AI deployment under direct scrutiny. The first EU insurer to commit publicly to cryptographic AI evidence is going to be read as the AI-governance leader of the sector — and the press cycle on that move runs against AXA, Generali, and Munich Re's own AI-strategy narratives.
 >
