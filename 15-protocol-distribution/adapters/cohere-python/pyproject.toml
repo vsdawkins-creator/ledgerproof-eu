@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgerproof-cohere"
+version = "0.1.0"
+description = "LedgerProof adapter for the Cohere Python SDK. Side-channel transparency receipts for EU AI Act Article 50."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [
+    { name = "LedgerProof Foundation (in formation)" }
+]
+keywords = ["ledgerproof", "cohere", "command", "rerank", "embed", "eu-ai-act", "article-50", "transparency", "receipts", "rag", "multilingual"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Security :: Cryptography",
+]
+dependencies = [
+    "cohere>=5.0",
+    "cryptography>=41",
+    "cbor2>=5.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.urls]
+Homepage = "https://ledgerproof.org"
+Repository = "https://github.com/ledgerproof/ledgerproof"
+Documentation = "https://docs.ledgerproof.org"
+
+[tool.setuptools.packages.find]
+include = ["ledgerproof_cohere*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

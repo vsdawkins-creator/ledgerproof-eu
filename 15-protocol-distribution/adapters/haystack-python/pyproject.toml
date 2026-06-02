@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgerproof-haystack"
+version = "0.1.0"
+description = "LedgerProof adapter for Haystack 2.x — side-channel cryptographic receipts for EU AI Act Article 50 transparency."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "LedgerProof Foundation", email = "adapters@ledgerproof.org" },
+]
+keywords = [
+    "ledgerproof",
+    "haystack",
+    "deepset",
+    "eu-ai-act",
+    "article-50",
+    "transparency",
+    "rag",
+    "compliance",
+    "cryptographic-receipts",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Legal Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "haystack-ai>=2.0",
+    "cryptography>=41.0",
+    "cbor2>=5.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "pytest-mock>=3.11",
+    "ruff>=0.1",
+    "mypy>=1.5",
+]
+
+[project.urls]
+Homepage = "https://ledgerproof.org"
+Documentation = "https://docs.ledgerproof.org/adapters/haystack"
+Repository = "https://github.com/ledgerproof-foundation/ledgerproof-haystack"
+Issues = "https://github.com/ledgerproof-foundation/ledgerproof-haystack/issues"
+
+[tool.setuptools.packages.find]
+include = ["ledgerproof_haystack*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
