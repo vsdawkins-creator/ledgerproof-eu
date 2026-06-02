@@ -426,6 +426,18 @@ For all three colors, the cascade is the same:
 - Do not engage on press-release positioning specifics inside the response thread. The press cut is locked at Jun 22; we will not pre-negotiate the press-release headline with the first responder because that constrains the second and third.
 - Do not over-promise SDK delivery dates inside the first response. The SDK roadmap is bound by the senior protocol engineer hire (JD lands week of Jun 8) and the contractor stack already engaged. The first response should say "our SDK is in active development and integration is five minutes once available; happy to walk through the technical timeline on the call" — not a specific ship date.
 
+### URL routing rule for all primary outreach + follow-ups (added Jun 1 21:55 PDT)
+
+**The homepage at `ledgerproofhq.io/` is not yet reframed for the Article 50 positioning.** As of Jun 1, the homepage still leads with the legacy document-attestation product (the LedgerProof Locker). It is being reframed for Jul 6 launch but is NOT counterparty-ready on Jun 3.
+
+**Discipline for all outreach sends Wed Jun 3 onwards:**
+
+- Any URL added during personalization (in the message body OR signature) MUST point to **`ledgerproofhq.io/article-50`**, NOT to `ledgerproofhq.io/`.
+- Acceptable to also reference: `spec.ledgerproofhq.io` (spec home), `verify.ledgerproofhq.io` (reference verifier), `datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/` (IETF), `github.com/ledgerproof` (open code).
+- NEVER link a counterparty to the bare homepage until the reframe ships. If a counterparty asks "where do I learn more?" in response — the answer is `/article-50` or the IETF draft or GitHub, not `/`.
+
+The homepage reframe spec lives at `16-site-content/homepage-reframe-spec.md` and is on the engineering plan for ship before Wed Jun 3. If that ship slips, the URL-routing rule above remains in force.
+
 ---
 
 ## What I want from Veronica before Wednesday morning
