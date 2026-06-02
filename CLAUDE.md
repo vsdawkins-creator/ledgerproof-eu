@@ -82,22 +82,39 @@ Veronica S. Dawkins, founder of LedgerProof Foundation. Building LPR — an open
 | canonicality | LPR 1.2 §6 — registry + arbitration for "which is the real one" |
 | symposium | intouch\|Live SD, May 18 — first Bitcoin anchor broadcast |
 
-## PR #1 status (as of May 26, 4:30pm PDT)
-- ALL GREEN. Rust build/test/clippy/fmt/audit pass. Web app pass.
-- 4 commits ahead of origin/main: 98ce39ce (lint fixes), b9f9aa0d (fmt), 70c6b501 (CI workflow), e1e3410e (audit.toml)
-- Issue #2 tracks sqlx 0.7→0.8 + reqwest 0.11→0.12 upgrade (before July 6 launch)
-- Veronica retains the merge button
+## Open PRs across the org (as of Monday Jun 1, EOD)
+| Repo | PR | Title | Status |
+|---|---|---|---|
+| `ledgerproof-platform` | **#1** | feat/lpr-v1.1 article-50 expansion (ALL GREEN CI) | Awaits Veronica merge |
+| `ledgerproof-platform` | **#3** | ci/canonical-conformance-test (cross-lang hash CI, LPR-ERRATA-001 enforcement) | Opened Jun 1; awaits Veronica review |
+| `quantum-edge-2` | **#2** | fix LPR1 magic-bytes conformance test | Opened May 28; restores green CI |
+| `ledgerproof-verifier` | **#1** | feat/slug-routing-and-brand-alignment (3 layers: slug routing + brand + pre-v1 errata cards) | Opened May 28; updated Jun 1 |
+| `ledgerproof-site` | **#1** | feat/article-50-landing-and-founder-letter (5 pages: /article-50, /letter, /spec/errata/001, /docs/entries/0, /r/founding-declaration) | Opened May 28; updated Jun 1 |
 
-## Open Founder Actions (priority order)
-1. **Wednesday May 27, 7:30am PDT** — TVP meeting (Calicott + Malhotra)
-2. **Wednesday May 27, 4:00pm PDT** — Stillmark meeting (Killeen + Singh) via Teams
-3. Reply to Fulgur when they confirm time
-4. Reply to Illuminate ONLY when their team comes back with question/meeting
-5. Merge PR #1 when ready
-6. By June 8 — pick lead investor
-7. By June 25 — close round
-8. Aug 23, 2026 — npm token rotation due (90-day)
-9. Aug 24, 2026 — PyPI tokens rotation due
+## Monday Jun 1 EOD state — operational substrate
+- **PAT exposure** — scrubbed from disk, Keychain helper wired; **github.com revoke still pending Veronica**
+- **Canonicalization bug** — ROOT-CAUSED in 5 minutes for $0; contained to Entry #0; LPR-ERRATA-001 issued
+- **Trail of Bits scope** — shrunk from $45-65K/2-week to $15-25K/3-day; engagement email drafted at `13-monday-sprint/03`
+- **Adler & Colvin** — 501(c)(3) + Day-1 IP license + multi-signer quorum email drafted at `13-monday-sprint/04`
+- **Hercules Capital** — $8M undrawn facility email drafted at `13-monday-sprint/05`
+- **Seed restructure** — two-stage proposal ($10M+$5M tranche) drafted to 4 co-leads at `13-monday-sprint/07`
+- **Founding-declaration entry** — JSON payload ready at `13-monday-sprint/06`; issuance pending verifier PR merge
+- **Operational substrate live**: `lpr-status.json` (weekly anchor) + `win-conditions.json` (quarterly anchor) + `CRIT_PATH.md` (26-week table)
+- **Spec artifacts**: `LPR-ERRATA-001.md` + `LPR-FEE-001.md` + `LPR-VER-001.md` in `04-lpr-spec/`
+
+## Open Founder Actions (priority order — Tuesday Jun 2 onward)
+1. **NOW** — Revoke `ghp_…1ZBl93` on github.com/settings/tokens (E1, 90 sec)
+2. **Today** — Send Trail of Bits + Adler & Colvin + Hercules engagement emails (drafts in `13-monday-sprint/`)
+3. **Today** — Order Unchained Capital Business Vault + 4× YubiKey 5C NFC + Casa Platinum (E5)
+4. **Tue Jun 2 09:00 PT** — Call Sarah Guo to pressure-test the two-stage seed restructure
+5. **Tue Jun 2 morning PT** — Send seed-restructure note to TVP + Stillmark partners (one-on-one threads)
+6. **Wed Jun 3 morning ET** — Send seed-restructure note to Fulgur + Mark Beeston
+7. **By Jun 7** — Decision on the 5 open PRs (merge / iterate / close per repo)
+8. **By Jun 18** — All four co-leads wire-confirm (one week before nominal close)
+9. **Jun 25** — Seed close
+10. **Jul 6** — Public launch
+11. Aug 23, 2026 — npm token rotation due
+12. Aug 24, 2026 — PyPI tokens rotation due
 
 ## Security/ops constraints (NON-NEGOTIABLE)
 - **Never touch legacy iad deployment** — 3 anchors stay verifiable forever
