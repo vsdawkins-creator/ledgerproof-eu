@@ -2,8 +2,18 @@
   "$schema": "https://spec.ledgerproofhq.io/schemas/ops-state-v1.json",
   "title": "LedgerProof Corporate Operations State",
   "doctrine": "Operational and execution state for the company. Distinct from lpr-status.json (protocol state) and win-conditions.json (quarterly boolean win conditions). This file captures phase, load-bearing corrections, active workstreams, kill switches, and the current operating reference document.",
-  "last_updated": "2026-06-01T20:15:00-07:00",
+  "last_updated": "2026-06-02T15:10:00-07:00",
   "current_phase": "Phase A - Seed Close Sprint",
+  "foundation_institutional_engagement": {
+    "futurium_post_01_live": "2026-06-02 (Foundation first EU AI Alliance post)",
+    "eu_ai_office_consultation_filed": "2026-06-02 (Article 50 Guidelines draft consultation; sections II/III/IV/VI/VII; anchored Foundation receipt at 17-futurium/anchored-receipts/2026-06-02-article-50-consultation/)",
+    "foundation_interim_signing_key_pub_b64": "qtG5TDcBlGR/25zsC/Cik3+rnUupR5XB2dSB+/IKUzA=",
+    "foundation_interim_key_disclosure": "Interim Ed25519 key created 2026-06-02 for governance event anchoring prior to Foundation root-key ceremony Aug 15, 2026. Will be rotated to 2-of-3 multisig via key-transition receipt signed by interim key, establishing unbroken authority chain.",
+    "ietf_scitt_draft_status": "draft-dawkins-scitt-ai-article50-00 published on Datatracker (WG adoption pending — NOT yet WG-adopted, keep distinction crisp)",
+    "din_sme_membership_status": "application drafted, filing target 2026-06-15 (KS4)",
+    "cen_cenelec_jtc_21_engagement": "via DIN SME membership pathway (pending)",
+    "regulator_briefings_held": "0 — Hallensleben + Toffaletti + Birkholz cold outreach pending warming via consultation submission credential"
+  },
   "phase_window": {
     "phase_a_seed_close": "2026-06-01 to 2026-06-25",
     "phase_b_launch_window": "2026-06-25 to 2026-07-06",

@@ -1,0 +1,38 @@
+{
+  "body": {
+    "anchor_method": "opentimestamps_bitcoin_mainnet",
+    "anchor_status": "pending_aggregator_confirmation",
+    "anchored_file": {
+      "filename": "consultation-01-article-50-guidelines-jun02.pdf",
+      "sha256": "753e48d51fddfcd7776b0fcbb9777d1d4216716391ff3d424ea10f6701552c98",
+      "size_bytes": 298840
+    },
+    "event_timestamp_iso": "2026-06-02T22:18:55.527642+00:00",
+    "event_type": "consultation_submission_eu_ai_office",
+    "foundation": "LedgerProof Foundation",
+    "foundation_status": "in_formation_us_501c3_delaware_plus_dutch_stichting_amsterdam",
+    "metadata": {
+      "closing_date": "2026-06-03",
+      "consultation_target": "European Commission DG-CNECT AI Office",
+      "consultation_topic": "Draft Guidelines on transparency obligations under Article 50 AI Act",
+      "foundation_voice": "institutional Foundation submission on Foundation letterhead",
+      "sections_addressed": "II III IV VI VII",
+      "submission_confirmed": "Your request has been sent to the survey owner",
+      "submission_date": "2026-06-02",
+      "submission_platform": "ec.europa.eu/eusurvey/runner/contactform/Art50guidelines"
+    },
+    "protocol_version": "LPR-1.1.1rc0",
+    "schema": "foundation_governance_event/v1",
+    "schema_url": "https://spec.ledgerproofhq.io/schemas/foundation_governance_event/v1.json",
+    "signing_key": {
+      "algorithm": "Ed25519",
+      "key_authority_chain_position": "interim_pre_root_ceremony",
+      "key_authority_disclosure": "This receipt is signed by the Foundation's interim Ed25519 signing key. The Foundation root-key ceremony (Aug 15, 2026) will rotate to a 2-of-3 multisig via a documented key-transition receipt signed by this interim key, establishing an unbroken authority chain.",
+      "key_ceremony_target_date": "2026-08-15",
+      "public_key_b64": "qtG5TDcBlGR/25zsC/Cik3+rnUupR5XB2dSB+/IKUzA="
+    }
+  },
+  "canonical_body_sha256": "20bcf1aa275268ebe1418c7b4ccb7eb0ecfb3ab7c9547b9af0c321024344b25f",
+  "signature_algorithm": "Ed25519-over-canonical-JSON-utf8",
+  "signature_b64": "7i1J3TLnbcXmP7keVmJDA5lFx12c2hqjRDCR+xlPbquwzr48SytvSzGVkhpXNiFgiBlIRjrIZYmFKyNM1bXdDg=="
+}
