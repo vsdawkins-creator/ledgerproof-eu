@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ledgerproof"
-version = "1.0.0"
+version = "1.1.1rc0"
 description = "EU AI Act Article 50 cryptographic transparency receipts, anchored to Bitcoin. The Stripe-style SDK: pip install, three lines, you're compliant."
 readme = "README.md"
 requires-python = ">=3.9"

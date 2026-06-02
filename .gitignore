@@ -45,3 +45,5 @@ clients/*/dist/
 .vscode/
 *.swp
 *.swo
+sdks/typescript/*.tgz
+sdks/python/dist/
