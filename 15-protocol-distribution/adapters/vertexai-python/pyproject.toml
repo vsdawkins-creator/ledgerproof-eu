@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgerproof-vertexai"
+version = "0.1.0"
+description = "LedgerProof adapter for Google Cloud Vertex AI Python SDK — side-channel transparency receipts for EU AI Act Article 50"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [{ name = "LedgerProof Foundation (Stichting, in formation)" }]
+keywords = ["ledgerproof", "vertex-ai", "gemini", "ai-act", "article-50", "transparency", "compliance", "eu", "gdpr", "data-residency"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Security :: Cryptography",
+]
+dependencies = [
+  "google-cloud-aiplatform>=1.60",
+  "cryptography>=41",
+  "cbor2>=5.0",
+  "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "pytest-mock>=3.12",
+  "pytest-asyncio>=0.23",
+  "ruff>=0.5",
+  "mypy>=1.8",
+]
+
+[project.urls]
+Homepage = "https://ledgerproof.foundation"
+Documentation = "https://docs.ledgerproof.foundation/adapters/vertexai-python"
+Repository = "https://github.com/ledgerproof-foundation/ledgerproof"
+Issues = "https://github.com/ledgerproof-foundation/ledgerproof/issues"
+
+[tool.setuptools.packages.find]
+include = ["ledgerproof_vertexai*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

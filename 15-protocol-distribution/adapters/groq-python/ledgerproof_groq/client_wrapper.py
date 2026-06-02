@@ -1,0 +1,302 @@
+"""Synchronous Groq client wrapper with LedgerProof side-channel receipts.
+
+The wrapper is a thin proxy. It never alters Groq's request/response objects
+(C7). It captures: model id, observed inference latency, and (where present)
+token usage statistics — Groq's LPU differentiator.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import os
+import time
+from typing import Any, Iterable, Optional, Union
+
+from groq import Groq
+
+from .emitter import AsyncEmitter, ReceiptSink, build_signed_receipt, default_sink_from_env
+from .schema import (
+    AudioTranscriptionV1,
+    ChatbotSessionV1,
+    GeneratedContentV1,
+    LowLatencyInferenceV1,
+    ReceiptSchemaName,
+)
+from .signer import Ed25519Signer, load_signer_from_pem
+
+_LPR_KWARGS = {
+    "lpr_schema",
+    "lpr_subject_id_hash",
+    "lpr_session_id_hash",
+    "lpr_prompt_hash",
+    "lpr_disclosure_shown",
+    "lpr_marking_method",
+    "lpr_audio_hash",
+    "lpr_language",
+    "lpr_audio_duration_seconds",
+    "lpr_skip",
+}
+
+
+def _sha256(text: str) -> str:
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _pop_lpr(kwargs: dict) -> dict:
+    return {k[4:]: kwargs.pop(k) for k in list(kwargs.keys()) if k in _LPR_KWARGS}
+
+
+class _ChatCompletionsProxy:
+    def __init__(self, parent: "LedgerProofGroq"):
+        self._parent = parent
+        self._inner = parent._inner.chat.completions
+
+    def create(self, *args: Any, **kwargs: Any) -> Any:
+        lpr_opts = _pop_lpr(kwargs)
+        if lpr_opts.get("skip"):
+            return self._inner.create(*args, **kwargs)
+
+        is_stream = bool(kwargs.get("stream", False))
+        model = kwargs.get("model", "unknown")
+        prompt_text = ""
+        if "messages" in kwargs:
+            try:
+                prompt_text = "".join(
+                    (m.get("content") or "") for m in kwargs["messages"] if isinstance(m, dict)
+                )
+            except Exception:
+                prompt_text = ""
+
+        t0 = time.monotonic()
+        result = self._inner.create(*args, **kwargs)
+
+        if is_stream:
+            return self._wrap_stream(result, lpr_opts, model, prompt_text, t0)
+
+        latency_ms = (time.monotonic() - t0) * 1000
+        completion_text = self._extract_completion(result)
+        usage = getattr(result, "usage", None)
+        self._parent._emit_chat_receipt(
+            lpr_opts, model, prompt_text, completion_text, latency_ms, usage
+        )
+        return result
+
+    def _wrap_stream(self, stream: Iterable[Any], lpr_opts: dict,
+                     model: str, prompt_text: str, t0: float) -> Iterable[Any]:
+        parent = self._parent
+
+        def gen():
+            chunks: list[str] = []
+            try:
+                for ev in stream:
+                    try:
+                        delta = ev.choices[0].delta
+                        c = getattr(delta, "content", None)
+                        if c:
+                            chunks.append(c)
+                    except Exception:
+                        pass
+                    yield ev
+            finally:
+                latency_ms = (time.monotonic() - t0) * 1000
+                parent._emit_chat_receipt(
+                    lpr_opts, model, prompt_text, "".join(chunks), latency_ms, None
+                )
+
+        return gen()
+
+    @staticmethod
+    def _extract_completion(resp: Any) -> str:
+        try:
+            return resp.choices[0].message.content or ""
+        except Exception:
+            return ""
+
+
+class _ChatProxy:
+    def __init__(self, parent: "LedgerProofGroq"):
+        self.completions = _ChatCompletionsProxy(parent)
+
+
+class _AudioTranscriptionsProxy:
+    def __init__(self, parent: "LedgerProofGroq"):
+        self._parent = parent
+        self._inner = parent._inner.audio.transcriptions
+
+    def create(self, *args: Any, **kwargs: Any) -> Any:
+        lpr_opts = _pop_lpr(kwargs)
+        if lpr_opts.get("skip"):
+            return self._inner.create(*args, **kwargs)
+
+        model = kwargs.get("model", "unknown")
+        # Hash audio bytes if accessible; otherwise placeholder.
+        audio_hash = lpr_opts.get("audio_hash")
+        if not audio_hash:
+            f = kwargs.get("file")
+            audio_hash = _hash_file_like(f)
+
+        t0 = time.monotonic()
+        result = self._inner.create(*args, **kwargs)
+        latency_ms = (time.monotonic() - t0) * 1000
+
+        transcript_text = getattr(result, "text", "") or ""
+        self._parent._emit_transcription_receipt(
+            lpr_opts, model, audio_hash, transcript_text, latency_ms
+        )
+        return result
+
+
+def _hash_file_like(f: Any) -> str:
+    try:
+        if f is None:
+            return _sha256("no-audio")
+        if hasattr(f, "read") and hasattr(f, "seek"):
+            pos = f.tell()
+            data = f.read()
+            f.seek(pos)
+            return "sha256:" + hashlib.sha256(data).hexdigest()
+        if isinstance(f, (bytes, bytearray)):
+            return "sha256:" + hashlib.sha256(bytes(f)).hexdigest()
+    except Exception:
+        pass
+    return _sha256("opaque-audio")
+
+
+class _AudioProxy:
+    def __init__(self, parent: "LedgerProofGroq"):
+        self.transcriptions = _AudioTranscriptionsProxy(parent)
+
+
+class LedgerProofGroq:
+    """Drop-in wrapper around `groq.Groq`.
+
+    All Groq-native kwargs pass through unmodified. LedgerProof-specific
+    kwargs (prefixed `lpr_*`) are intercepted and used to shape the receipt.
+
+    The underlying Groq client object is reachable via `.raw`.
+    """
+
+    def __init__(
+        self,
+        *,
+        api_key: Optional[str] = None,
+        lpr_signing_key_path: Optional[Union[str, os.PathLike]] = None,
+        lpr_signer: Optional[Ed25519Signer] = None,
+        lpr_deployer_id: str,
+        lpr_sink: Optional[ReceiptSink] = None,
+        lpr_emitter: Optional[AsyncEmitter] = None,
+        **groq_kwargs: Any,
+    ):
+        if lpr_signer is None and lpr_signing_key_path is None:
+            # Generate ephemeral key for dev/test. Production callers should
+            # supply their own.
+            lpr_signer = Ed25519Signer.generate()
+        elif lpr_signer is None:
+            lpr_signer = load_signer_from_pem(lpr_signing_key_path)  # type: ignore[arg-type]
+
+        self._inner = Groq(api_key=api_key, **groq_kwargs)
+        self._signer = lpr_signer
+        self._deployer_id = lpr_deployer_id
+        self._emitter = lpr_emitter or AsyncEmitter(lpr_sink or default_sink_from_env())
+
+        self.chat = _ChatProxy(self)
+        self.audio = _AudioProxy(self)
+
+    @property
+    def raw(self) -> Groq:
+        return self._inner
+
+    @property
+    def signer(self) -> Ed25519Signer:
+        return self._signer
+
+    def flush(self, timeout: float = 5.0) -> None:
+        self._emitter.flush(timeout)
+
+    def close(self) -> None:
+        self._emitter.close()
+
+    # ----- receipt builders -----
+
+    def _emit_chat_receipt(
+        self,
+        lpr_opts: dict,
+        model: str,
+        prompt_text: str,
+        completion_text: str,
+        latency_ms: float,
+        usage: Any,
+    ) -> None:
+        schema_name = lpr_opts.get("schema") or ReceiptSchemaName.CHATBOT_SESSION_V1
+        ts = int(time.time() * 1000)
+        common = {
+            "deployer_id": self._deployer_id,
+            "model": model,
+            "timestamp_unix_ms": ts,
+        }
+        if isinstance(schema_name, str):
+            schema_name = ReceiptSchemaName(schema_name)
+
+        if schema_name == ReceiptSchemaName.CHATBOT_SESSION_V1:
+            receipt = ChatbotSessionV1(
+                **common,
+                subject_id_hash=lpr_opts.get("subject_id_hash"),
+                session_id_hash=lpr_opts.get("session_id_hash"),
+                prompt_hash=lpr_opts.get("prompt_hash") or _sha256(prompt_text),
+                completion_hash=_sha256(completion_text),
+                disclosure_shown=bool(lpr_opts.get("disclosure_shown", False)),
+            )
+        elif schema_name == ReceiptSchemaName.GENERATED_CONTENT_V1:
+            receipt = GeneratedContentV1(
+                **common,
+                content_hash=_sha256(completion_text),
+                content_type="text",
+                marking_method=lpr_opts.get("marking_method"),
+            )
+        elif schema_name == ReceiptSchemaName.LOW_LATENCY_INFERENCE_V1:
+            prompt_tokens = getattr(usage, "prompt_tokens", None) if usage else None
+            completion_tokens = getattr(usage, "completion_tokens", None) if usage else None
+            total_tokens = getattr(usage, "total_tokens", None) if usage else None
+            tps = None
+            if completion_tokens and latency_ms > 0:
+                tps = completion_tokens / (latency_ms / 1000.0)
+            receipt = LowLatencyInferenceV1(
+                **common,
+                inference_latency_ms=latency_ms,
+                tokens_per_second=tps,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                total_tokens=total_tokens,
+                prompt_hash=lpr_opts.get("prompt_hash") or _sha256(prompt_text),
+                completion_hash=_sha256(completion_text),
+            )
+        else:
+            # Fallback to generated_content for unknown schemas on chat path.
+            receipt = GeneratedContentV1(
+                **common,
+                content_hash=_sha256(completion_text),
+            )
+
+        self._emitter.submit(build_signed_receipt(receipt, self._signer))
+
+    def _emit_transcription_receipt(
+        self,
+        lpr_opts: dict,
+        model: str,
+        audio_hash: str,
+        transcript_text: str,
+        latency_ms: float,
+    ) -> None:
+        ts = int(time.time() * 1000)
+        receipt = AudioTranscriptionV1(
+            schema_name=ReceiptSchemaName.AUDIO_TRANSCRIPTION_V1,
+            model=model,
+            deployer_id=self._deployer_id,
+            timestamp_unix_ms=ts,
+            audio_hash=audio_hash,
+            transcript_hash=_sha256(transcript_text),
+            audio_duration_seconds=lpr_opts.get("audio_duration_seconds"),
+            language=lpr_opts.get("language"),
+            marking_method=lpr_opts.get("marking_method"),
+        )
+        self._emitter.submit(build_signed_receipt(receipt, self._signer))

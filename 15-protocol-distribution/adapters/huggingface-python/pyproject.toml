@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgerproof-huggingface"
+version = "0.1.0"
+description = "LedgerProof adapter for Hugging Face Inference API + Transformers — emits Article 50 transparency receipts as a side channel."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [
+    { name = "LedgerProof Foundation (in formation)" }
+]
+keywords = [
+    "ledgerproof",
+    "huggingface",
+    "transformers",
+    "eu-ai-act",
+    "article-50",
+    "transparency",
+    "receipts",
+    "eu-ai-sovereignty",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "huggingface-hub>=0.25",
+    "cryptography>=41",
+    "cbor2>=5.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+transformers = [
+    "transformers>=4.45",
+]
+test = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+]
+
+[project.urls]
+Homepage = "https://ledgerproof.org"
+Repository = "https://github.com/ledgerproof/ledgerproof"
+Documentation = "https://docs.ledgerproof.org"
+
+[tool.setuptools.packages.find]
+include = ["ledgerproof_huggingface*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
