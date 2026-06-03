@@ -82,3 +82,30 @@ If V wants any of the three reverted to her original wording:
 - Correction 1 (zero-knowledge → hash-commitment-based): the hosted version uses "hash-commitment-based metadata framework"; revert by changing back to "zero-knowledge metadata framework" — recommend AGAINST given the cryptographic-reviewer risk
 - Correction 2 (no latency → bounded incremental latency): the hosted version uses "bounded incremental latency on the inference path"; revert by changing back to "without introducing operational processing latency" — recommend AGAINST given the trivial-to-falsify nature
 - Correction 3 (Unit A.A.1 → ATTN clause): the hosted version uses the ATTN clause; revert if V has insider read confirming A.A.1 is current
+
+---
+
+## Send 7 — IETF SCITT mailing-list moderator confirmation reply
+
+- **Sent**: Wed Jun 3, 2026 11:26:56 PDT
+- **To**: scitt@mail2.ietf.org
+- **From**: veronica@ledgerproofhq.io
+- **Subject**: Confirm: scitt@mail2.ietf.org:aiBwEAxqQaSP:ZEfSXbj2q30SvlsL8FeJ2_4duzPX9ZXmOKEsDA
+- **Body**: "Confirming."
+- **Purpose**: Release the 11:18:43 SCITT WG post from IETF moderation queue. IETF mail2 system holds first-time list submissions pending confirmation reply with the code-bearing subject intact.
+- **Status**: Sent — confirmed in Sent Mail folder
+- **Expected outcome**: IETF list management acknowledgment within 1-5 min; original 11:18:43 post released to public scitt@ietf.org archive at mailarchive.ietf.org
+
+## Send 6 status update — LOKKE RE-SEND ALSO BOUNCED
+
+- **Outcome**: Bounced 11:18:57 PDT (4 seconds after send)
+- **Bounce code**: 550 Invalid Recipient (status 5.1.1) from Mimecast (us-smtp-inbound-1.mimecast.com)
+- **Diagnosis**: `mofo.com` domain is CORRECT (Mimecast is MoFo's email security gateway). Mailbox `lokke.moerel` does not exist at MoFo.
+- **Next-step decision required from V**: provide Lokke's actual mailbox at mofo.com from prior correspondence (likely candidates: lmoerel, moerell, lokkemoerel) OR drop the Lokke path and route Allianz via Brunswick Group EU pre-decided pivot
+- **Resend stage**: NOT attempted again. Two bounces is the line; no third guess.
+
+## Updated day total
+
+**7 sends. 4 successful first-time deliveries, 1 corrected after bounce, 1 IETF moderator confirmation, 1 still bouncing.**
+
+Lokke is the only remaining outbound blocker — and is gated on V supplying the correct mailbox or authorizing the Brunswick pivot.
