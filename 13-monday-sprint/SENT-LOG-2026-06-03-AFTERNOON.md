@@ -147,3 +147,63 @@ Lokke is the only remaining outbound blocker — and is gated on V supplying the
 - **Replies to Sarah / Harrison / Stibbe / Lokke / SCITT WG** — counterparty timing; not actionable from this end
 
 Nothing else within Claude's reach to close tonight.
+
+---
+
+## Mid-afternoon emergency: spec.ledgerproofhq.io was never wired up
+
+**Discovered**: ~12:21 PDT when V navigated to spec.ledgerproofhq.io and got `DNS_PROBE_FINISHED_NXDOMAIN` in Chrome.
+
+**Root cause**: The `spec.` subdomain referenced throughout today's sprint artifacts (OCPP-AI v1 spec, Anchor Interface, JSON-LD context, hosted DG-CNECT memo, arXiv preprint, SCITT WG post, Stibbe brief, Henk endorsement request) had no A record in Cloudflare. The codebase assumed the subdomain hosting existed; it never did. Email (veronica@ledgerproofhq.io) and apex (ledgerproofhq.io → Vercel 76.76.21.21) worked correctly; spec subdomain was missed.
+
+**Blast radius at discovery**:
+- Send 5 (SCITT WG post) — publicly archived; spec URL broken for ~70 min between 11:27 (release) and 12:37 (fix)
+- Send 4 (Stibbe brief) — after-hours in Brussels; would be read Thu AM CET regardless
+- Send 9 (Henk Birkholz endorsement request) — sent 12:19 PDT, broken URL window ~18 min
+
+**Fix sequence**:
+
+1. **12:25 PDT** — Verified Vercel CLI logged in as vsdawkins-2506; team `ledger-proof` owns apex
+2. **12:26 PDT** — `vercel --prod` from `15-spec-hosting/` → deployed to staging URL `15-spec-hosting.vercel.app`
+3. **12:27 PDT** — Verified all 6 cited paths return HTTP 200 from staging
+4. **12:28 PDT** — `vercel domains add spec.ledgerproofhq.io` → custom domain added to project; Vercel returned required DNS: `A spec 76.76.21.21 DNS only`
+5. **12:30 PDT** — V added the A record at Cloudflare (was already in her DNS table by 12:33; possibly added before fix sequence started)
+6. **12:34 PDT** — DNS resolves globally (verified via default + 1.1.1.1 + 8.8.8.8 resolvers)
+7. **12:34-12:36 PDT** — Vercel SSL provisioning (Let's Encrypt YR1)
+8. **12:36 PDT** — HTTPS live with valid cert (Jun 3 → Sep 1 2026)
+9. **12:37 PDT** — All 6 paths verified 200 via live https://spec.ledgerproofhq.io
+
+**Total downtime**: From spec hosting first cited (08:53 PDT today) to live: ~3h 44min. Active broken-URL window post-discovery: ~16 min.
+
+## Send 10 — Henk follow-up "spec URLs now live"
+
+- **Sent**: Wed Jun 3, 2026 12:37:28 PDT
+- **To**: henk.birkholz@sit.fraunhofer.de
+- **From**: veronica@ledgerproofhq.io
+- **Subject**: Quick correction — spec URLs now live
+- **Status**: Sent via Mail.app — confirmed
+- **Content**: Brief 3-paragraph note stating spec.ledgerproofhq.io is now live; lists the four primary URLs cited in the endorsement request; reaffirms IETF draft as canonical reference; reaffirms unchanged endorsement code Y8Q9TS.
+- **Why a second touch was the right call**: Better to surface the URL state proactively than have Henk hit broken URLs during the endorsement evaluation. The honest "now live" framing is stronger than waiting for him to discover and ask.
+
+## Final day total — 10 sends from veronica@ledgerproofhq.io
+
+| # | Time PDT | To | Outcome |
+|---|---|---|---|
+| 1 | 08:53:55 | lokke.moerel@morrisonforerster.com | NXDOMAIN bounce |
+| 2 | 08:54:25 | sarah@conviction.com | Delivered |
+| 3 | 08:55:02 | harrison@langchain.dev | Delivered |
+| 4 | 11:16:32 | laurens.dehoop@stibbe.com | Delivered |
+| 5 | 11:18:43 | scitt@ietf.org | Held + released after #7 |
+| 6 | 11:18:43 | lokke.moerel@mofo.com | Mailbox-not-found bounce |
+| 7 | 11:26:56 | scitt@mail2.ietf.org | IETF confirmation (releases #5) |
+| 8 | 11:29:29 | lmoerel@mofo.com | Delivered (verified MoFo address) |
+| 9 | 12:19 | henk.birkholz@sit.fraunhofer.de | arXiv endorsement request (Gmail; logged by V) |
+| 10 | 12:37:28 | henk.birkholz@sit.fraunhofer.de | "spec URLs now live" correction |
+
+**8 successful deliveries, 2 bounces resolved, all institutional outbound for the day complete. Spec hosting is live with valid SSL.**
+
+## Truly final remaining items
+
+- **arXiv submission upload** — V to complete in the active arXiv tab (cs.CR + cs.CY + cs.DC, metadata + file upload + preview + submit). The endorsement gate is in flight via Henk.
+- **Track 2 Thursday afternoon review** — calendared
+- **Counterparty replies** — Sarah / Harrison / Stibbe / Lokke / Henk / SCITT WG
