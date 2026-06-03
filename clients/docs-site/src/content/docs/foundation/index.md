@@ -12,7 +12,7 @@ description: The LedgerProof Foundation stewards the open Bitcoin-anchored Artic
 The LedgerProof Foundation stewards three things:
 
 1. **The LedgerProof Protocol** (`LPR v1.1` and successors) — the open specification for Bitcoin-anchored Article 50 transparency receipts, published as IETF Internet-Draft `draft-dawkins-scitt-ai-article50-00` (SCITT working group track).
-2. **The reference implementations** — Python, TypeScript, and Rust libraries plus 29 framework adapters, all under Apache License 2.0, source at `github.com/vsdawkins-creator/ledgerproof-eu` (migrating to `github.com/ledgerproof` post-launch).
+2. **The reference implementations** — Python, TypeScript, and Rust libraries plus 29 framework adapters, all under Apache License 2.0, source at `github.com/vsdawkins-creator/ledgerproof-eu` (migrating to `github.com/vsdawkins-creator/ledgerproof-eu` post-launch).
 3. **Foundation governance evidence** — every ratified Foundation decision (board minutes, key rotations, charter ratifications, security policy revisions) is Bitcoin-anchored as a `foundation_governance_event/v1` record, so that the Foundation's governance is itself verifiable using the same protocol the Foundation stewards.
 
 The Foundation does NOT:

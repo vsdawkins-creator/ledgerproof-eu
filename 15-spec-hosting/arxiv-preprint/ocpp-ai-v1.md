@@ -351,7 +351,7 @@ the protocol.
 # 7. Implementation status and ecosystem
 
 Reference implementations of OCPP-AI are published under Apache License 2.0
-at `github.com/ledgerproof` in Python, TypeScript, and Rust. Twenty-nine
+at `github.com/vsdawkins-creator/ledgerproof-eu` in Python, TypeScript, and Rust. Twenty-nine
 framework adapters cover the principal AI orchestration ecosystems
 (LangChain, LlamaIndex, OpenAI SDK, Anthropic SDK, Google AI, Vertex AI,
 AWS Bedrock, Azure OpenAI, Mistral, Cohere, Together, Groq, Hugging Face,

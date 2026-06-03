@@ -53,7 +53,7 @@ A unified preprint describing OCPP-AI v1.0, the Anchor Interface, and the eIDAS 
 
 **Reference implementation availability**
 
-Reference implementations are at github.com/ledgerproof (migrating from github.com/vsdawkins-creator/ledgerproof-eu) under Apache License 2.0. Twenty-nine framework adapters covering the principal AI orchestration ecosystems are published.
+Reference implementations are at github.com/vsdawkins-creator/ledgerproof-eu (migrating from github.com/vsdawkins-creator/ledgerproof-eu) under Apache License 2.0. Twenty-nine framework adapters covering the principal AI orchestration ecosystems are published.
 
 I will be available at IETF 116 in person for discussion of the profile and welcome WG review of the artifacts published today.
 

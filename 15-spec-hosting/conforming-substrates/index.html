@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anchor substrate conformance registry — OCPP-AI</title>
+<meta name="description" content="Registry of cryptographic anchor substrates evaluated against the OCPP-AI Anchor Interface Specification.">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 760px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.55; font-size: 16px; }
+  h1, h2 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; }
+  h2 { font-size: 14pt; margin-top: 2em; border-bottom: 1px solid #d1d5db; padding-bottom: 0.25em; }
+  .lede { background: #fffbeb; border-left: 4px solid #fbbf24; padding: 1em 1.3em; font-size: 0.95em; margin: 1em 0 2em; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; font-size: 0.93em; }
+  th, td { border: 1px solid #d1d5db; padding: 0.5em 0.7em; text-align: left; vertical-align: top; }
+  th { background: #0b3d2e; color: #fbbf24; font-weight: 600; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  tr:nth-child(even) td { background: #f9fafb; }
+  a { color: #0b3d2e; }
+  code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  .breadcrumb { font-size: 0.9em; color: #4b5563; margin-bottom: 1em; }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb"><a href="/">spec.ledgerproofhq.io</a> &rsaquo; conforming-substrates</div>
+
+<h1>Anchor substrate conformance registry</h1>
+
+<div class="lede">
+This registry enumerates cryptographic anchor substrates that have been evaluated against the eight normative properties of the <a href="/anchor-interface-v1.html">OCPP-AI Anchor Interface Specification v1.0</a> (properties I-1 through I-8). Evaluations are performed according to the procedure described in Section 6 of that specification. Inclusion in this registry constitutes a published conformance evaluation; it does not imply Foundation endorsement of any particular operational or deployment choice.
+</div>
+
+<h2>Currently evaluated substrates</h2>
+
+<table>
+  <thead><tr><th>Substrate</th><th>Properties satisfied</th><th>Reference</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Bitcoin OP_RETURN</strong> (Bitcoin mainnet, network magic 0xF9 0xBE 0xB4 0xD9)</td>
+      <td>I-1, I-2, I-3, I-4, I-5, I-6, I-7, I-8 (all)</td>
+      <td><a href="/anchor-interface-v1.html#ref-impl-btc">Anchor Interface §3</a></td>
+    </tr>
+    <tr>
+      <td><strong>European Blockchain Services Infrastructure (EBSI)</strong></td>
+      <td>I-1, I-2, I-3, I-5, I-6, I-7, I-8 (seven of eight; I-4 under continuing evaluation pending EBSI's accumulation of the 36-month operational record threshold)</td>
+      <td><a href="/anchor-interface-v1.html#alt-impl-ebsi">Anchor Interface §4</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Substrates under evaluation</h2>
+
+<p>No substrates are currently in formal evaluation. The Foundation accepts substrate-evaluation submissions from any party. The evaluation procedure is documented in Section 6 of the Anchor Interface Specification; submissions may be sent to <code>spec@ledgerproofhq.io</code> with the subject line <code>Anchor substrate conformance evaluation request</code>.</p>
+
+<h2>Substrates declined for inclusion</h2>
+
+<p>No substrates have been formally declined for inclusion. The Foundation publishes declined-substrate evaluations with full documented reasoning when such evaluations are completed, in the interest of transparency about the Anchor Interface's binding constraints.</p>
+
+<h2>Status of this page</h2>
+
+<p>This is the initial publication of the conformance registry, 3 June 2026. Updates to the registry are themselves Bitcoin-anchored as Foundation governance events of type <code>anchor_substrate_registry_revision</code> and are linked from the Foundation governance events index on the specification root.</p>
+
+</body>
+</html>

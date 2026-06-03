@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>spec.ledgerproofhq.io — OCPP-AI Specification + companion artifacts</title>
+<meta name="description" content="Specifications, JSON-LD contexts, conformance materials, and governance event records published by the LedgerProof Foundation in support of EU AI Act Article 50 transparency obligations.">
+<meta name="author" content="LedgerProof Foundation (in formation)">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 760px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.55; font-size: 16px; }
+  h1, h2, h3 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; line-height: 1.2; }
+  h1 .subtitle { display: block; font-size: 11pt; color: #4b5563; font-weight: 400; margin-top: 0.5em; font-family: inherit; }
+  h2 { font-size: 14pt; margin-top: 2em; border-bottom: 1px solid #d1d5db; padding-bottom: 0.25em; }
+  .lede { background: #f3f4f6; border-left: 4px solid #0b3d2e; padding: 1em 1.3em; font-size: 0.95em; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; margin: 1em 0 2em; }
+  table { border-collapse: collapse; margin: 0.5em 0 1.5em; width: 100%; font-size: 0.93em; }
+  th, td { border: 1px solid #d1d5db; padding: 0.5em 0.7em; text-align: left; vertical-align: top; }
+  th { background: #0b3d2e; color: #fbbf24; font-weight: 600; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  tr:nth-child(even) td { background: #f9fafb; }
+  code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  a { color: #0b3d2e; }
+  a code { background: #e6f0eb; }
+  .meta { color: #4b5563; font-size: 0.9em; }
+  hr { border: none; border-top: 1px solid #d1d5db; margin: 2.5em 0 1.5em; }
+  .footer-note { font-size: 0.86em; color: #4b5563; margin-top: 2em; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<h1>spec.ledgerproofhq.io
+<span class="subtitle">Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI) and companion specifications — maintained by the LedgerProof Foundation (in formation)</span>
+</h1>
+
+<div class="lede">
+This domain hosts the canonical, citable specifications, JSON-LD contexts, conformance materials, and Bitcoin-anchored governance event records published by the LedgerProof Foundation in support of the transparency obligations of Article 50 of Regulation (EU) 2024/1689 (the EU AI Act). All material is published under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. Reference implementations are published under <strong>Apache License 2.0</strong>.
+</div>
+
+<h2>Specifications</h2>
+
+<table>
+  <thead><tr><th>Document</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="/ocpp-ai-v1.html"><strong>OCPP-AI v1.0 Core Specification</strong></a><br>
+        <span class="meta">EU legislative styling (Recitals + 10 Articles + 3 Annexes). Defines the receipt structure, canonical encoding (CBOR), Ed25519 signatures, SHA-256 Merkle aggregation, and the four Article 50 sub-obligation profiles (ChatbotSession, GeneratedContent, HumanReview, manner-of-disclosure).</span></td>
+      <td>Draft for stakeholder consultation</td>
+    </tr>
+    <tr>
+      <td><a href="/anchor-interface-v1.html"><strong>Anchor Interface Specification v1.0</strong></a><br>
+        <span class="meta">Substrate-agnostic specification defining eight normative properties (I-1 through I-8) that any conforming cryptographic anchor substrate must satisfy. Bitcoin OP_RETURN as current reference implementation; European Blockchain Services Infrastructure (EBSI) as the primary enterprise-government alternative; dual-anchor deployment recommended for EU-jurisdictional deployers.</span></td>
+      <td>Draft for stakeholder consultation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Machine-readable contexts</h2>
+
+<table>
+  <thead><tr><th>Resource</th><th>Content-Type</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="/contexts/lpr-v1.jsonld"><strong>W3C VC 2.0 JSON-LD Context</strong></a><br>
+        <span class="meta">Maps OCPP-AI receipt content body fields to W3C Verifiable Credentials 2.0 <code>credentialSubject</code> properties. Enables lossless wrapping of OCPP-AI receipts as VC 2.0 credentials and composition with eIDAS 2.0 Qualified Trust Service Providers.</span></td>
+      <td><code>application/ld+json</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Memoranda</h2>
+
+<table>
+  <thead><tr><th>Document</th><th>Recipient</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="/memos/dgcnect-article-50-reference-architecture-2026-06-03.html"><strong>DG-CNECT Memorandum (3 June 2026)</strong></a><br>
+        <span class="meta">Reference Implementation Architecture for AI Act Article 50 Transparency Obligations: Mitigating Systemic Vendor Lock-In and Safeguarding Open Strategic Autonomy.</span></td>
+      <td>European Commission DG-CNECT AI Office</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Foundation governance events (Bitcoin-anchored)</h2>
+
+<table>
+  <thead><tr><th>Event ID</th><th>Type</th><th>Date</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="/governance-events/gov-2026-06-03-dgcnect-memo.json"><code>gov-2026-06-03-dgcnect-memo</code></a></td>
+      <td>regulatory_submission</td>
+      <td>3 June 2026</td>
+      <td>anchor pending block confirmation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Preprint companion (arXiv submission in flight)</h2>
+
+<p><a href="/arxiv-preprint/ocpp-ai-v1.tex"><strong>OCPP-AI v1 — arXiv preprint LaTeX source</strong></a> · cs.CR primary classification with cs.CY and cs.DC cross-list · single-author preprint companion to the SCITT-WG-track Internet-Draft <code>draft-dawkins-scitt-ai-article50-00</code>. arXiv permanent identifier will be appended to the OCPP-AI v1.0 specification once assigned.</p>
+
+<h2>Forthcoming materials</h2>
+
+<table>
+  <thead><tr><th>Resource</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="/conforming-substrates/">Anchor substrate conformance registry</a></td>
+      <td>Forthcoming — placeholder published; substrate conformance evaluations will populate this URL as additional substrates are evaluated against the Anchor Interface.</td>
+    </tr>
+    <tr>
+      <td><a href="/test-vectors-v1/">OCPP-AI v1.0 conformance test vectors</a></td>
+      <td>Forthcoming — placeholder published; test vectors covering each Article 50 sub-obligation profile, sample anchor records, sample Merkle proofs, and sample W3C VC 2.0 wrappings will populate this URL.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>External references</h2>
+
+<ul>
+  <li><strong>IETF Internet-Draft</strong> — <a href="https://datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/"><code>draft-dawkins-scitt-ai-article50-00</code></a> on the IETF Datatracker (SCITT Working Group track).</li>
+  <li><strong>Source repository</strong> — <a href="https://github.com/vsdawkins-creator/ledgerproof-eu"><code>github.com/vsdawkins-creator/ledgerproof-eu</code></a> (Apache License 2.0 reference implementations in Python, TypeScript, and Rust with twenty-nine framework adapters).</li>
+  <li><strong>Foundation operations</strong> — <a href="https://ledgerproofhq.io"><code>ledgerproofhq.io</code></a>.</li>
+</ul>
+
+<p class="footer-note">
+LedgerProof Foundation is in formation as a Delaware 501(c)(3) public charity under Adler &amp; Colvin counsel, with a Dutch Stichting EU subsidiary under NautaDutilh counsel and EU regulatory engagement scoped with Stibbe Brussels. The specifications hosted at this domain are published for stakeholder consultation at the European Commission AI Office, the European AI Board, CEN-CENELEC Joint Technical Committee 21, the IETF SCITT Working Group, and W3C. The Foundation does not assert patent encumbrance over any specification published here and undertakes that the specifications will not be made subject to commercial licensing. Editorial contact: <code>veronica@ledgerproofhq.io</code>.
+</p>
+
+</body>
+</html>

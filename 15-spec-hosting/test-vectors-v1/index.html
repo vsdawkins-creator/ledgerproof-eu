@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OCPP-AI v1.0 conformance test vectors</title>
+<meta name="description" content="Conformance test vectors for OCPP-AI v1.0 implementations.">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 760px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.55; font-size: 16px; }
+  h1, h2 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; }
+  h2 { font-size: 14pt; margin-top: 2em; border-bottom: 1px solid #d1d5db; padding-bottom: 0.25em; }
+  .lede { background: #fffbeb; border-left: 4px solid #fbbf24; padding: 1em 1.3em; font-size: 0.95em; margin: 1em 0 2em; }
+  ul li { margin: 0.4em 0; }
+  a { color: #0b3d2e; }
+  code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  .breadcrumb { font-size: 0.9em; color: #4b5563; margin-bottom: 1em; }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb"><a href="/">spec.ledgerproofhq.io</a> &rsaquo; test-vectors-v1</div>
+
+<h1>OCPP-AI v1.0 conformance test vectors</h1>
+
+<div class="lede">
+This page hosts the conformance test vectors required by Annex C of the <a href="/ocpp-ai-v1.html">OCPP-AI v1.0 Core Specification</a>. Conforming implementations MUST pass all test vectors to claim OCPP-AI v1.0 conformance.
+</div>
+
+<h2>Planned test vector coverage</h2>
+
+<ul>
+  <li>Sample receipts for each content body profile defined in OCPP-AI Article 4 — ChatbotSession (Article 50(1)), GeneratedContent (Article 50(2)), HumanReview (Article 50(4))</li>
+  <li>Canonical CBOR encoding round-trip vectors (input data → CBOR bytes → decoded structure must be byte-identical across implementations)</li>
+  <li>Ed25519 signature vectors over the canonical CBOR encoding</li>
+  <li>RFC 6962 Merkle tree construction vectors for receipt batches</li>
+  <li>Sample Bitcoin OP_RETURN anchor records demonstrating the 36-byte payload format <code>"LPR1" || merkle_root_32</code></li>
+  <li>Sample W3C VC 2.0 wrappings demonstrating lossless round-trip between OCPP-AI receipt format and the JSON-LD-contexted VC form</li>
+  <li>Schema validation vectors — inputs that MUST be accepted and inputs that MUST be rejected (specifically inputs containing PII patterns, which the schema validation layer is required to reject)</li>
+  <li>Negative test vectors — malformed receipts, signature failures, anchor format violations, Merkle proof failures</li>
+</ul>
+
+<h2>Status</h2>
+
+<p>Test vector generation is in progress. The first release will be tagged <code>test-vectors-v1.0.0</code> in the source repository at <a href="https://github.com/vsdawkins-creator/ledgerproof-eu"><code>github.com/vsdawkins-creator/ledgerproof-eu</code></a> under <code>spec/test-vectors-v1/</code> and mirrored to this URL. Publication target: 30 June 2026.</p>
+
+<p>Implementers requiring earlier access for integration work may request a pre-release test vector bundle by emailing <code>spec@ledgerproofhq.io</code> with the subject <code>OCPP-AI test vector pre-release request</code>.</p>
+
+<h2>Conformance assertion</h2>
+
+<p>Implementations claiming OCPP-AI v1.0 conformance MUST publish a conformance statement listing the specific test vector set version they pass against. Conformance statements for the LedgerProof Foundation reference implementations (Python, TypeScript, Rust) are published in the source repository under the respective language directories.</p>
+
+</body>
+</html>
