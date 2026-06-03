@@ -1,0 +1,217 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+
+    "id": "@id",
+    "type": "@type",
+
+    "ocpp": "https://spec.ledgerproofhq.io/contexts/ocpp-ai-v1#",
+    "lpr": "https://spec.ledgerproofhq.io/contexts/lpr-v1#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "sec": "https://w3id.org/security#",
+    "ai-act": "https://spec.ledgerproofhq.io/contexts/ai-act-article-50#",
+    "eidas2": "https://eu.europa.eu/eidas-2-architecture-reference-framework#",
+
+    "OCPPReceipt": {
+      "@id": "ocpp:Receipt",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+
+        "profileVersion": {
+          "@id": "ocpp:profileVersion",
+          "@type": "xsd:string"
+        },
+
+        "enforcementDate": {
+          "@id": "ocpp:enforcementDate",
+          "@type": "xsd:date"
+        },
+
+        "anchor": {
+          "@id": "ocpp:anchor",
+          "@context": {
+            "@version": 1.1,
+            "@protected": true,
+            "anchorInterface": {
+              "@id": "ocpp:anchorInterface",
+              "@type": "@vocab",
+              "@context": {
+                "BitcoinOpReturnAnchor": "ocpp:BitcoinOpReturnAnchor",
+                "EBSIAnchor": "ocpp:EBSIAnchor"
+              }
+            },
+            "anchorReference": {
+              "@id": "ocpp:anchorReference",
+              "@type": "xsd:string"
+            },
+            "merkleRoot": {
+              "@id": "ocpp:merkleRoot",
+              "@type": "xsd:hexBinary"
+            },
+            "anchorBlockHeight": {
+              "@id": "ocpp:anchorBlockHeight",
+              "@type": "xsd:nonNegativeInteger"
+            }
+          }
+        },
+
+        "transparencyMarker": {
+          "@id": "ocpp:transparencyMarker",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Article50ChatbotSession": {
+      "@id": "ai-act:ChatbotSessionDisclosure",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "subObligation": {
+          "@id": "ai-act:subObligation",
+          "@type": "@vocab",
+          "@context": {
+            "Article50_1": "ai-act:Article50_1_InteractiveDisclosure",
+            "Article50_2": "ai-act:Article50_2_SyntheticMediaMarking",
+            "Article50_3": "ai-act:Article50_3_BiometricNotification",
+            "Article50_4": "ai-act:Article50_4_AIGeneratedTextDisclosure",
+            "Article50_6": "ai-act:Article50_6_MannerOfDisclosure"
+          }
+        },
+        "disclosureTextHash": {
+          "@id": "ai-act:disclosureTextHash",
+          "@type": "sec:multihash"
+        }
+      }
+    },
+
+    "Article50GeneratedContent": {
+      "@id": "ai-act:SyntheticContentDeclaration",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "subObligation": "ai-act:subObligation",
+        "contentHash": {
+          "@id": "ai-act:contentHash",
+          "@type": "sec:multihash"
+        },
+        "perceptualHash": {
+          "@id": "ai-act:perceptualHash",
+          "@type": "xsd:string"
+        },
+        "generationType": {
+          "@id": "ai-act:generationType",
+          "@type": "@vocab",
+          "@context": {
+            "AI_GENERATED": "ai-act:AIGenerated",
+            "AI_MANIPULATED": "ai-act:AIManipulated",
+            "AI_ASSISTED": "ai-act:AIAssisted"
+          }
+        },
+        "sourceContentHash": {
+          "@id": "ai-act:sourceContentHash",
+          "@type": "sec:multihash"
+        },
+        "isPublicInterest": {
+          "@id": "ai-act:isPublicInterest",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Article50HumanReview": {
+      "@id": "ai-act:HumanEditorialReviewAttestation",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "subObligation": "ai-act:subObligation",
+        "reviewerRole": {
+          "@id": "ai-act:reviewerRole",
+          "@type": "xsd:string",
+          "@comment": "Bounded vocabulary; never PII. Examples: editor, journalist, compliance_officer, fact_checker."
+        },
+        "reviewerOrganization": {
+          "@id": "ai-act:reviewerOrganization",
+          "@type": "xsd:string"
+        },
+        "reviewRationale": {
+          "@id": "ai-act:reviewRationale",
+          "@type": "xsd:string",
+          "@comment": "Bounded vocabulary; never PII. Schema validation rejects email addresses, phone numbers, and free-text PII patterns."
+        },
+        "reviewTimestamp": {
+          "@id": "ai-act:reviewTimestamp",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Deployer": {
+      "@id": "ocpp:Deployer",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "deployerId": {
+          "@id": "ocpp:deployerId",
+          "@type": "xsd:string",
+          "@comment": "Legal Entity Identifier (LEI), VAT ID, EORI number, or opaque identifier. Schema validation rejects email addresses."
+        },
+        "deployerName": {
+          "@id": "ocpp:deployerName",
+          "@type": "xsd:string"
+        },
+        "deployerCountry": {
+          "@id": "ocpp:deployerCountry",
+          "@type": "xsd:string",
+          "@comment": "ISO 3166-1 alpha-2 country code."
+        },
+        "supervisoryAuthority": {
+          "@id": "ocpp:supervisoryAuthority",
+          "@type": "xsd:string",
+          "@comment": "Named EU AI Act national competent authority (e.g., 'FR:CNIL', 'DE:BfDI', 'ES:AEPD', 'IT:Garante', 'NL:AP')."
+        }
+      }
+    },
+
+    "AISystem": {
+      "@id": "ocpp:AISystem",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "aiSystemId": {
+          "@id": "ocpp:aiSystemId",
+          "@type": "xsd:string"
+        },
+        "aiSystemVersion": {
+          "@id": "ocpp:aiSystemVersion",
+          "@type": "xsd:string"
+        },
+        "providerLEI": {
+          "@id": "ocpp:providerLEI",
+          "@type": "xsd:string",
+          "@comment": "Legal Entity Identifier of the AI system provider per AI Act Article 16."
+        }
+      }
+    },
+
+    "EIDASAlignment": {
+      "@id": "eidas2:ArchitecturalCompatibility",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "trustServiceProvider": {
+          "@id": "eidas2:trustServiceProvider",
+          "@type": "xsd:string",
+          "@comment": "Optional. Identifier of an eIDAS-qualified Trust Service Provider wrapping this credential for use cases requiring qualified evidence."
+        },
+        "qualifiedSignatureAttachment": {
+          "@id": "eidas2:qualifiedSignatureAttachment",
+          "@type": "xsd:string",
+          "@comment": "Optional. Reference to a detached eIDAS Qualified Electronic Signature (QES) covering this credential, where regulatory use case requires QES."
+        }
+      }
+    }
+  }
+}

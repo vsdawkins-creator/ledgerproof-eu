@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OCPP-AI v1.0 — Open Cryptographic Provenance Protocol for AI System Outputs</title>
+<meta name="description" content="Specification of the Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI). An open, substrate-agnostic protocol for machine-readable cryptographic transparency receipts addressing EU AI Act Article 50 sub-obligations 50(1), 50(2), 50(4), and 50(6). Architecturally compatible with eIDAS 2.0 and W3C Verifiable Credentials 2.0.">
+<meta name="author" content="LedgerProof Foundation — maintainer of the OCPP-AI reference implementation">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 800px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.55; font-size: 16px; }
+  h1, h2, h3, h4 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 26pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; line-height: 1.2; }
+  h1 .subtitle { display: block; font-size: 14pt; color: #4b5563; font-weight: 400; margin-top: 0.3em; }
+  h2 { font-size: 17pt; border-bottom: 1px solid #d1d5db; padding-bottom: 0.3em; margin-top: 2em; }
+  h3 { font-size: 13pt; margin-top: 1.6em; }
+  h4 { font-size: 11pt; margin-top: 1.2em; }
+  .doc-meta { background: #f3f4f6; border-left: 4px solid #0b3d2e; padding: 0.9em 1.2em; font-size: 0.93em; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; margin: 1em 0 2em; }
+  .doc-meta div { margin: 0.18em 0; }
+  code, pre { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; }
+  code { background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  pre { background: #f3f4f6; padding: 1em; border-radius: 4px; overflow-x: auto; font-size: 0.85em; line-height: 1.45; }
+  pre code { background: transparent; padding: 0; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; font-size: 0.93em; }
+  th, td { border: 1px solid #d1d5db; padding: 0.45em 0.7em; text-align: left; vertical-align: top; }
+  th { background: #0b3d2e; color: #fbbf24; font-weight: 600; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  tr:nth-child(even) td { background: #f9fafb; }
+  blockquote { border-left: 3px solid #f59e0b; padding-left: 1em; color: #4b5563; margin: 1em 0; }
+  .recitals { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 4px; padding: 1em 1.3em; margin: 1em 0; font-size: 0.95em; }
+  .recitals h3 { margin-top: 0.5em; }
+  .recitals ol { margin: 0.5em 0; padding-left: 1.5em; }
+  .recitals ol li { margin: 0.5em 0; }
+  .normative { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 4px; padding: 0.4em 0.8em; font-size: 0.88em; color: #7f1d1d; display: inline-block; font-weight: 600; }
+  .toc { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 0.9em 1.5em; margin: 1em 0; font-size: 0.93em; }
+  .toc ul { margin: 0.3em 0; padding-left: 1.4em; }
+  a { color: #0b3d2e; }
+  hr { border: none; border-top: 1px solid #d1d5db; margin: 2em 0; }
+</style>
+</head>
+<body>
+
+<h1>OCPP-AI v1.0
+<span class="subtitle">Open Cryptographic Provenance Protocol for AI System Outputs</span>
+</h1>
+
+<div class="doc-meta">
+  <div><strong>Document:</strong> OCPP-AI Core Specification v1.0</div>
+  <div><strong>Status:</strong> Draft for stakeholder consultation (European Commission AI Office; European AI Board; CEN-CENELEC JTC 21; IETF SCITT WG)</div>
+  <div><strong>Editor:</strong> Veronica S. Dawkins, LedgerProof Foundation (in formation; Delaware 501(c)(3); Adler &amp; Colvin counsel)</div>
+  <div><strong>Date:</strong> 3 June 2026</div>
+  <div><strong>Stable URL:</strong> <code>https://spec.ledgerproofhq.io/ocpp-ai-v1.html</code></div>
+  <div><strong>Companion documents:</strong></div>
+  <div style="padding-left: 1.5em;">— Anchor Interface Specification v1.0 (<code>/anchor-interface-v1.html</code>)</div>
+  <div style="padding-left: 1.5em;">— W3C VC 2.0 JSON-LD Context (<code>/contexts/lpr-v1.jsonld</code>)</div>
+  <div style="padding-left: 1.5em;">— IETF Internet-Draft <code>draft-dawkins-scitt-ai-article50-00</code> (SCITT WG)</div>
+  <div style="padding-left: 1.5em;">— Reference implementations: Python, TypeScript, Rust (Apache-2.0; <code>github.com/ledgerproof</code>)</div>
+  <div><strong>License:</strong> The specification is published under CC BY 4.0 to enable unrestricted citation, translation, and reference by EU institutions, Member State competent authorities, notified bodies, standards organizations, academic researchers, and the press.</div>
+</div>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#recitals">Recitals (informative)</a></li>
+    <li><a href="#article1">Article 1 — Scope and conformance</a></li>
+    <li><a href="#article2">Article 2 — Definitions</a></li>
+    <li><a href="#article3">Article 3 — Receipt structure and canonical encoding</a></li>
+    <li><a href="#article4">Article 4 — Article 50 sub-obligation profiles</a></li>
+    <li><a href="#article5">Article 5 — Anchor Interface integration (normative reference)</a></li>
+    <li><a href="#article6">Article 6 — Architectural compatibility with eIDAS 2.0</a></li>
+    <li><a href="#article7">Article 7 — Architectural compatibility with W3C Verifiable Credentials 2.0</a></li>
+    <li><a href="#article8">Article 8 — Verification procedure</a></li>
+    <li><a href="#article9">Article 9 — GDPR compatibility and personal-data exclusion</a></li>
+    <li><a href="#article10">Article 10 — Governance, maintainer accountability, and revision procedure</a></li>
+    <li><a href="#annex-a">Annex A — Article 50 sub-obligation conformity matrix</a></li>
+    <li><a href="#annex-b">Annex B — Reference implementation inventory</a></li>
+    <li><a href="#annex-c">Annex C — Test vectors</a></li>
+  </ul>
+</div>
+
+<h2 id="recitals">Recitals (informative)</h2>
+
+<div class="recitals">
+<ol>
+  <li><strong>Whereas</strong> Article 50 of Regulation (EU) 2024/1689 (the &quot;AI Act&quot;) imposes transparency obligations on providers and deployers of AI systems with respect to natural persons, supervisory authorities, and the public, and the operational implementation of those obligations requires machine-readable evidence that survives the continued cooperation of any single deployer, vendor, or jurisdiction;</li>
+
+  <li><strong>Whereas</strong> proprietary logging mechanisms operated by individual AI system providers create a structural risk of compliance evidence fragmentation, vendor lock-in of regulatory evidence, and the effective outsourcing of Union enforcement infrastructure to non-Union private actors, with corresponding diminution of the Brussels Effect for AI regulation;</li>
+
+  <li><strong>Whereas</strong> the European Union has, through Regulation (EU) 2024/1183 (eIDAS 2.0) and the European Blockchain Services Infrastructure (EBSI), invested in architectural patterns for verifiable, sovereign, cross-border publication of trusted evidence, and any Article 50 evidence framework should preserve and extend rather than duplicate or supplant those investments;</li>
+
+  <li><strong>Whereas</strong> the General Data Protection Regulation 2016/679 imposes structural constraints on the publication of personal data to immutable substrates, and any Article 50 evidence framework must by design preclude the embedding of personal data in any layer of the evidence record;</li>
+
+  <li><strong>Whereas</strong> the W3C Verifiable Credentials 2.0 Data Model provides a standardized, internationally recognized format for machine-readable cryptographic attestations, and architectural compatibility with that format enables Article 50 evidence to participate in the broader ecosystem of verifiable credentials including those produced under eIDAS 2.0;</li>
+
+  <li><strong>Whereas</strong> standardization activity at CEN-CENELEC Joint Technical Committee 21 and at the IETF Supply Chain Integrity, Transparency, and Trust (SCITT) Working Group is actively addressing the technical requirements of AI Act conformance, and contributions to those standardization processes should be open, substrate-agnostic, and implementation-neutral;</li>
+
+  <li><strong>Whereas</strong> the Open Cryptographic Provenance Protocol for AI System Outputs (&quot;OCPP-AI&quot;) is offered as an open specification — published under CC BY 4.0, free of patent encumbrance, with reference implementations under Apache License 2.0 — for stakeholder consultation, technical evaluation, and potential reference by EU institutions and Member State authorities;</li>
+
+  <li><strong>The LedgerProof Foundation</strong> (in formation as a Delaware 501(c)(3) public charity) is positioned as the maintainer of the reference implementation, not as a proprietor of the specification. The specification is offered to the broader standardization ecosystem without claim to exclusivity, endorsement, or commercial advantage.</li>
+</ol>
+</div>
+
+<h2 id="article1">Article 1 — Scope and conformance</h2>
+
+<p><strong>1.1</strong> This specification defines a machine-readable cryptographic receipt format and verification procedure addressing the transparency obligations of Article 50 of Regulation (EU) 2024/1689. The specification covers sub-obligations 50(1), 50(2), 50(4), and 50(6). Sub-obligation 50(3) is deferred to a subsequent revision pending stakeholder consultation on biometric notification handling under joint AI Act and GDPR constraints.</p>
+
+<p><strong>1.2</strong> An implementation is OCPP-AI v1.0 conformant if it produces receipts conforming to Articles 3 and 4, anchors batched Merkle roots to a substrate satisfying the Anchor Interface (Article 5), and supports the verification procedure of Article 8.</p>
+
+<p><strong>1.3</strong> Conformance is implementation-language-neutral. Reference implementations exist in Python, TypeScript, and Rust under Apache License 2.0; conforming implementations in any language are explicitly admitted.</p>
+
+<h2 id="article2">Article 2 — Definitions</h2>
+
+<p>For the purposes of this specification, the following definitions apply:</p>
+
+<ul>
+  <li><strong>Receipt</strong> — a machine-readable cryptographic record conforming to Article 3 that attests to the provenance of a single AI system output for the purpose of Article 50 transparency.</li>
+  <li><strong>Receipt batch</strong> — an ordered collection of receipts whose Merkle root is anchored as a single anchor record per the Anchor Interface.</li>
+  <li><strong>Anchor substrate</strong> — a publicly verifiable, immutable data structure satisfying the Anchor Interface, used to publish Merkle roots of receipt batches.</li>
+  <li><strong>Deployer</strong> — a natural or legal person using an AI system under its authority within the meaning of Article 3(4) of the AI Act.</li>
+  <li><strong>Verifier</strong> — any natural or legal person, including supervisory authorities and natural persons, exercising the verification procedure of Article 8.</li>
+  <li><strong>Maintainer</strong> — the LedgerProof Foundation, the entity responsible for the reference implementation and for the revision procedure of Article 10.</li>
+</ul>
+
+<h2 id="article3">Article 3 — Receipt structure and canonical encoding</h2>
+
+<p><strong>3.1 Structural layers.</strong> A receipt comprises three structural layers:</p>
+
+<ol>
+  <li>An <strong>envelope</strong> establishing chain identity (sequence, prev_hash, entry_hash, signature, publisher_id, key_id);</li>
+  <li>A <strong>content</strong> body conforming to one of the Article 50 sub-obligation profiles defined in Article 4;</li>
+  <li>An <strong>anchor reference</strong> resolving to a substrate-level anchor record per the Anchor Interface.</li>
+</ol>
+
+<p><strong>3.2 Canonical encoding.</strong> Receipts are encoded using the Concise Binary Object Representation (CBOR; RFC 8949) deterministic encoding subset. The CBOR encoding is canonical and reproducible: byte-identical input data produces byte-identical CBOR encoding across all conforming implementations.</p>
+
+<p><strong>3.3 Signature scheme.</strong> Receipts are signed using Ed25519 (RFC 8032). The signature covers the canonical CBOR encoding of the envelope and content body.</p>
+
+<p><strong>3.4 Hash function.</strong> All hash references within receipts and the Anchor Interface use SHA-256 (RFC 6234).</p>
+
+<p><strong>3.5 Merkle aggregation.</strong> Receipt batches are aggregated into a Merkle tree per the construction described in RFC 6962 (Certificate Transparency). The root of this tree is the value published as the anchor payload per the Anchor Interface, Section 2.7.</p>
+
+<h2 id="article4">Article 4 — Article 50 sub-obligation profiles</h2>
+
+<p>OCPP-AI v1.0 defines three content body profiles, each mapping to specified sub-obligations of Article 50.</p>
+
+<h3>4.1 — ChatbotSession profile (Article 50(1))</h3>
+
+<p>Used to record that a natural person was disclosed to be interacting with an AI system. Fields: ai_system_id, deployer_id, deployer_country, disclosure_text_hash, session_start_timestamp, session_identifier. Schema validation MUST reject disclosure_text values that contain personally identifiable information patterns.</p>
+
+<h3>4.2 — GeneratedContent profile (Article 50(2))</h3>
+
+<p>Used to record that a piece of synthetic media was generated or manipulated by an AI system. Fields: ai_system_id, deployer_id, deployer_country, content_hash, perceptual_hash, generation_type (AI_GENERATED, AI_MANIPULATED, AI_ASSISTED), source_content_hash (required for AI_MANIPULATED), is_public_interest, transparency_marker.</p>
+
+<h3>4.3 — HumanReview profile (Article 50(4))</h3>
+
+<p>Used to record that AI-generated text was subject to human editorial review prior to publication, evidencing the Article 50(4) exemption. Fields: content_hash, reviewer_role, reviewer_organization, review_rationale, review_timestamp. The reviewer_role and review_rationale fields draw from a bounded vocabulary; schema validation MUST reject values containing email addresses, telephone numbers, or free-text patterns matching common PII regular expressions.</p>
+
+<h3>4.4 — Manner-of-disclosure (Article 50(6))</h3>
+
+<p>The transparency_marker field (default: "LPR-EU-AI-ACT-50") present in ChatbotSession and GeneratedContent profiles satisfies the Article 50(6) requirement that disclosure be made in a clear and distinguishable manner. The field admits localized values for Member State use.</p>
+
+<h2 id="article5">Article 5 — Anchor Interface integration (normative reference)</h2>
+
+<p>The Anchor Interface is specified separately at <code>https://spec.ledgerproofhq.io/anchor-interface-v1.html</code> and is incorporated into this specification by normative reference. Conforming implementations MUST publish receipt-batch Merkle roots to a substrate satisfying that interface. Two conforming substrates are described in the Anchor Interface specification: the Bitcoin OP_RETURN reference implementation and the European Blockchain Services Infrastructure (EBSI) alternative implementation. Dual-anchor deployment is RECOMMENDED for deployers operating under EU jurisdictional reach.</p>
+
+<h2 id="article6">Article 6 — Architectural compatibility with eIDAS 2.0</h2>
+
+<p><strong>6.1 Scope of compatibility.</strong> OCPP-AI v1.0 is architecturally compatible with the verifiable attestation patterns of Regulation (EU) 2024/1183 (eIDAS 2.0). This document does NOT claim that OCPP-AI signatures constitute Qualified Electronic Signatures (QES) per eIDAS Article 25, nor that the LedgerProof Foundation is a Qualified Trust Service Provider (QTSP). Such qualifications, where required by a specific use case, are obtained through arrangement with an established QTSP, as described in Section 6.3.</p>
+
+<p><strong>6.2 Wrapping pattern.</strong> An OCPP-AI receipt MAY be wrapped as a W3C Verifiable Credential 2.0 (see Article 7) and, in that form, presented through an eIDAS-compliant Trust Service Provider for use cases requiring qualified evidence. The receipt content remains unaltered; the eIDAS qualification attaches at the wrapping layer.</p>
+
+<p><strong>6.3 Complementarity.</strong> OCPP-AI provides the cryptographic provenance evidence layer specifically for Article 50 transparency. eIDAS 2.0 provides the broader trust-service framework for qualified evidence. The two frameworks are complementary: OCPP-AI does not duplicate, compete with, or replace eIDAS infrastructure. Deployers requiring qualified evidence under Article 50 may obtain it by combining OCPP-AI receipts with an eIDAS-qualified TSP wrapping arrangement.</p>
+
+<h2 id="article7">Article 7 — Architectural compatibility with W3C Verifiable Credentials 2.0</h2>
+
+<p><strong>7.1 JSON-LD context.</strong> A JSON-LD context for wrapping OCPP-AI receipts as W3C VC 2.0 Verifiable Credentials is published at <code>https://spec.ledgerproofhq.io/contexts/lpr-v1.jsonld</code> and is incorporated into this specification by reference.</p>
+
+<p><strong>7.2 credentialSubject mapping.</strong> The OCPP-AI content body fields (deployer_id, reviewer_role, content_hash, disclosure_text_hash, and the remaining fields enumerated in Article 4) are mapped to credentialSubject properties in the published JSON-LD context. The mapping is one-to-one and is reversible; an OCPP-AI receipt may be losslessly serialized as a W3C VC 2.0 Verifiable Credential and recovered from that form.</p>
+
+<p><strong>7.3 Issuer.</strong> When an OCPP-AI receipt is wrapped as a W3C VC, the issuer property identifies the publishing deployer (not the LedgerProof Foundation). The Foundation does not claim issuer authority over receipts issued by deployers; the Foundation is the maintainer of the reference implementation.</p>
+
+<h2 id="article8">Article 8 — Verification procedure</h2>
+
+<p>An OCPP-AI receipt is verified by performing the following steps in order:</p>
+
+<ol>
+  <li>Parse the receipt as canonical CBOR per Article 3.2. Reject if parsing fails.</li>
+  <li>Verify the Ed25519 signature over the envelope and content body per Article 3.3, using the publisher's published public key. Reject on signature failure.</li>
+  <li>Verify that the content body conforms to one of the Article 4 profiles. Reject on schema validation failure.</li>
+  <li>Resolve the anchor reference per Anchor Interface Section 2.5. Reject if the anchor record is not retrievable.</li>
+  <li>Verify the OCPP-AI Anchor Payload Format (Anchor Interface Section 2.7) of the resolved anchor record, including the "LPR1" magic prefix.</li>
+  <li>Reconstruct the Merkle proof from the receipt to the anchor's published Merkle root per RFC 6962. Reject on Merkle proof failure.</li>
+  <li>Where dual anchoring is in use and the verifier's policy requires it, repeat steps 4 through 6 against the secondary anchor and assert Merkle root identity per Anchor Interface Section 7.2.</li>
+</ol>
+
+<p>A receipt that passes all steps is verified. No step requires authentication to or cooperation by any party. The verifier requires only public substrate access and the publisher's published public key.</p>
+
+<h2 id="article9">Article 9 — GDPR compatibility and personal-data exclusion</h2>
+
+<p><strong>9.1 Structural exclusion.</strong> The OCPP-AI receipt schema is constructed to preclude the inclusion of personal data within receipts. Fields that could otherwise carry personal data (deployer_id, reviewer_role, review_rationale) are bounded to specific identifier formats (Legal Entity Identifier, VAT identifier, bounded role vocabulary) and schema validation MUST reject email addresses, telephone numbers, government identifiers, and free-text PII patterns.</p>
+
+<p><strong>9.2 Anchor exclusion.</strong> The Anchor Interface Section 2.8 prohibits inclusion of personal data at the anchor layer. The 32-byte SHA-256 Merkle root carries cryptographically no recoverable information about underlying receipt content.</p>
+
+<p><strong>9.3 Erasure mechanics.</strong> Receipt-level erasure under GDPR Article 17 is performed at the receipt store. Erasure invalidates the Merkle proof for the erased receipt without invalidating proofs for other receipts in the same batch. The anchor is unaffected by erasure.</p>
+
+<h2 id="article10">Article 10 — Governance, maintainer accountability, and revision procedure</h2>
+
+<p><strong>10.1 Maintainer.</strong> The LedgerProof Foundation maintains the reference implementation and operates the specification revision procedure. The Foundation is established as a Delaware 501(c)(3) public charity under Adler &amp; Colvin counsel and a Dutch Stichting EU subsidiary under NautaDutilh counsel. The Foundation's governance structure, board composition, and conflict-of-interest disclosures are published at <code>https://docs.ledgerproofhq.io/foundation/</code>.</p>
+
+<p><strong>10.2 Revision procedure.</strong> Material revisions to this specification are issued under the Foundation's Bitcoin-anchored governance procedure. Each revision is published with a corresponding <code>foundation_governance_event/v1</code> record anchored per the Anchor Interface, providing tamper-evident evidence of the revision date and content.</p>
+
+<p><strong>10.3 Standardization participation.</strong> The Foundation contributes to standardization activities at CEN-CENELEC JTC 21 (through national mirror committees including DIN Germany and AFNOR France), at the IETF SCITT Working Group, and at W3C. The Foundation does not assert ownership of intellectual property necessary to implement this specification; the specification is published under CC BY 4.0.</p>
+
+<p><strong>10.4 Foundation undertaking.</strong> The Foundation undertakes that this specification will not be made subject to commercial licensing, that no person will be required to obtain Foundation consent to implement, deploy, or extend the specification, and that the Foundation will support the adoption of this specification or its successors by other standards bodies including ISO, CEN-CENELEC, IETF, and W3C if requested.</p>
+
+<hr>
+
+<h2 id="annex-a">Annex A — Article 50 sub-obligation conformity matrix</h2>
+
+<table>
+  <thead>
+    <tr><th>Article 50 sub-obligation</th><th>OCPP-AI profile</th><th>Key receipt fields</th><th>Anchor</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>50(1) Direct user disclosure of AI interaction</td><td>ChatbotSession</td><td>ai_system_id, deployer_id, disclosure_text_hash, session_start_timestamp</td><td>via Anchor Interface</td></tr>
+    <tr><td>50(2) Marking of synthetic media</td><td>GeneratedContent</td><td>content_hash, perceptual_hash, generation_type, source_content_hash, transparency_marker</td><td>via Anchor Interface</td></tr>
+    <tr><td>50(3) Biometric / emotion recognition notification</td><td>(Deferred to v1.1 pending GDPR-coordination consultation)</td><td>—</td><td>—</td></tr>
+    <tr><td>50(4) AI-generated text disclosure with human editorial review exemption</td><td>HumanReview + GeneratedContent</td><td>content_hash, reviewer_role, reviewer_organization, review_rationale, review_timestamp</td><td>via Anchor Interface</td></tr>
+    <tr><td>50(6) Manner of disclosure (clear and distinguishable)</td><td>transparency_marker field present in ChatbotSession and GeneratedContent</td><td>transparency_marker (default "LPR-EU-AI-ACT-50"; admits localized values)</td><td>via Anchor Interface</td></tr>
+  </tbody>
+</table>
+
+<h2 id="annex-b">Annex B — Reference implementation inventory</h2>
+
+<p>The Foundation publishes reference implementations under Apache License 2.0 at <code>github.com/ledgerproof</code>. As of the date of this specification, reference implementations exist for the following languages and frameworks:</p>
+
+<ul>
+  <li><strong>Core libraries:</strong> Python (CPython 3.10+), TypeScript (Node.js 20+, Deno 1.40+), Rust (stable channel)</li>
+  <li><strong>Framework adapters (Python):</strong> LangChain, LlamaIndex, OpenAI SDK, Anthropic SDK, Google AI SDK, Vertex AI, AWS Bedrock, Azure OpenAI, Mistral, Cohere, Together AI, Groq, Hugging Face Transformers, AI21, Replicate, xAI, DeepSeek, Qwen, Reka, Voyage AI, Cerebras, IBM watsonx, Snowflake Cortex, Perplexity, Fireworks, Mistral Codestral, Aleph Alpha, Haystack, Semantic Kernel</li>
+  <li><strong>Verifier tooling:</strong> command-line verifier, browser-based verifier (no SaaS dependency), JSON-LD verifier compatible with W3C VC 2.0</li>
+</ul>
+
+<h2 id="annex-c">Annex C — Test vectors</h2>
+
+<p>Conformance test vectors are published at <code>https://spec.ledgerproofhq.io/test-vectors-v1/</code> and include sample receipts for each Article 4 profile, sample anchor records, sample Merkle proofs, and sample W3C VC 2.0 wrappings. Implementers MUST pass all test vectors to claim conformance.</p>
+
+</body>
+</html>

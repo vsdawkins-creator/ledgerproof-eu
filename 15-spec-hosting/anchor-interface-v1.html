@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OCPP-AI Anchor Interface Specification v1.0</title>
+<meta name="description" content="Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI) — Anchor Interface Specification. Defines the abstract interface for cryptographic anchoring of receipt Merkle roots to public, immutable data structures. Reference implementations: Bitcoin OP_RETURN, European Blockchain Services Infrastructure (EBSI).">
+<meta name="author" content="LedgerProof Foundation — maintainer of the OCPP-AI reference implementation">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 780px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.55; font-size: 16px; }
+  h1, h2, h3, h4 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 24pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; }
+  h2 { font-size: 16pt; border-bottom: 1px solid #d1d5db; padding-bottom: 0.3em; margin-top: 2em; }
+  h3 { font-size: 13pt; margin-top: 1.6em; }
+  h4 { font-size: 11pt; margin-top: 1.2em; }
+  .doc-meta { background: #f3f4f6; border-left: 4px solid #0b3d2e; padding: 0.9em 1.2em; font-size: 0.93em; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; margin: 1em 0 2em; }
+  .doc-meta div { margin: 0.18em 0; }
+  code, pre { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; }
+  code { background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  pre { background: #f3f4f6; padding: 1em; border-radius: 4px; overflow-x: auto; font-size: 0.85em; line-height: 1.45; }
+  pre code { background: transparent; padding: 0; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; font-size: 0.93em; }
+  th, td { border: 1px solid #d1d5db; padding: 0.45em 0.7em; text-align: left; vertical-align: top; }
+  th { background: #0b3d2e; color: #fbbf24; font-weight: 600; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  tr:nth-child(even) td { background: #f9fafb; }
+  blockquote { border-left: 3px solid #f59e0b; padding-left: 1em; color: #4b5563; margin: 1em 0; }
+  .interface-block { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 4px; padding: 1em 1.3em; margin: 1em 0; }
+  .normative { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 4px; padding: 0.4em 0.8em; font-size: 0.88em; color: #7f1d1d; display: inline-block; font-weight: 600; }
+  .toc { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 0.9em 1.5em; margin: 1em 0; font-size: 0.93em; }
+  .toc ul { margin: 0.3em 0; padding-left: 1.4em; }
+  .toc li { margin: 0.18em 0; }
+  a { color: #0b3d2e; }
+  .footnote { font-size: 0.86em; color: #4b5563; margin-top: 0.6em; }
+  hr { border: none; border-top: 1px solid #d1d5db; margin: 2em 0; }
+</style>
+</head>
+<body>
+
+<h1>Anchor Interface Specification v1.0</h1>
+
+<div class="doc-meta">
+  <div><strong>Document:</strong> OCPP-AI Anchor Interface Specification v1.0</div>
+  <div><strong>Status:</strong> Draft for stakeholder review</div>
+  <div><strong>Editor:</strong> Veronica S. Dawkins, LedgerProof Foundation (in formation)</div>
+  <div><strong>Date:</strong> 3 June 2026</div>
+  <div><strong>Stable URL:</strong> <code>https://spec.ledgerproofhq.io/anchor-interface-v1.html</code></div>
+  <div><strong>Companion documents:</strong> OCPP-AI Core Specification v1.0, OCPP-AI W3C VC 2.0 JSON-LD Context, IETF <code>draft-dawkins-scitt-ai-article50-00</code></div>
+  <div><strong>Conformance language:</strong> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in RFC 2119 and RFC 8174 when, and only when, they appear in all capitals as shown here.</div>
+</div>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#scope">1 — Scope and design objectives</a></li>
+    <li><a href="#interface">2 — The Anchor Interface (normative)</a></li>
+    <li><a href="#ref-impl-btc">3 — Reference implementation: Bitcoin OP_RETURN</a></li>
+    <li><a href="#alt-impl-ebsi">4 — Alternative implementation: European Blockchain Services Infrastructure (EBSI)</a></li>
+    <li><a href="#dual">5 — Dual-anchor deployment for sovereign verification</a></li>
+    <li><a href="#future">6 — Future anchor primitives and conformance evaluation</a></li>
+    <li><a href="#security">7 — Security considerations</a></li>
+    <li><a href="#references">8 — References</a></li>
+  </ul>
+</div>
+
+<h2 id="scope">1 — Scope and design objectives</h2>
+
+<p>This document specifies the <strong>Anchor Interface</strong> of the Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI). The Anchor Interface is the abstract specification of the properties any acceptable cryptographic anchor MUST satisfy when used to publish Merkle roots of OCPP-AI receipt batches to a public, immutable data structure for the purpose of providing tamper-evident provenance evidence to EU AI Act Article 50 supervisory authorities, EU AI Act notified bodies, courts of Member States, and natural persons exercising rights under the Regulation.</p>
+
+<p>The interface is deliberately substrate-agnostic. The protocol does not mandate a specific anchoring substrate. It mandates the properties that any acceptable substrate must satisfy. This separation of interface from implementation is essential for three reasons:</p>
+
+<ol>
+  <li><strong>Strategic autonomy.</strong> The Regulation requires evidence that survives the deployer's continued operation, the vendor's continued operation, and any single jurisdiction's hostility. Coupling Article 50 evidence to any single substrate operated under any single jurisdiction's control would defeat the Regulation's enforcement purpose.</li>
+  <li><strong>European digital sovereignty.</strong> The European Union has invested in the European Blockchain Services Infrastructure (EBSI) as Union-owned infrastructure for the cross-border publication of trusted credentials. An anchor interface that admits EBSI as a first-class implementation ensures that Member State competent authorities and EU institutions can verify OCPP-AI receipts against EU-controlled infrastructure where their use case requires Union-sovereign verification.</li>
+  <li><strong>Operational evolution.</strong> The cryptographic landscape evolves. Anchor substrates that are operationally optimal in 2026 may not be optimal in 2036. The interface allows new anchor primitives to be evaluated for conformance without modification of the core OCPP-AI specification or invalidation of previously-anchored receipts.</li>
+</ol>
+
+<p>This document does not specify a particular substrate. Sections 3 and 4 describe two conforming reference implementations.</p>
+
+<h2 id="interface">2 — The Anchor Interface (normative)</h2>
+
+<p>A cryptographic anchor substrate is <strong>OCPP-AI conformant</strong> if and only if it satisfies all of the properties described in Sections 2.1 through 2.8. Compliance is binary; partial compliance is non-compliance.</p>
+
+<h3 id="i1">2.1 — Property I-1: Immutability under adversarial conditions <span class="normative">MUST</span></h3>
+
+<p>The substrate MUST provide a cryptographic guarantee that, once an anchor record is published, no party — including the substrate operator, any state actor with jurisdictional authority over the substrate operator, and any coalition of computational resources operating within the substrate's design parameters — can alter, remove, or substitute the published anchor record without producing a publicly observable inconsistency detectable by an independent verifier without privileged access.</p>
+
+<p>An anchor substrate that relies on the cooperation of any identified operator to maintain immutability is non-conformant. An anchor substrate that relies on the absence of an adversary controlling a defined threshold of the substrate's consensus apparatus is conformant if and only if that threshold is publicly documented, currently above the level of any known coalition, and operationally evidenced by the substrate's continuous operation through historical adversarial events.</p>
+
+<h3 id="i2">2.2 — Property I-2: Public verifiability without authentication <span class="normative">MUST</span></h3>
+
+<p>Any natural or legal person with internet access MUST be able to verify the presence and content of any published anchor record without identifying themselves to the substrate operator, without holding credentials issued by the substrate operator, and without entering into any agreement with the substrate operator.</p>
+
+<p>Verification MUST be possible using only publicly available client software and the published anchor reference.</p>
+
+<h3 id="i3">2.3 — Property I-3: Jurisdictional neutrality <span class="normative">MUST</span></h3>
+
+<p>The substrate's continued operation MUST NOT depend on the consent, license, or non-interference of any single sovereign state, single municipal jurisdiction, or single private legal entity. The substrate MUST be operationally distributed across at least three independent jurisdictions, where independence is evidenced by the absence of mutual extradition treaties enabling unilateral compulsion of substrate operation between any two of the three.</p>
+
+<p>This property is satisfied by substrates operated as voluntary multi-jurisdictional public infrastructure (Bitcoin, EBSI consortium nodes operating under Member State authority). It is not satisfied by substrates operated under the licensing authority of a single regulatory regime.</p>
+
+<h3 id="i4">2.4 — Property I-4: Demonstrated operational durability <span class="normative">MUST</span></h3>
+
+<p>The substrate MUST have demonstrated continuous operational availability for a period of not less than thirty-six (36) months prior to the date of any anchor publication, with no period of substrate-wide unavailability exceeding seventy-two (72) hours during that period.</p>
+
+<p>This property exists to exclude substrates of unproven operational characteristics from carrying long-term regulatory evidence. The threshold is reviewed at each revision of this specification.</p>
+
+<h3 id="i5">2.5 — Property I-5: Deterministic resolution of anchor records <span class="normative">MUST</span></h3>
+
+<p>Given an anchor reference produced at the time of anchor publication, any independent verifier MUST be able to deterministically resolve the anchor record content and the substrate position (block height, sequence number, or equivalent) at which it was published. Two independent verifiers performing this resolution MUST produce byte-identical anchor record content and substrate position.</p>
+
+<h3 id="i6">2.6 — Property I-6: Bounded anchor payload format <span class="normative">MUST</span></h3>
+
+<p>The substrate MUST accept a fixed-length anchor payload conforming to the OCPP-AI Anchor Payload Format defined in Section 2.7. Substrates that require variable-length payloads or impose payload format constraints incompatible with the OCPP-AI Anchor Payload Format are non-conformant.</p>
+
+<h3 id="i7">2.7 — OCPP-AI Anchor Payload Format <span class="normative">MUST</span></h3>
+
+<p>The anchor payload is a fixed 36-byte structure:</p>
+
+<div class="interface-block">
+<pre>┌──────────────────────────────────┬──────────────────────────────────────┐
+│ MAGIC (4 bytes)                  │ MERKLE ROOT (32 bytes)               │
+│ ASCII "LPR1" — 0x4C 0x50 0x52 0x31 │ SHA-256 root of receipt batch         │
+└──────────────────────────────────┴──────────────────────────────────────┘
+</pre>
+</div>
+
+<p>The MAGIC prefix <code>"LPR1"</code> (0x4C 0x50 0x52 0x31) MUST be present in the first four bytes. The MERKLE ROOT is the SHA-256 (RFC 6234) root of the canonical CBOR (RFC 8949 deterministic encoding subset) representation of the OCPP-AI receipt batch, computed per RFC 6962 (Certificate Transparency Merkle tree construction).</p>
+
+<p>The fixed 36-byte length is preserved across substrate implementations to ensure that an anchor record produced under one conforming substrate can be machine-distinguished from records produced under non-OCPP-AI uses of the same substrate, and to bound the maximum information content of any anchor record at the substrate layer to preclude PII leakage into the anchor.</p>
+
+<h3 id="i8">2.8 — Property I-8: GDPR Article 17 compatibility <span class="normative">MUST</span></h3>
+
+<p>The anchor payload format defined in Section 2.7 MUST NOT permit the publication of personal data as defined in GDPR Article 4(1) within the anchor record. Compliance with this property is structural: the 32-byte SHA-256 Merkle root carries cryptographically no recoverable information about the underlying receipt content absent access to the full receipt batch, and receipt-level GDPR Article 17 erasure of an individual receipt does not invalidate the anchor for other receipts in the same batch.</p>
+
+<p>This property is binding on the protocol layer. Substrate operators MUST NOT relax this requirement.</p>
+
+<hr>
+
+<h2 id="ref-impl-btc">3 — Reference implementation: Bitcoin OP_RETURN</h2>
+
+<h3>3.1 — Substrate identification</h3>
+
+<p>The reference implementation of the OCPP-AI Anchor Interface uses the Bitcoin mainnet (network magic bytes 0xF9 0xBE 0xB4 0xD9) as the anchor substrate, publishing anchor payloads via the <code>OP_RETURN</code> script opcode (BIP 0011, BIP 0027, Bitcoin Core consensus rules).</p>
+
+<h3>3.2 — Substrate evaluation against the Anchor Interface</h3>
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Status</th><th>Evidence</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>I-1 Immutability</td><td>SATISFIED</td><td>Bitcoin's continuous operation since 3 January 2009; reorganization depth bounded; adversarial economic cost of altering historical anchors exceeds practical thresholds by orders of magnitude.</td></tr>
+    <tr><td>I-2 Public verifiability without authentication</td><td>SATISFIED</td><td>Any internet-connected party may query any of approximately fifteen thousand publicly operated Bitcoin full nodes for the content of any OP_RETURN record.</td></tr>
+    <tr><td>I-3 Jurisdictional neutrality</td><td>SATISFIED</td><td>Bitcoin nodes operate in over one hundred fifty jurisdictions including all Member States. Mining operations are distributed across jurisdictions with no mutual extradition coalition controlling consensus majority.</td></tr>
+    <tr><td>I-4 Demonstrated durability</td><td>SATISFIED</td><td>Continuous operational availability since 3 January 2009 with no substrate-wide unavailability event exceeding seventy-two hours in the protocol's history.</td></tr>
+    <tr><td>I-5 Deterministic anchor resolution</td><td>SATISFIED</td><td>An anchor reference of the form <code>{txid, vout}</code> resolves deterministically to the byte-identical anchor record content at the byte-identical block height across all Bitcoin Core conformant verifiers.</td></tr>
+    <tr><td>I-6 Bounded anchor payload format</td><td>SATISFIED</td><td>OP_RETURN admits payloads up to 80 bytes; the 36-byte OCPP-AI anchor payload fits within this bound.</td></tr>
+    <tr><td>I-7 Anchor payload format</td><td>SATISFIED</td><td>The OCPP-AI 36-byte payload is published verbatim as the OP_RETURN data field; no substrate-specific transformation is applied.</td></tr>
+    <tr><td>I-8 GDPR Article 17 compatibility</td><td>SATISFIED</td><td>The 32-byte SHA-256 Merkle root within the OP_RETURN payload contains no personally identifiable information; receipt-level erasure remains possible at the receipt store layer without affecting the anchor.</td></tr>
+  </tbody>
+</table>
+
+<h3>3.3 — Operational characteristics for EU AI Act use</h3>
+
+<p>Bitcoin OP_RETURN anchoring is suitable for cross-border, cross-jurisdiction Article 50 evidence where the use case prioritizes maximum operational durability, jurisdictional neutrality, and independence from any single state's regulatory authority. Examples include AI-generated content syndicated across multiple Member States, AI system outputs subject to potential cross-border enforcement coordination among national competent authorities, and Article 50 evidence intended to remain verifiable across multi-decade time horizons.</p>
+
+<p>The reference implementation maintained by LedgerProof Foundation operates at an aggregation cadence of one anchor per ten-minute Bitcoin block window, achieving an effective anchor amortization of approximately one anchor record per several thousand receipts at production volumes.</p>
+
+<hr>
+
+<h2 id="alt-impl-ebsi">4 — Alternative implementation: European Blockchain Services Infrastructure (EBSI)</h2>
+
+<h3>4.1 — Substrate identification</h3>
+
+<p>The European Blockchain Services Infrastructure (EBSI), operated by the European Commission and the European Blockchain Partnership Member States, is identified by this specification as the <strong>primary enterprise-government alternative anchor substrate</strong> conforming to the OCPP-AI Anchor Interface.</p>
+
+<p>EBSI operates as a permissioned blockchain network with consensus nodes operated by Member State governments. As of the date of this specification, EBSI conformance with the OCPP-AI Anchor Interface has been evaluated as follows:</p>
+
+<h3>4.2 — Substrate evaluation against the Anchor Interface</h3>
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Status</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>I-1 Immutability</td><td>SATISFIED with conditions</td><td>EBSI consensus is Byzantine-fault-tolerant across Member State operator nodes. Immutability is conditional on the absence of a coalition controlling more than one-third of consensus nodes. This threshold is publicly documented in EBSI governance documents and currently exceeds any plausible coalition size.</td></tr>
+    <tr><td>I-2 Public verifiability without authentication</td><td>SATISFIED for verifier role</td><td>EBSI verifier nodes accept anonymous read queries for published anchor records. Write access (anchor publication) requires accreditation; this asymmetry is consistent with the Anchor Interface requirement that verification specifically be unauthenticated.</td></tr>
+    <tr><td>I-3 Jurisdictional neutrality</td><td>SATISFIED at Union level</td><td>EBSI nodes are operated across all participating Member States and the Commission. No single Member State or non-EU jurisdiction can compel substrate operation. The substrate is sovereign to the Union as a whole; this is the design intent and is appropriate for Article 50 evidence produced by deployers under EU jurisdictional reach.</td></tr>
+    <tr><td>I-4 Demonstrated durability</td><td>UNDER EVALUATION</td><td>EBSI's continuous operational record from initial production deployment to date is approaching the 36-month threshold. The Foundation will publish updated conformance assessment when this threshold is met.</td></tr>
+    <tr><td>I-5 Deterministic anchor resolution</td><td>SATISFIED</td><td>EBSI's block structure provides deterministic resolution of published records by reference.</td></tr>
+    <tr><td>I-6 Bounded anchor payload format</td><td>SATISFIED</td><td>EBSI smart contracts admit fixed-length byte payloads compatible with the 36-byte OCPP-AI anchor payload format.</td></tr>
+    <tr><td>I-7 Anchor payload format</td><td>SATISFIED</td><td>The OCPP-AI 36-byte payload format is published verbatim via an EBSI smart contract conforming to a published interface specification (forthcoming Annex B to this document).</td></tr>
+    <tr><td>I-8 GDPR Article 17 compatibility</td><td>SATISFIED</td><td>The 32-byte SHA-256 Merkle root contains no personally identifiable information; the GDPR posture is identical to the Bitcoin OP_RETURN reference implementation.</td></tr>
+  </tbody>
+</table>
+
+<h3>4.3 — Operational characteristics for EU AI Act use</h3>
+
+<p>EBSI anchoring is suitable for Article 50 evidence where the use case requires Union-sovereign verification, where the deployer is a public-sector entity or operates under a regulatory regime requiring EU-controlled infrastructure, or where Member State competent authorities have indicated a preference for EU-operated anchor substrates in their supervisory practice.</p>
+
+<p>The Foundation will publish a reference EBSI smart contract for OCPP-AI anchor publication as Annex B to this document at the time the I-4 conformance threshold is met.</p>
+
+<hr>
+
+<h2 id="dual">5 — Dual-anchor deployment for sovereign verification</h2>
+
+<p>This specification permits and RECOMMENDS dual-anchor publication: the same receipt batch Merkle root MAY be published as anchor records to both Bitcoin OP_RETURN and EBSI in parallel. Verifiers MAY accept evidence from either anchor; verifiers operated by EU institutions, Member State competent authorities, or notified bodies MAY require evidence from the EBSI anchor as a matter of supervisory policy, while verifiers operated by parties outside the EU regulatory perimeter MAY accept the Bitcoin OP_RETURN anchor.</p>
+
+<p>Dual anchoring is the recommended configuration for deployers subject to EU AI Act Article 50 obligations whose AI system outputs are syndicated across both EU and non-EU jurisdictions, as it satisfies both sovereign verification preferences without requiring the deployer to commit to a single substrate choice.</p>
+
+<hr>
+
+<h2 id="future">6 — Future anchor primitives and conformance evaluation</h2>
+
+<p>The Anchor Interface is explicitly designed to admit additional substrate implementations. Candidate substrates submitted to the Foundation for conformance evaluation are assessed against Sections 2.1 through 2.8 according to a published evaluation procedure. Substrates that satisfy all properties are added to the registry of conforming substrates published at <code>https://spec.ledgerproofhq.io/conforming-substrates</code>.</p>
+
+<p>Substrates that may be evaluated for future inclusion include national-sovereign distributed ledgers operated by individual Member States or the Union, post-quantum-resistant anchor substrates anticipated by OCPP-AI v2.0, and emerging permissionless substrates demonstrating sufficient operational durability.</p>
+
+<hr>
+
+<h2 id="security">7 — Security considerations</h2>
+
+<h3>7.1 — Anchor substrate compromise</h3>
+
+<p>In the event that a conforming anchor substrate ceases to satisfy any property in Sections 2.1 through 2.8, the Foundation will publish a security advisory and update the registry of conforming substrates. Previously-anchored receipts whose anchor records are published to a now-non-conforming substrate remain verifiable using historical substrate state where the historical state itself is still recoverable; this is the case for Bitcoin OP_RETURN historical records regardless of any future Bitcoin substrate state changes.</p>
+
+<h3>7.2 — Dual-anchor consistency</h3>
+
+<p>Where dual anchoring is in use, the same 32-byte Merkle root MUST be published to both substrates. A verifier that observes inconsistent Merkle roots for the same nominal batch identifier across the two anchors MUST treat the receipt batch as unverified and report the inconsistency.</p>
+
+<h3>7.3 — GDPR Article 17 erasure mechanics</h3>
+
+<p>Receipt-level erasure under GDPR Article 17 is performed at the receipt store layer, not at the anchor layer. The anchor is unaffected by receipt erasure; the receipt erasure invalidates the Merkle proof for the specific receipt but does not invalidate proofs for the remaining receipts in the same batch. This separation is essential for GDPR compliance and is a normative architectural commitment of OCPP-AI.</p>
+
+<hr>
+
+<h2 id="references">8 — References</h2>
+
+<p><strong>Normative references:</strong></p>
+<ul>
+  <li>BIP 0011 — M-of-N Standard Transactions, Bitcoin Improvement Proposals</li>
+  <li>BIP 0027 — Embedded merkle path validation, Bitcoin Improvement Proposals</li>
+  <li>EBSI Architecture Reference Framework v3, European Commission DG-DIGIT</li>
+  <li>Regulation (EU) 2024/1689 (Artificial Intelligence Act), Article 50</li>
+  <li>Regulation (EU) 2016/679 (General Data Protection Regulation), Articles 4, 17</li>
+  <li>Regulation (EU) 910/2014 as amended by Regulation (EU) 2024/1183 (eIDAS 2.0), architectural reference framework for trust services</li>
+  <li>RFC 2119 — Key words for use in RFCs</li>
+  <li>RFC 6234 — US Secure Hash Algorithms (SHA-256)</li>
+  <li>RFC 6962 — Certificate Transparency Merkle tree</li>
+  <li>RFC 8174 — Ambiguity of uppercase vs lowercase in RFC 2119 key words</li>
+  <li>RFC 8949 — Concise Binary Object Representation (CBOR), deterministic encoding subset</li>
+</ul>
+
+<p><strong>Informative references:</strong></p>
+<ul>
+  <li><code>draft-dawkins-scitt-ai-article50-00</code> — A SCITT Profile for EU AI Act Article 50 Transparency Receipts (IETF SCITT Working Group)</li>
+  <li>W3C Verifiable Credentials 2.0 Data Model (W3C Recommendation, May 2025)</li>
+  <li>European Interoperability Framework (EIF) v2.0, European Commission</li>
+</ul>
+
+</body>
+</html>
