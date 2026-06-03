@@ -65,6 +65,12 @@ export default defineConfig({
           ],
         },
         {
+          label: "Foundation",
+          items: [
+            { label: "Status, governance, transparency", link: "/foundation/" },
+          ],
+        },
+        {
           label: "Security",
           items: [
             { label: "Disclosure policy", link: "/security/disclosure/" },
