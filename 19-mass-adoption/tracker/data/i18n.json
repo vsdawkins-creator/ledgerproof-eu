@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "languages": ["en", "de", "fr", "it", "es", "nl", "pl"],
+  "default": "en",
+  "strings": {
+    "site_title": {
+      "en": "EU AI Act Article 50 Compliance Tracker",
+      "de": "EU-KI-Verordnung Artikel 50 Compliance-Tracker",
+      "fr": "Tracker de conformité Article 50 — Loi européenne sur l'IA",
+      "it": "Tracker di conformità Articolo 50 — Regolamento UE sull'IA",
+      "es": "Rastreador de cumplimiento del Artículo 50 — Ley de IA de la UE",
+      "nl": "EU AI-verordening Artikel 50 Compliance-tracker",
+      "pl": "Tracker zgodności z Art. 50 unijnego aktu o sztucznej inteligencji"
+    },
+    "tagline": {
+      "en": "Open, weekly assessment of major European enterprises against the transparency obligations of EU AI Act Article 50. Updated every Monday by the LedgerProof Foundation.",
+      "de": "Offene, wöchentliche Bewertung großer europäischer Unternehmen anhand der Transparenzpflichten von Artikel 50 der EU-KI-Verordnung. Jeden Montag aktualisiert von der LedgerProof Foundation.",
+      "fr": "Évaluation hebdomadaire et ouverte des grandes entreprises européennes au regard des obligations de transparence de l'article 50 de la loi européenne sur l'IA. Mise à jour chaque lundi par la LedgerProof Foundation.",
+      "it": "Valutazione settimanale e aperta delle principali imprese europee rispetto agli obblighi di trasparenza dell'Articolo 50 del Regolamento UE sull'IA. Aggiornata ogni lunedì dalla LedgerProof Foundation.",
+      "es": "Evaluación semanal y abierta de las principales empresas europeas frente a las obligaciones de transparencia del Artículo 50 de la Ley de IA de la UE. Actualizada cada lunes por la LedgerProof Foundation.",
+      "nl": "Open, wekelijkse beoordeling van grote Europese ondernemingen aan de hand van de transparantieverplichtingen van Artikel 50 van de EU AI-verordening. Elke maandag bijgewerkt door de LedgerProof Foundation.",
+      "pl": "Otwarta, cotygodniowa ocena dużych europejskich przedsiębiorstw pod kątem obowiązków przejrzystości wynikających z Art. 50 unijnego aktu o sztucznej inteligencji. Aktualizowana w każdy poniedziałek przez LedgerProof Foundation."
+    },
+    "enforcement_date_label": {
+      "en": "Article 50 applicability date",
+      "de": "Geltungsbeginn von Artikel 50",
+      "fr": "Date d'applicabilité de l'article 50",
+      "it": "Data di applicabilità dell'Articolo 50",
+      "es": "Fecha de aplicabilidad del Artículo 50",
+      "nl": "Datum van toepasselijkheid van Artikel 50",
+      "pl": "Data rozpoczęcia stosowania Art. 50"
+    },
+    "days_remaining": {
+      "en": "days until applicability",
+      "de": "Tage bis zur Geltung",
+      "fr": "jours avant applicabilité",
+      "it": "giorni all'applicabilità",
+      "es": "días hasta la aplicabilidad",
+      "nl": "dagen tot toepasselijkheid",
+      "pl": "dni do rozpoczęcia stosowania"
+    },
+    "header_company": {
+      "en": "Company",
+      "de": "Unternehmen",
+      "fr": "Entreprise",
+      "it": "Azienda",
+      "es": "Empresa",
+      "nl": "Onderneming",
+      "pl": "Firma"
+    },
+    "header_country": {
+      "en": "Headquarters",
+      "de": "Hauptsitz",
+      "fr": "Siège",
+      "it": "Sede",
+      "es": "Sede",
+      "nl": "Hoofdkantoor",
+      "pl": "Siedziba"
+    },
+    "header_industry": {
+      "en": "Industry",
+      "de": "Branche",
+      "fr": "Secteur",
+      "it": "Settore",
+      "es": "Sector",
+      "nl": "Sector",
+      "pl": "Branża"
+    },
+    "header_50_1": {
+      "en": "50(1) Direct disclosure",
+      "de": "50(1) Direkte Offenlegung",
+      "fr": "50(1) Divulgation directe",
+      "it": "50(1) Divulgazione diretta",
+      "es": "50(1) Divulgación directa",
+      "nl": "50(1) Directe openbaarmaking",
+      "pl": "50(1) Bezpośrednie ujawnienie"
+    },
+    "header_50_2": {
+      "en": "50(2) Synthetic content marking",
+      "de": "50(2) Kennzeichnung synthetischer Inhalte",
+      "fr": "50(2) Marquage des contenus synthétiques",
+      "it": "50(2) Marcatura contenuti sintetici",
+      "es": "50(2) Marcado de contenido sintético",
+      "nl": "50(2) Markering van synthetische inhoud",
+      "pl": "50(2) Oznaczanie treści syntetycznych"
+    },
+    "header_50_4": {
+      "en": "50(4) AI-generated text disclosure",
+      "de": "50(4) Offenlegung KI-generierter Texte",
+      "fr": "50(4) Divulgation des textes générés par IA",
+      "it": "50(4) Divulgazione testi generati da IA",
+      "es": "50(4) Divulgación de texto generado por IA",
+      "nl": "50(4) Openbaarmaking van AI-gegenereerde tekst",
+      "pl": "50(4) Ujawnienie tekstów wygenerowanych przez SI"
+    },
+    "header_50_6": {
+      "en": "50(6) Clear & distinguishable",
+      "de": "50(6) Klar & unterscheidbar",
+      "fr": "50(6) Clair & distinguable",
+      "it": "50(6) Chiaro e distinguibile",
+      "es": "50(6) Claro y distinguible",
+      "nl": "50(6) Duidelijk & onderscheidbaar",
+      "pl": "50(6) Wyraźne i wyróżnialne"
+    },
+    "header_exposure": {
+      "en": "Exposure",
+      "de": "Risiko",
+      "fr": "Exposition",
+      "it": "Esposizione",
+      "es": "Exposición",
+      "nl": "Blootstelling",
+      "pl": "Ekspozycja"
+    },
+    "exposure_low": {
+      "en": "Low",
+      "de": "Niedrig",
+      "fr": "Faible",
+      "it": "Bassa",
+      "es": "Baja",
+      "nl": "Laag",
+      "pl": "Niska"
+    },
+    "exposure_moderate": {
+      "en": "Moderate",
+      "de": "Mittel",
+      "fr": "Modérée",
+      "it": "Moderata",
+      "es": "Moderada",
+      "nl": "Gemiddeld",
+      "pl": "Średnia"
+    },
+    "exposure_high": {
+      "en": "High",
+      "de": "Hoch",
+      "fr": "Élevée",
+      "it": "Alta",
+      "es": "Alta",
+      "nl": "Hoog",
+      "pl": "Wysoka"
+    },
+    "exposure_critical": {
+      "en": "Critical",
+      "de": "Kritisch",
+      "fr": "Critique",
+      "it": "Critica",
+      "es": "Crítica",
+      "nl": "Kritiek",
+      "pl": "Krytyczna"
+    },
+    "methodology_link": {
+      "en": "Read scoring methodology →",
+      "de": "Bewertungsmethodik lesen →",
+      "fr": "Lire la méthodologie de notation →",
+      "it": "Leggi la metodologia di valutazione →",
+      "es": "Leer la metodología de puntuación →",
+      "nl": "Lees de scoringmethodologie →",
+      "pl": "Przeczytaj metodologię oceniania →"
+    },
+    "footer_credit": {
+      "en": "Maintained by the LedgerProof Foundation (in formation). Scores reflect publicly verifiable evidence as of the last assessment date. Companies wishing to provide additional evidence may contact the Foundation.",
+      "de": "Gepflegt von der LedgerProof Foundation (in Gründung). Die Bewertungen spiegeln öffentlich überprüfbare Belege zum letzten Bewertungsdatum wider. Unternehmen, die zusätzliche Belege bereitstellen möchten, können sich an die Foundation wenden.",
+      "fr": "Maintenu par la LedgerProof Foundation (en formation). Les notes reflètent les éléments publiquement vérifiables à la date de la dernière évaluation. Les entreprises souhaitant fournir des éléments supplémentaires peuvent contacter la Foundation.",
+      "it": "Gestito dalla LedgerProof Foundation (in formazione). I punteggi riflettono le evidenze pubblicamente verificabili alla data dell'ultima valutazione. Le aziende che desiderano fornire ulteriori evidenze possono contattare la Foundation.",
+      "es": "Mantenido por la LedgerProof Foundation (en formación). Las puntuaciones reflejan evidencias públicamente verificables hasta la fecha de la última evaluación. Las empresas que deseen aportar evidencias adicionales pueden contactar a la Foundation.",
+      "nl": "Onderhouden door de LedgerProof Foundation (in oprichting). De scores weerspiegelen publiek verifieerbaar bewijs op de datum van de laatste beoordeling. Bedrijven die aanvullend bewijs willen aanleveren, kunnen contact opnemen met de Foundation.",
+      "pl": "Prowadzone przez LedgerProof Foundation (w organizacji). Wyniki odzwierciedlają publicznie weryfikowalne dowody na dzień ostatniej oceny. Firmy, które chcą dostarczyć dodatkowe dowody, mogą skontaktować się z Foundation."
+    },
+    "industry_enterprise_software": {
+      "en": "Enterprise software", "de": "Unternehmenssoftware", "fr": "Logiciels d'entreprise", "it": "Software aziendale", "es": "Software empresarial", "nl": "Bedrijfssoftware", "pl": "Oprogramowanie dla przedsiębiorstw"
+    },
+    "industry_banking": {
+      "en": "Banking", "de": "Bankwesen", "fr": "Banque", "it": "Settore bancario", "es": "Banca", "nl": "Bankwezen", "pl": "Bankowość"
+    },
+    "industry_consumer_finance": {
+      "en": "Consumer finance", "de": "Verbraucherfinanzdienstleistungen", "fr": "Finance grand public", "it": "Credito al consumo", "es": "Finanzas al consumo", "nl": "Consumentenfinanciering", "pl": "Finanse konsumenckie"
+    },
+    "industry_payments": {
+      "en": "Payments", "de": "Zahlungsverkehr", "fr": "Paiements", "it": "Pagamenti", "es": "Pagos", "nl": "Betalingen", "pl": "Płatności"
+    },
+    "industry_insurance": {
+      "en": "Insurance", "de": "Versicherungen", "fr": "Assurance", "it": "Assicurazioni", "es": "Seguros", "nl": "Verzekeringen", "pl": "Ubezpieczenia"
+    },
+    "industry_automotive": {
+      "en": "Automotive", "de": "Automobilindustrie", "fr": "Automobile", "it": "Automotive", "es": "Automoción", "nl": "Automobielindustrie", "pl": "Motoryzacja"
+    },
+    "industry_media": {
+      "en": "Media", "de": "Medien", "fr": "Médias", "it": "Media", "es": "Medios", "nl": "Media", "pl": "Media"
+    },
+    "industry_telecommunications": {
+      "en": "Telecommunications", "de": "Telekommunikation", "fr": "Télécommunications", "it": "Telecomunicazioni", "es": "Telecomunicaciones", "nl": "Telecommunicatie", "pl": "Telekomunikacja"
+    }
+  }
+}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EU AI Act Article 50 Compliance Tracker — LedgerProof Foundation</title>
+<meta name="description" content="Open weekly assessment of major European enterprises against EU AI Act Article 50 transparency obligations. Updated every Monday by the LedgerProof Foundation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root {
+    --brand-dark: #0b3d2e;
+    --brand-amber: #f59e0b;
+    --brand-amber-light: #fbbf24;
+    --text: #1a1a1a;
+    --text-muted: #4b5563;
+    --bg-page: #ffffff;
+    --bg-soft: #f9fafb;
+    --bg-card: #ffffff;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --critical: #b91c1c;
+    --high: #d97706;
+    --moderate: #ca8a04;
+    --low: #15803d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg-page);
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  .topbar {
+    background: var(--brand-dark);
+    color: var(--brand-amber-light);
+    padding: 0.8em 1.4em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.92em;
+    flex-wrap: wrap;
+    gap: 0.7em;
+  }
+  .topbar-brand {
+    display: flex; align-items: center; gap: 0.6em;
+    color: var(--brand-amber-light);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .topbar-brand-mark {
+    width: 28px; height: 28px;
+    background: var(--brand-amber);
+    color: var(--brand-dark);
+    font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+    letter-spacing: -0.5px;
+  }
+  .lang-switcher {
+    display: flex; gap: 0.3em; align-items: center;
+  }
+  .lang-switcher button {
+    background: transparent;
+    color: var(--brand-amber-light);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    padding: 0.25em 0.55em;
+    border-radius: 3px;
+    font-size: 0.85em;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .lang-switcher button:hover, .lang-switcher button.active {
+    background: var(--brand-amber);
+    color: var(--brand-dark);
+    border-color: var(--brand-amber);
+  }
+  header.hero {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, #0d4a37 100%);
+    color: #fff;
+    padding: 2.5em 1.4em 2em;
+    text-align: center;
+  }
+  .hero h1 {
+    margin: 0 0 0.4em;
+    font-size: clamp(1.5em, 4vw, 2.3em);
+    line-height: 1.15;
+    color: #fff;
+  }
+  .hero .tagline {
+    margin: 0 auto 1.5em;
+    max-width: 720px;
+    color: rgba(255,255,255,0.85);
+    font-size: 1.02em;
+  }
+  .countdown {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.9em 2em;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--brand-amber);
+    border-radius: 6px;
+  }
+  .countdown-label {
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--brand-amber-light);
+    margin-bottom: 0.2em;
+  }
+  .countdown-value {
+    font-size: 2.4em;
+    font-weight: 800;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .countdown-unit {
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.3em;
+  }
+  .countdown-date {
+    font-size: 0.78em;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.5em;
+  }
+  main { max-width: 1280px; margin: 0 auto; padding: 1.8em 1em; }
+  .legend {
+    display: flex; gap: 0.7em; flex-wrap: wrap; margin: 0 0 1.4em; font-size: 0.85em; align-items: center;
+  }
+  .legend-label { color: var(--text-muted); font-weight: 600; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.35em;
+    padding: 0.18em 0.55em;
+    border-radius: 3px;
+    font-size: 0.82em;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .badge-low { background: var(--low); }
+  .badge-moderate { background: var(--moderate); }
+  .badge-high { background: var(--high); }
+  .badge-critical { background: var(--critical); }
+  .tracker-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 0.93em;
+  }
+  .tracker-table thead th {
+    background: var(--brand-dark);
+    color: var(--brand-amber-light);
+    text-align: left;
+    padding: 0.7em 0.8em;
+    font-weight: 600;
+    border-bottom: 2px solid var(--brand-amber);
+    font-size: 0.82em;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .tracker-table thead th.center { text-align: center; }
+  .tracker-table tbody td {
+    padding: 0.7em 0.8em;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .tracker-table tbody tr:nth-child(even) { background: var(--bg-soft); }
+  .tracker-table tbody tr:hover { background: #fef3c7; }
+  .company-name { font-weight: 600; color: var(--text); }
+  .company-id { font-size: 0.8em; color: var(--text-muted); font-family: 'SF Mono', Menlo, monospace; }
+  .country-flag {
+    display: inline-block;
+    padding: 0.15em 0.5em;
+    background: var(--border);
+    border-radius: 3px;
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: 'SF Mono', Menlo, monospace;
+  }
+  .industry-label {
+    font-size: 0.9em; color: var(--text-muted);
+  }
+  .score-cell { text-align: center; }
+  .score-bar {
+    display: inline-flex;
+    gap: 1px;
+    align-items: center;
+  }
+  .score-pip {
+    width: 14px;
+    height: 22px;
+    border-radius: 2px;
+    background: var(--border);
+  }
+  .score-pip.filled-0 { background: var(--critical); }
+  .score-pip.filled-1 { background: var(--critical); }
+  .score-pip.filled-2 { background: var(--high); }
+  .score-pip.filled-3 { background: var(--moderate); }
+  .score-pip.filled-4 { background: var(--low); }
+  .score-pip.filled-5 { background: var(--low); }
+  .score-value {
+    margin-left: 0.4em;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .footer-note {
+    margin-top: 2em;
+    padding: 1.3em;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--brand-dark);
+    color: var(--text-muted);
+    font-size: 0.9em;
+    border-radius: 0 3px 3px 0;
+  }
+  .footer-note a { color: var(--brand-dark); font-weight: 600; }
+  .methodology-link {
+    display: inline-block;
+    margin: 0.7em 0 0;
+    padding: 0.4em 0.9em;
+    background: var(--brand-dark);
+    color: var(--brand-amber-light);
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-weight: 600;
+  }
+  .methodology-link:hover { background: var(--brand-amber); color: var(--brand-dark); }
+  .assessment-date {
+    margin: 0 0 1em;
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+  @media (max-width: 720px) {
+    .tracker-table { font-size: 0.85em; }
+    .tracker-table thead th { padding: 0.5em 0.4em; font-size: 0.72em; }
+    .tracker-table tbody td { padding: 0.5em 0.4em; }
+    .score-pip { width: 10px; height: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="topbar-brand" href="https://ledgerproofhq.io">
+    <span class="topbar-brand-mark">LP</span>
+    <span>LedgerProof Foundation</span>
+  </a>
+  <div class="lang-switcher" id="lang-switcher">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="de">DE</button>
+    <button data-lang="fr">FR</button>
+    <button data-lang="it">IT</button>
+    <button data-lang="es">ES</button>
+    <button data-lang="nl">NL</button>
+    <button data-lang="pl">PL</button>
+  </div>
+</div>
+
+<header class="hero">
+  <h1 data-i18n="site_title">EU AI Act Article 50 Compliance Tracker</h1>
+  <p class="tagline" data-i18n="tagline">Open, weekly assessment of major European enterprises against the transparency obligations of EU AI Act Article 50. Updated every Monday by the LedgerProof Foundation.</p>
+
+  <div class="countdown">
+    <div class="countdown-label" data-i18n="enforcement_date_label">Article 50 applicability date</div>
+    <div class="countdown-value" id="countdown-value">—</div>
+    <div class="countdown-unit" data-i18n="days_remaining">days until applicability</div>
+    <div class="countdown-date">2 August 2026</div>
+  </div>
+</header>
+
+<main>
+  <p class="assessment-date">Last assessed: <strong id="assessment-date">—</strong></p>
+
+  <div class="legend">
+    <span class="legend-label">Exposure bands:</span>
+    <span class="badge badge-low" data-i18n="exposure_low">Low</span>
+    <span class="badge badge-moderate" data-i18n="exposure_moderate">Moderate</span>
+    <span class="badge badge-high" data-i18n="exposure_high">High</span>
+    <span class="badge badge-critical" data-i18n="exposure_critical">Critical</span>
+  </div>
+
+  <table class="tracker-table">
+    <thead>
+      <tr>
+        <th data-i18n="header_company">Company</th>
+        <th data-i18n="header_country">HQ</th>
+        <th data-i18n="header_industry">Industry</th>
+        <th class="center" data-i18n="header_50_1">50(1) Direct disclosure</th>
+        <th class="center" data-i18n="header_50_2">50(2) Synthetic content marking</th>
+        <th class="center" data-i18n="header_50_4">50(4) AI-generated text disclosure</th>
+        <th class="center" data-i18n="header_50_6">50(6) Clear & distinguishable</th>
+        <th class="center" data-i18n="header_exposure">Exposure</th>
+      </tr>
+    </thead>
+    <tbody id="tracker-body">
+      <!-- rows injected by JS -->
+    </tbody>
+  </table>
+
+  <div class="footer-note">
+    <p id="footer-credit" data-i18n="footer_credit">Maintained by the LedgerProof Foundation (in formation). Scores reflect publicly verifiable evidence as of the last assessment date. Companies wishing to provide additional evidence may contact the Foundation.</p>
+    <a class="methodology-link" href="/methodology/" data-i18n="methodology_link">Read scoring methodology →</a>
+  </div>
+</main>
+
+<script>
+let i18n = null;
+let companies = null;
+let currentLang = 'en';
+
+// load both data files
+Promise.all([
+  fetch('./data/i18n.json').then(r => r.json()),
+  fetch('./data/companies.json').then(r => r.json())
+]).then(([i18nData, companyData]) => {
+  i18n = i18nData;
+  companies = companyData;
+  document.getElementById('assessment-date').textContent = companyData.last_assessed;
+  renderTable();
+  applyI18n(currentLang);
+  startCountdown();
+});
+
+function t(key, lang) {
+  if (!i18n || !i18n.strings[key]) return key;
+  return i18n.strings[key][lang] || i18n.strings[key][i18n.default] || key;
+}
+
+function applyI18n(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key, lang);
+  });
+  // also re-render table for industry translation
+  renderTable();
+  // active button
+  document.querySelectorAll('.lang-switcher button').forEach(b =>
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang)
+  );
+}
+
+function renderTable() {
+  if (!companies) return;
+  const body = document.getElementById('tracker-body');
+  body.innerHTML = '';
+  // sort by exposure (critical → high → moderate → low) then by overall_score asc
+  const exposureRank = { critical: 4, high: 3, moderate: 2, low: 1 };
+  const sorted = [...companies.companies].sort((a, b) =>
+    (exposureRank[b.overall_exposure_band] || 0) - (exposureRank[a.overall_exposure_band] || 0)
+  );
+
+  for (const c of sorted) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="company-name">${c.legal_name}</div>
+        <div class="company-id">${c.id} · LEI ${c.lei.substring(0, 8)}…</div>
+      </td>
+      <td><span class="country-flag">${c.headquarters_country}</span></td>
+      <td><span class="industry-label">${t('industry_' + c.industry, currentLang)}</span></td>
+      <td class="score-cell">${renderScoreBar(c.scores.article_50_1)}</td>
+      <td class="score-cell">${renderScoreBar(c.scores.article_50_2)}</td>
+      <td class="score-cell">${renderScoreBar(c.scores.article_50_4)}</td>
+      <td class="score-cell">${renderScoreBar(c.scores.article_50_6)}</td>
+      <td class="score-cell"><span class="badge badge-${c.overall_exposure_band}">${t('exposure_' + c.overall_exposure_band, currentLang)}</span></td>
+    `;
+    body.appendChild(tr);
+  }
+}
+
+function renderScoreBar(score) {
+  let html = '<div class="score-bar">';
+  for (let i = 0; i < 5; i++) {
+    const cls = (i < score) ? `filled-${score}` : '';
+    html += `<span class="score-pip ${cls}"></span>`;
+  }
+  html += `<span class="score-value">${score}/5</span></div>`;
+  return html;
+}
+
+function startCountdown() {
+  const target = new Date('2026-08-02T00:00:00+02:00').getTime();
+  function tick() {
+    const now = Date.now();
+    const ms = target - now;
+    const days = Math.max(0, Math.floor(ms / (1000 * 60 * 60 * 24)));
+    document.getElementById('countdown-value').textContent = days;
+  }
+  tick();
+  setInterval(tick, 60000); // every minute is fine for day-granularity
+}
+
+document.getElementById('lang-switcher').addEventListener('click', e => {
+  if (e.target.tagName === 'BUTTON') {
+    const lang = e.target.getAttribute('data-lang');
+    applyI18n(lang);
+  }
+});
+</script>
+
+</body>
+</html>

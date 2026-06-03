@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LedgerProof — Will your enterprise partners drop your AI integration on August 2?</title>
+<meta name="description" content="Test your Article 50 compliance footprint instantly. The EU AI Act applies on 2 August 2026. Open cryptographic provenance protocol from the LedgerProof Foundation.">
+<style>
+  :root {
+    --brand-dark: #0b3d2e;
+    --brand-dark-2: #0d4a37;
+    --brand-amber: #f59e0b;
+    --brand-amber-light: #fbbf24;
+    --critical: #b91c1c;
+    --critical-dark: #7f1d1d;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --text-inverse: #ffffff;
+    --bg-page: #ffffff;
+    --bg-soft: #f8fafc;
+    --bg-fear: linear-gradient(135deg, #0b1410 0%, #1f0808 100%);
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg-page);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+
+  /* ── topbar ── */
+  nav.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9em 1.6em;
+    background: #000;
+    color: #fff;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 0.7em;
+    color: #fff; text-decoration: none; font-weight: 700;
+  }
+  .nav-brand-mark {
+    width: 32px; height: 32px;
+    background: var(--brand-amber); color: var(--brand-dark);
+    font-weight: 800; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+    letter-spacing: -0.5px;
+  }
+  .nav-links {
+    display: flex; gap: 1.6em; align-items: center;
+    font-size: 0.92em;
+  }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; }
+  .nav-links a:hover { color: var(--brand-amber-light); }
+  .nav-lang {
+    background: transparent; border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.75); padding: 0.3em 0.7em; border-radius: 3px;
+    font-size: 0.85em; cursor: pointer; font-family: inherit;
+  }
+
+  /* ── hero (fear-led) ── */
+  header.hero {
+    background: var(--bg-fear);
+    color: var(--text-inverse);
+    padding: 2.5em 1.5em 3em;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(185, 28, 28, 0.12) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 920px; margin: 0 auto; }
+
+  .countdown-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.3em;
+    padding: 1em 2em;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid var(--brand-amber);
+    border-radius: 6px;
+    margin-bottom: 2em;
+  }
+  .countdown-block {
+    text-align: center;
+  }
+  .countdown-num {
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--brand-amber-light);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+  }
+  .countdown-label {
+    font-size: 0.72em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.2em;
+  }
+  .countdown-separator {
+    width: 1px;
+    height: 50px;
+    background: rgba(251, 191, 36, 0.3);
+  }
+  .countdown-context {
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.85);
+    max-width: 200px;
+    text-align: left;
+    line-height: 1.45;
+  }
+  .countdown-context strong { color: var(--brand-amber-light); }
+
+  .hero h1 {
+    font-size: clamp(1.7em, 4.5vw, 2.8em);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 0.6em;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .hero h1 .accent { color: var(--brand-amber); }
+  .hero-sub {
+    font-size: clamp(1em, 1.7vw, 1.2em);
+    color: rgba(255,255,255,0.82);
+    max-width: 720px;
+    margin: 0 auto 2em;
+    text-wrap: balance;
+  }
+
+  /* ── CTA form ── */
+  .cta-form {
+    max-width: 640px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 1.4em;
+    backdrop-filter: blur(8px);
+  }
+  .cta-form-label {
+    font-size: 0.92em;
+    color: var(--brand-amber-light);
+    font-weight: 600;
+    margin-bottom: 0.7em;
+    text-align: left;
+  }
+  .cta-input-group {
+    display: flex; gap: 0.6em;
+    flex-wrap: wrap;
+  }
+  .cta-input {
+    flex: 1; min-width: 240px;
+    padding: 0.85em 1em;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: inherit;
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.4); }
+  .cta-input:focus {
+    outline: none;
+    border-color: var(--brand-amber);
+    background: rgba(0,0,0,0.6);
+  }
+  .cta-button {
+    background: var(--brand-amber);
+    color: #000;
+    border: none;
+    padding: 0.85em 1.6em;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.15s;
+  }
+  .cta-button:hover { background: #fbbf24; }
+  .cta-disclaimer {
+    margin-top: 0.7em;
+    font-size: 0.78em;
+    color: rgba(255,255,255,0.5);
+    text-align: left;
+  }
+  .cta-secondary {
+    margin-top: 0.7em;
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.65);
+  }
+  .cta-secondary a { color: var(--brand-amber-light); }
+
+  /* ── exposure preview band ── */
+  .exposure-band {
+    background: var(--bg-soft);
+    padding: 2.2em 1.5em;
+    border-top: 4px solid var(--brand-amber);
+  }
+  .exposure-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .exposure-eyebrow {
+    color: var(--critical);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.4em;
+  }
+  .exposure-title {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: var(--brand-dark);
+    margin: 0 0 0.5em;
+  }
+  .exposure-subtitle {
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto 1.6em;
+  }
+  .exposure-preview {
+    display: flex;
+    gap: 0.7em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.4em;
+  }
+  .exposure-chip {
+    display: flex; align-items: center; gap: 0.5em;
+    padding: 0.5em 0.9em;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.88em;
+    color: var(--text);
+  }
+  .exposure-chip-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--critical);
+  }
+  .exposure-chip-dot.high { background: #d97706; }
+  .exposure-chip-name { font-weight: 600; }
+  .exposure-cta {
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    background: var(--brand-dark);
+    color: var(--brand-amber-light);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .exposure-cta:hover { background: var(--brand-dark-2); }
+
+  /* ── three-up value props ── */
+  .value-props {
+    padding: 3em 1.5em;
+    background: #fff;
+  }
+  .value-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.4em;
+  }
+  .value-card {
+    padding: 1.4em;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-soft);
+  }
+  .value-card h3 {
+    margin: 0 0 0.5em;
+    color: var(--brand-dark);
+    font-size: 1.1em;
+  }
+  .value-card p { margin: 0; color: var(--text-muted); font-size: 0.95em; }
+
+  /* ── credibility band ── */
+  .credibility {
+    background: var(--brand-dark);
+    color: #fff;
+    padding: 2.2em 1.5em;
+    text-align: center;
+  }
+  .credibility-inner { max-width: 920px; margin: 0 auto; }
+  .credibility h2 {
+    margin: 0 0 1em;
+    font-size: 1.2em;
+    color: var(--brand-amber-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .credibility-list {
+    display: flex; gap: 1.6em; flex-wrap: wrap; justify-content: center;
+    font-size: 0.92em;
+    color: rgba(255,255,255,0.85);
+  }
+  .credibility-list a { color: var(--brand-amber-light); text-decoration: none; }
+
+  /* ── footer ── */
+  footer.site-footer {
+    background: #000;
+    color: rgba(255,255,255,0.6);
+    padding: 1.8em 1.5em;
+    text-align: center;
+    font-size: 0.85em;
+  }
+  footer.site-footer a { color: var(--brand-amber-light); }
+
+  @media (max-width: 720px) {
+    .countdown-bar { flex-direction: column; gap: 0.7em; padding: 0.9em 1.2em; }
+    .countdown-separator { width: 100px; height: 1px; }
+    .countdown-context { text-align: center; }
+    .hero h1 { font-size: 1.5em; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="nav-brand" href="/">
+    <span class="nav-brand-mark">LP</span>
+    <span>LedgerProof</span>
+  </a>
+  <div class="nav-links">
+    <a href="/compliance/">Tracker</a>
+    <a href="/docs/">Docs</a>
+    <a href="/foundation/">Foundation</a>
+    <a href="/security/">Security</a>
+    <button class="nav-lang">EN ▾</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="countdown-bar">
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-days">—</div>
+        <div class="countdown-label">days</div>
+      </div>
+      <div class="countdown-separator"></div>
+      <div class="countdown-context">
+        until <strong>EU AI Act Article 50</strong> becomes legally enforceable on <strong>2 August 2026</strong>
+      </div>
+    </div>
+
+    <h1>Will your enterprise partners <span class="accent">drop your AI integration</span> on August 2?</h1>
+
+    <p class="hero-sub">
+      The EU AI Act Article 50 transparency obligations apply on 2 August 2026. Procurement teams across European banks, insurers, payment processors, and Fortune 500 vendors are auditing their AI suppliers <em>now</em>. If your integration cannot produce machine-readable Article 50 evidence, you are at material risk of being removed from approved-vendor lists before enforcement begins.
+    </p>
+
+    <form class="cta-form" id="cta-form" onsubmit="return submitExposureCheck(event)">
+      <div class="cta-form-label">Test your Article 50 exposure instantly — no signup required</div>
+      <div class="cta-input-group">
+        <input type="url" class="cta-input" id="cta-url"
+          placeholder="https://your-company.com or your AI API endpoint"
+          required
+          autocomplete="url">
+        <button type="submit" class="cta-button">Run exposure check →</button>
+      </div>
+      <div class="cta-disclaimer">
+        We analyze your public-facing endpoint against the four sub-obligations of Article 50. Report ready in &lt;30 seconds. No data leaves your control without explicit consent.
+      </div>
+      <div class="cta-secondary">
+        Or browse the public <a href="/compliance/">Compliance Tracker</a> covering 100+ major European enterprises.
+      </div>
+    </form>
+  </div>
+</header>
+
+<section class="exposure-band">
+  <div class="exposure-inner">
+    <div class="exposure-eyebrow">Most-exposed Fortune Europe this week</div>
+    <h2 class="exposure-title">10 publicly-listed European enterprises currently rated <span style="color: var(--critical)">Critical</span> or <span style="color: #d97706;">High</span> exposure</h2>
+    <p class="exposure-subtitle">
+      Updated every Monday by the LedgerProof Foundation against publicly-verifiable Article 50 disclosure evidence. Scoring rubric and methodology fully published.
+    </p>
+
+    <div class="exposure-preview">
+      <div class="exposure-chip"><span class="exposure-chip-dot"></span><span class="exposure-chip-name">Deutsche Bank AG</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">SAP SE</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">Adyen N.V.</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">ING Groep N.V.</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">Allianz SE</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">Volkswagen AG</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">Spotify Technology S.A.</span></div>
+      <div class="exposure-chip"><span class="exposure-chip-dot high"></span><span class="exposure-chip-name">Telefónica S.A.</span></div>
+    </div>
+
+    <a class="exposure-cta" href="/compliance/">See the full Compliance Tracker →</a>
+  </div>
+</section>
+
+<section class="value-props">
+  <div class="value-inner">
+    <div class="value-grid">
+      <div class="value-card">
+        <h3>Open specification, no vendor lock-in</h3>
+        <p>OCPP-AI is published under CC BY 4.0. The reference implementation is Apache 2.0. Twenty-nine framework adapters (LangChain, OpenAI SDK, Anthropic, Mistral, and more) ship today. Architecturally compatible with W3C Verifiable Credentials 2.0 and eIDAS 2.0.</p>
+      </div>
+      <div class="value-card">
+        <h3>Substrate-agnostic, EU-sovereign-ready</h3>
+        <p>Receipt Merkle roots anchor to public, immutable substrates satisfying our published Anchor Interface. Current reference implementation: Bitcoin OP_RETURN. Primary alternative: European Blockchain Services Infrastructure (EBSI). Dual-anchor deployment recommended for EU-jurisdictional deployers.</p>
+      </div>
+      <div class="value-card">
+        <h3>GDPR-compatible by structure</h3>
+        <p>Schema validation rejects personal data at the receipt layer. The 36-byte anchor payload carries no recoverable PII. Receipt-level Article 17 erasure is independent of the anchor. Verifier requires no SaaS dependency — only Bitcoin chain + public key + receipt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="credibility">
+  <div class="credibility-inner">
+    <h2>Maintained by the LedgerProof Foundation (in formation)</h2>
+    <div class="credibility-list">
+      <span>IETF SCITT Working Group: <a href="https://datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/">draft-dawkins-scitt-ai-article50-00</a></span>
+      <span>EU AI Office consultation: <a href="/foundation/governance/">filed 2 June 2026</a></span>
+      <span>Specification: <a href="https://spec.ledgerproofhq.io/ocpp-ai-v1.html">spec.ledgerproofhq.io</a></span>
+      <span>Source: <a href="https://github.com/ledgerproof">github.com/ledgerproof</a></span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2026 LedgerProof Foundation (in formation). Specification published under CC BY 4.0. Reference implementations under Apache License 2.0.</p>
+  <p>
+    <a href="/foundation/">About the Foundation</a> ·
+    <a href="/security/">Security disclosure</a> ·
+    <a href="/legal/">Legal</a> ·
+    <a href="/press/">Press</a>
+  </p>
+</footer>
+
+<script>
+function startCountdown() {
+  const target = new Date('2026-08-02T00:00:00+02:00').getTime();
+  function tick() {
+    const now = Date.now();
+    const ms = target - now;
+    const days = Math.max(0, Math.floor(ms / (1000 * 60 * 60 * 24)));
+    document.getElementById('cd-days').textContent = days;
+  }
+  tick();
+  setInterval(tick, 60000);
+}
+startCountdown();
+
+function submitExposureCheck(e) {
+  e.preventDefault();
+  const url = document.getElementById('cta-url').value;
+  // STUB — wire to actual self-assessment tool endpoint in T2.3
+  alert('Exposure check coming soon. URL captured: ' + url + '\n\n(In production this will redirect to compliance.ledgerproofhq.io/check?url=...)');
+  return false;
+}
+</script>
+
+</body>
+</html>

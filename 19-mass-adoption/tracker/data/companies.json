@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "last_assessed": "2026-06-03",
+  "methodology_url": "/methodology/",
+  "scoring_rubric": {
+    "0": "No evidence of disclosure infrastructure for this sub-obligation",
+    "1": "Acknowledgment of AI use somewhere in public materials, no specific Article 50 mechanism",
+    "2": "Generic AI-use notice present, not consistently applied at the point of interaction",
+    "3": "Sub-obligation-specific disclosure mechanism present but incomplete",
+    "4": "Sub-obligation-specific disclosure mechanism present and consistently applied",
+    "5": "Machine-readable cryptographic evidence in conformance with an open standard"
+  },
+  "evidence_types": [
+    "privacy_notice",
+    "ai_acceptable_use_policy",
+    "chatbot_disclosure_screenshot",
+    "synthetic_content_marking",
+    "investor_disclosure",
+    "regulatory_filing"
+  ],
+  "companies": [
+    {
+      "id": "sap-se",
+      "legal_name": "SAP SE",
+      "lei": "529900D6BF99LW9F1E32",
+      "headquarters_country": "DE",
+      "industry": "enterprise_software",
+      "ai_systems_in_scope_examples": ["Joule (Copilot for SAP)", "SAP AI Foundation"],
+      "scores": {
+        "article_50_1": 2,
+        "article_50_2": 1,
+        "article_50_4": 1,
+        "article_50_6": 2
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "sap-se-rationale",
+      "evidence_urls": ["https://www.sap.com/about/legal/privacy.html"],
+      "national_competent_authority": "DE:BfDI"
+    },
+    {
+      "id": "deutsche-bank-ag",
+      "legal_name": "Deutsche Bank AG",
+      "lei": "7LTWFZYICNSX8D621K86",
+      "headquarters_country": "DE",
+      "industry": "banking",
+      "ai_systems_in_scope_examples": ["Customer service chatbot", "AI-driven trading insights"],
+      "scores": {
+        "article_50_1": 1,
+        "article_50_2": 0,
+        "article_50_4": 0,
+        "article_50_6": 1
+      },
+      "overall_exposure_band": "critical",
+      "rationale_key": "deutsche-bank-rationale",
+      "evidence_urls": ["https://www.db.com/privacy-notice"],
+      "national_competent_authority": "DE:BaFin"
+    },
+    {
+      "id": "klarna-bank-ab",
+      "legal_name": "Klarna Bank AB",
+      "lei": "549300JHHJUJ4VS3UO39",
+      "headquarters_country": "SE",
+      "industry": "consumer_finance",
+      "ai_systems_in_scope_examples": ["Klarna AI assistant (OpenAI-powered)", "Klarna fraud detection"],
+      "scores": {
+        "article_50_1": 3,
+        "article_50_2": 2,
+        "article_50_4": 1,
+        "article_50_6": 3
+      },
+      "overall_exposure_band": "moderate",
+      "rationale_key": "klarna-rationale",
+      "evidence_urls": ["https://www.klarna.com/international/privacy-notice/"],
+      "national_competent_authority": "SE:IMY"
+    },
+    {
+      "id": "adyen-nv",
+      "legal_name": "Adyen N.V.",
+      "lei": "549300P1FTUAMVB0F713",
+      "headquarters_country": "NL",
+      "industry": "payments",
+      "ai_systems_in_scope_examples": ["RevenueAccelerate (ML risk scoring)"],
+      "scores": {
+        "article_50_1": 1,
+        "article_50_2": 0,
+        "article_50_4": 0,
+        "article_50_6": 1
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "adyen-rationale",
+      "evidence_urls": ["https://www.adyen.com/legal/privacy-policy"],
+      "national_competent_authority": "NL:AP"
+    },
+    {
+      "id": "ing-groep-nv",
+      "legal_name": "ING Groep N.V.",
+      "lei": "549300NYKK9MWM7GGW15",
+      "headquarters_country": "NL",
+      "industry": "banking",
+      "ai_systems_in_scope_examples": ["ING customer-service AI", "ING fraud-detection AI"],
+      "scores": {
+        "article_50_1": 2,
+        "article_50_2": 0,
+        "article_50_4": 1,
+        "article_50_6": 2
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "ing-rationale",
+      "evidence_urls": ["https://www.ing.com/Privacy-Statement.htm"],
+      "national_competent_authority": "NL:DNB"
+    },
+    {
+      "id": "bnp-paribas-sa",
+      "legal_name": "BNP Paribas S.A.",
+      "lei": "R0MUWSFPU8MPRO8K5P83",
+      "headquarters_country": "FR",
+      "industry": "banking",
+      "ai_systems_in_scope_examples": ["Hello bank! chatbot", "Mood (AI-powered insights)"],
+      "scores": {
+        "article_50_1": 3,
+        "article_50_2": 0,
+        "article_50_4": 1,
+        "article_50_6": 3
+      },
+      "overall_exposure_band": "moderate",
+      "rationale_key": "bnp-paribas-rationale",
+      "evidence_urls": ["https://group.bnpparibas/en/our-commitments/managing-our-impacts/data-protection"],
+      "national_competent_authority": "FR:CNIL"
+    },
+    {
+      "id": "allianz-se",
+      "legal_name": "Allianz SE",
+      "lei": "529900HNOAA1KXQJUQ27",
+      "headquarters_country": "DE",
+      "industry": "insurance",
+      "ai_systems_in_scope_examples": ["Claims processing AI", "Underwriting AI"],
+      "scores": {
+        "article_50_1": 2,
+        "article_50_2": 0,
+        "article_50_4": 1,
+        "article_50_6": 2
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "allianz-rationale",
+      "evidence_urls": ["https://www.allianz.com/en/info/data-privacy.html"],
+      "national_competent_authority": "DE:BfDI"
+    },
+    {
+      "id": "volkswagen-ag",
+      "legal_name": "Volkswagen AG",
+      "lei": "529900NNUPAGGOMPXZ31",
+      "headquarters_country": "DE",
+      "industry": "automotive",
+      "ai_systems_in_scope_examples": ["IDA voice assistant", "Travel Assist (L2 autonomy)"],
+      "scores": {
+        "article_50_1": 2,
+        "article_50_2": 1,
+        "article_50_4": 0,
+        "article_50_6": 2
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "volkswagen-rationale",
+      "evidence_urls": ["https://www.volkswagen-newsroom.com/en"],
+      "national_competent_authority": "DE:BfDI"
+    },
+    {
+      "id": "spotify-sa",
+      "legal_name": "Spotify Technology S.A.",
+      "lei": "549300V93BQOY8MEH337",
+      "headquarters_country": "LU",
+      "industry": "media",
+      "ai_systems_in_scope_examples": ["AI DJ", "AI-generated playlists", "Recommendation engine"],
+      "scores": {
+        "article_50_1": 2,
+        "article_50_2": 1,
+        "article_50_4": 1,
+        "article_50_6": 1
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "spotify-rationale",
+      "evidence_urls": ["https://www.spotify.com/legal/privacy-policy/"],
+      "national_competent_authority": "LU:CNPD"
+    },
+    {
+      "id": "telefonica-sa",
+      "legal_name": "Telefónica S.A.",
+      "lei": "549300TBOJUEAVSFAQ16",
+      "headquarters_country": "ES",
+      "industry": "telecommunications",
+      "ai_systems_in_scope_examples": ["Aura (voice AI assistant)", "Movistar Home AI"],
+      "scores": {
+        "article_50_1": 3,
+        "article_50_2": 0,
+        "article_50_4": 0,
+        "article_50_6": 2
+      },
+      "overall_exposure_band": "high",
+      "rationale_key": "telefonica-rationale",
+      "evidence_urls": ["https://www.telefonica.com/en/privacy-centre/"],
+      "national_competent_authority": "ES:AEPD"
+    }
+  ]
+}
