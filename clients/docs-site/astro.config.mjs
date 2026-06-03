@@ -64,6 +64,12 @@ export default defineConfig({
             { label: "GDPR compliance posture", link: "/for-lawyers/gdpr-compliance/" },
           ],
         },
+        {
+          label: "Security",
+          items: [
+            { label: "Disclosure policy", link: "/security/disclosure/" },
+          ],
+        },
       ],
     }),
   ],

@@ -118,8 +118,8 @@ echo "" | tee -a "$LOG"
 echo "=== Summary ===" | tee -a "$LOG"
 echo "Succeeded: ${#succeeded[@]}" | tee -a "$LOG"
 printf '  %s\n' "${succeeded[@]}" | tee -a "$LOG"
-echo "Failed: ${#failed[@]}" | tee -a "$LOG"
-printf '  %s\n' "${failed[@]}" | tee -a "$LOG"
-[[ ${#skipped[@]} -gt 0 ]] && { echo "Skipped: ${#skipped[@]}" | tee -a "$LOG"; printf '  %s\n' "${skipped[@]}" | tee -a "$LOG"; }
+echo "Failed: ${#failed[@]:-0}" | tee -a "$LOG"
+[[ ${#failed[@]:-0} -gt 0 ]] && printf '  %s\n' "${failed[@]}" | tee -a "$LOG"
+[[ ${#skipped[@]:-0} -gt 0 ]] && { echo "Skipped: ${#skipped[@]}" | tee -a "$LOG"; printf '  %s\n' "${skipped[@]}" | tee -a "$LOG"; }
 echo "" | tee -a "$LOG"
 echo "Full log: $LOG" | tee -a "$LOG"
