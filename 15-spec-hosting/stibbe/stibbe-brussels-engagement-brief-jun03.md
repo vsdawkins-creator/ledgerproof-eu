@@ -2,12 +2,13 @@
 
 **Date**: Wed Jun 3, 2026 (drafted for delivery Thu Jun 4 AM CET)
 **From**: Veronica S. Dawkins, LedgerProof Foundation (in formation)
-**To**: [V to confirm Stibbe Brussels contact — likely the partner V's scoping memo was negotiated through]
+**To**: Laurens de Hoop, Partner — Digital & ICT / EU Regulatory Affairs, Stibbe Brussels
+**Alternative recipient if Laurens unavailable**: Head of the Digital & ICT / EU Regulatory Affairs desk currently managing the LedgerProof Foundation scoping engagement
 **Subject**: Time-sensitive: institutional sourcing for AI Office Article 50 Guidelines — ring-fenced 4-hour engagement
 
 ---
 
-Dear [Stibbe contact name],
+Dear Laurens,
 
 I am writing to engage Stibbe Brussels on a specific, ring-fenced piece of institutional sourcing work with a 10-business-day window. Subject matter is within the existing scope of our retainer; this letter establishes the specific task envelope.
 

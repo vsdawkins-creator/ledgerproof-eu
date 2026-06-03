@@ -1,0 +1,33 @@
+{
+  "schema": "foundation_governance_event/v1",
+  "event_id": "gov-2026-06-03-dgcnect-memo",
+  "event_type": "regulatory_submission",
+  "event_date": "2026-06-03",
+  "event_summary": "Submission of memorandum to European Commission DG-CNECT AI Office proposing OCPP-AI v1.0 as candidate reference architecture for Article 50 Transparency Guidelines. Concurrent publication of: OCPP-AI v1.0 Core Specification, Anchor Interface Specification v1.0, W3C VC 2.0 JSON-LD context. Concurrent posting to IETF SCITT Working Group mailing list. Concurrent arXiv preprint submission under cs.CR primary classification.",
+  "artifact_urls": [
+    "https://spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html",
+    "https://spec.ledgerproofhq.io/ocpp-ai-v1.html",
+    "https://spec.ledgerproofhq.io/anchor-interface-v1.html",
+    "https://spec.ledgerproofhq.io/contexts/lpr-v1.jsonld"
+  ],
+  "artifact_hashes": {
+    "_note": "SHA-256 hashes computed at time of anchoring; populated by foundation_anchor.py at submission time",
+    "memo": "<to-be-computed>",
+    "ocpp_ai_v1": "<to-be-computed>",
+    "anchor_interface_v1": "<to-be-computed>",
+    "lpr_v1_context": "<to-be-computed>"
+  },
+  "publisher_id": "ledgerproof-foundation",
+  "publisher_role": "founding_executive_director",
+  "signing_key_id": "interim-ed25519-2026-06",
+  "signing_key_public_base64": "qtG5TDcBlGR/25zsC/Cik3+rnUupR5XB2dSB+/IKUzA=",
+  "anchor_substrate": "BitcoinOpReturnAnchor",
+  "anchor_status": "pending_block_confirmation",
+  "anchor_payload_format": "LPR1 || merkle_root_32 (36 bytes)",
+  "expected_anchor_window": "within 6 hours of publication",
+  "ots_receipt_path": "17-futurium/anchored-receipts/2026-06-03-dgcnect-memo/governance.ots",
+  "verifier_instructions": "Verify per Article 8 of the OCPP-AI Specification v1.0. The byte-identical content of the artifact URLs above is recoverable from the Bitcoin OP_RETURN anchor record via the verification procedure published at https://spec.ledgerproofhq.io/ocpp-ai-v1.html",
+  "subsequent_events_referenced": [],
+  "supersedes": [],
+  "operator_notes": "This is the second Foundation governance event after gov-2026-06-02-eu-ai-office-consultation (yesterday's Futurium consultation submission). The two events together comprise the Foundation's institutional engagement record on EU AI Act Article 50 for Q2 2026."
+}

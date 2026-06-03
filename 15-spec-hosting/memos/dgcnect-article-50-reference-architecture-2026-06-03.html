@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Memorandum to DG-CNECT — Reference Implementation Architecture for AI Act Article 50 (3 June 2026)</title>
+<meta name="description" content="LedgerProof Foundation memorandum to the European Commission DG-CNECT AI Office proposing OCPP-AI as candidate reference architecture for the Article 50 Transparency Guidelines, mitigating systemic vendor lock-in and safeguarding Open Strategic Autonomy.">
+<meta name="author" content="Veronica S. Dawkins, LedgerProof Foundation (in formation)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reference Implementation Architecture for AI Act Article 50 — DG-CNECT Memorandum">
+<meta property="og:description" content="LedgerProof Foundation memorandum submitted to DG-CNECT proposing OCPP-AI as candidate reference architecture for the Article 50 Transparency Guidelines.">
+<meta property="og:url" content="https://spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html">
+<style>
+  body { font-family: Charter, Georgia, 'Times New Roman', serif; max-width: 760px; margin: 2em auto; padding: 0 1.2em; color: #1a1a1a; line-height: 1.6; font-size: 16px; }
+  h1, h2, h3 { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #0b3d2e; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #0b3d2e; padding-bottom: 0.4em; line-height: 1.2; }
+  h2 { font-size: 14pt; margin-top: 2em; border-bottom: 1px solid #d1d5db; padding-bottom: 0.25em; }
+  h3 { font-size: 11.5pt; margin-top: 1.4em; }
+  .doc-meta { background: #f3f4f6; border-left: 4px solid #0b3d2e; padding: 0.9em 1.2em; font-size: 0.93em; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; margin: 1em 0 2em; }
+  .doc-meta div { margin: 0.18em 0; }
+  code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.92em; background: #f3f4f6; padding: 0.1em 0.35em; border-radius: 2px; }
+  blockquote { border-left: 3px solid #f59e0b; padding-left: 1em; color: #4b5563; margin: 1em 0; font-style: italic; }
+  a { color: #0b3d2e; }
+  ul, ol { padding-left: 1.4em; }
+  ol li, ul li { margin: 0.4em 0; }
+  .anchor-block { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 4px; padding: 1em 1.3em; margin: 1.5em 0; font-size: 0.93em; }
+  .anchor-block code { background: rgba(0,0,0,0.06); }
+  hr { border: none; border-top: 1px solid #d1d5db; margin: 2em 0; }
+  .roman { font-variant-numeric: oldstyle-nums; }
+</style>
+</head>
+<body>
+
+<h1>Reference Implementation Architecture for AI Act Article 50 Transparency Obligations: Mitigating Systemic Vendor Lock-In and Safeguarding Open Strategic Autonomy</h1>
+
+<div class="doc-meta">
+  <div><strong>TO:</strong> Director, AI Office, European Commission DG-CNECT</div>
+  <div style="padding-left: 2.5em;">ATTN: Unit responsible for Article 50 Transparency Guidelines drafting</div>
+  <div><strong>FROM:</strong> Veronica S. Dawkins, Founder, LedgerProof Foundation (in formation; Delaware 501(c)(3) under Adler &amp; Colvin counsel; Dutch Stichting EU subsidiary under NautaDutilh counsel)</div>
+  <div><strong>DATE:</strong> 3 June 2026</div>
+  <div><strong>SUBJECT:</strong> Reference Implementation Architecture for AI Act Article 50 Transparency Obligations: Mitigating Systemic Vendor Lock-In and Safeguarding Open Strategic Autonomy</div>
+  <div><strong>Stable URL:</strong> <code>https://spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html</code></div>
+  <div><strong>Companion artifacts:</strong></div>
+  <div style="padding-left: 1.5em;">— <a href="../ocpp-ai-v1.html">OCPP-AI v1.0 Core Specification</a></div>
+  <div style="padding-left: 1.5em;">— <a href="../anchor-interface-v1.html">Anchor Interface Specification v1.0</a></div>
+  <div style="padding-left: 1.5em;">— <a href="../contexts/lpr-v1.jsonld">W3C VC 2.0 JSON-LD Context</a></div>
+  <div style="padding-left: 1.5em;">— IETF Internet-Draft <code>draft-dawkins-scitt-ai-article50-00</code></div>
+  <div><strong>Bitcoin-anchored governance event:</strong> Publication of this memorandum is recorded as Foundation governance event <code>gov-2026-06-03-dgcnect-memo</code>, anchored per the Anchor Interface specification. Anchor txid pending Bitcoin block confirmation; OpenTimestamps receipt available on request.</div>
+</div>
+
+<h2>I. Legislative Context &amp; the Compliance Chokepoint</h2>
+
+<p>The fast-approaching applicability date for Article 50 on 2 August 2026 introduces a critical operational bottleneck for the European digital economy. Article 50 sub-obligations 50(1) through 50(6) mandate that providers of certain AI systems ensure that outputs are marked or identifiable as artificially generated or manipulated in a machine-readable format, that natural persons are informed they are interacting with an AI system, and that disclosures are made in a clear and distinguishable manner.</p>
+
+<p>In the absence of an open, interoperable standard, European Small and Medium Enterprises face a dual existential constraint:</p>
+
+<ol>
+  <li><strong>Regulatory Non-Compliance.</strong> The absence of clear technical patterns to achieve the required data-logging integrity without violating concurrent General Data Protection Regulation 2016/679 data-minimization obligations.</li>
+
+  <li><strong>Structural Regulatory Capture.</strong> Dependence on proprietary, closed-source logging features provided natively by non-Union cloud platform operators (Amazon Web Services, Microsoft Azure, Google Cloud Platform). This concentration effectively outsources the architectural enforcement of the AI Act to corporate actors outside Union jurisdiction, directly undermining the Commission's mandate for Open Strategic Autonomy and threatening the projection of the Brussels Effect into AI regulation.</li>
+</ol>
+
+<p>The structural property of vendor-operated logging has a regulatory consequence: the enforcement infrastructure of the AI Act is, in the default deployment pattern, conditional on the continued cooperation of operators outside the Union's jurisdictional reach. Resolving this requires an architectural pattern that admits independent verification by natural persons, national competent authorities, and EU institutions without depending on cooperation by any single non-Union private actor.</p>
+
+<h2>II. Architectural Overview of the OCPP-AI Standard</h2>
+
+<p>To resolve this fragmentation, the LedgerProof Foundation submits the <strong>Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI v1.0)</strong> as a candidate reference architecture for the upcoming Article 50 Guidelines. The Foundation positions itself as maintainer of the reference implementation; the protocol itself is published under Creative Commons Attribution 4.0 and is free of any commercial encumbrance or patent claim by the Foundation.</p>
+
+<p>OCPP-AI isolates the mathematical verification of machine-generated provenance from proprietary cloud environments. The architecture establishes a <strong>hash-commitment-based metadata framework</strong> with structurally bounded payload format, leveraging three lightweight, language-agnostic cryptographic primitives that disclose integrity proofs without disclosing underlying receipt content to the anchor layer:</p>
+
+<ol>
+  <li><strong>Canonical CBOR Encoding (RFC 8949 deterministic encoding subset).</strong> Ensures platform-independent, bit-perfect data determinism across heterogeneous enterprise environments, with reference implementations published under Apache License 2.0 in Python, TypeScript, and Rust.</li>
+
+  <li><strong>Ed25519 Signatures over SHA-256 Merkle Trees (RFC 8032 + RFC 6234 + RFC 6962).</strong> Guarantees high-throughput timestamping and non-repudiation of AI deployment logs with bounded incremental latency on the inference path — signature operations are microsecond-scale and execute asynchronously after response delivery to the natural person.</li>
+
+  <li><strong>W3C Verifiable Credentials 2.0 mapping.</strong> Every receipt is natively mapped to a W3C Verifiable Credentials 2.0 schema via the JSON-LD context hosted at <code>https://spec.ledgerproofhq.io/contexts/lpr-v1.jsonld</code>. This enables corporate procurement systems to automate vendor compliance verification at the API gateway layer, and admits composition with eIDAS 2.0 Qualified Trust Service Providers for use cases requiring qualified evidence.</li>
+</ol>
+
+<h2>III. The Dual-Anchor Incentive Layer</h2>
+
+<p>A critical feature of OCPP-AI is its formal <strong>Anchor Interface Specification</strong>, published at <code>https://spec.ledgerproofhq.io/anchor-interface-v1.html</code>. Rather than coupling compliance data to a specific database or sovereign state, the protocol defines eight normative criteria (I-1 through I-8) for absolute cryptographic immutability: immutability under adversarial conditions, public verifiability without authentication, jurisdictional neutrality, demonstrated operational durability of at least thirty-six months, deterministic resolution of anchor records, bounded anchor payload format, the OCPP-AI Anchor Payload Format (the fixed 36-byte structure <code>"LPR1" || merkle_root_32</code>), and GDPR Article 17 compatibility.</p>
+
+<p>The protocol operates a <strong>dual-anchor deployment mechanism</strong> designed to maximize operational stability while embedding European sovereignty:</p>
+
+<ul>
+  <li><strong>The Reference Implementation: Bitcoin OP_RETURN.</strong> The current reference implementation satisfies all eight criteria. Bitcoin's continuous operation since 3 January 2009, demonstrated jurisdictional distribution across more than one hundred fifty independent jurisdictions, and bounded reorganization depth establish operational confidence and international cross-border market readiness.</li>
+
+  <li><strong>The Sovereign Implementation: EBSI Compatibility.</strong> The protocol natively supports the European Blockchain Services Infrastructure (EBSI) as a parallel, complementary anchor layer satisfying seven of the eight criteria, with criterion I-4 under continuing evaluation as EBSI accumulates its operational record. This admits Member State supervisory authorities and Union public-sector entities to anchor Article 50 compliance evidence within EU-controlled, GDPR-compatible public infrastructure under direct Union sovereignty.</li>
+</ul>
+
+<p>Dual-anchor publication — the same receipt-batch Merkle root anchored to both Bitcoin and EBSI in parallel — is the recommended deployment configuration for deployers operating under EU jurisdictional reach. Verifiers operated by EU institutions, Member State competent authorities, and notified bodies may require evidence from the EBSI anchor as a matter of supervisory policy without sacrificing the operational durability and jurisdictional neutrality of the Bitcoin anchor for cross-border use.</p>
+
+<h2>IV. Impact Matrix on the European Infrastructure</h2>
+
+<ul>
+  <li><strong>For the AI Office and DG-CNECT.</strong> Citation of an open, multi-substrate, vendor-neutral reference architecture in the Article 50 Guidelines prevents the structural fragmentation that proprietary logging mechanisms would otherwise produce, and shields European Small and Medium Enterprises from hyperscaler lock-in of regulatory evidence. The architecture preserves the Brussels Effect for AI regulation by providing a globally projectable, open-source technical standard rather than depending on private actors outside Union jurisdiction.</li>
+
+  <li><strong>For National Supervisory Authorities and EAIB Member State representatives.</strong> Authorities including the French Commission Nationale de l'Informatique et des Libertés (CNIL), the German Bundesbeauftragte für den Datenschutz und die Informationsfreiheit (BfDI), the Spanish Agencia Española de Protección de Datos (AEPD), the Italian Garante per la protezione dei dati personali (Garante), the Dutch Autoriteit Persoonsgegevens (AP), and the Estonian Andmekaitse Inspektsioon (AKI) gain the ability to perform machine-verifiable remote compliance audits. They can verify an enterprise's cryptographic receipts locally using a standard verifier (command-line and browser-based, published under Apache License 2.0), without requiring access to proprietary datasets, vendor-controlled audit endpoints, or commercial model weights. This is the architectural property that converts AI Act enforcement from a process conditional on private-actor cooperation to a process unilaterally exercisable by Union authorities.</li>
+
+  <li><strong>For the European Business-to-Business Supply Chain.</strong> The protocol provides an instant, predictable de-risking mechanism for corporate boards subject to fiduciary obligations regarding AI Act compliance. Procurement teams across European banks, insurers, payment processors, and Fortune Europe vendors gain a machine-readable Article 50 compliance verification — a procurement checkbox — that converts a vague regulatory threat into a precisely-scoped supplier requirement.</li>
+</ul>
+
+<h2>V. Specific Request</h2>
+
+<p>The LedgerProof Foundation respectfully requests that the AI Office consider:</p>
+
+<ol>
+  <li>Citation of the OCPP-AI v1.0 specification as a non-exclusive example of acceptable Article 50 implementation architecture in the published Article 50 Guidelines;</li>
+  <li>The opportunity to provide a technical briefing on the OCPP-AI specification, the Anchor Interface, and the EBSI compatibility evaluation to the policy officers drafting the Guidelines, at a time and format convenient to the AI Office;</li>
+  <li>Direction regarding the appropriate channel for parallel submission to the European AI Board Secretariat for consideration in the Board's advisory deliberations on Article 50 implementation.</li>
+</ol>
+
+<p>The Foundation does not seek exclusive endorsement, commercial advantage, or any form of representation that DG-CNECT, the AI Office, the EAIB, or any Member State authority endorses the LedgerProof Foundation specifically. The Foundation seeks reference to OCPP-AI as <em>one example</em> of an open implementation architecture that satisfies the operational requirements of Article 50 transparency without introducing the systemic vulnerabilities of vendor-controlled compliance logging.</p>
+
+<hr>
+
+<div class="anchor-block">
+<p><strong>Publication and verifiability statement.</strong> This memorandum is published as <code>foundation_governance_event/v1</code> with <code>event_type = "regulatory_submission"</code>. The publication is anchored to Bitcoin mainnet per the Anchor Interface Specification. The byte-identical content of this memorandum at <code>https://spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html</code> is recoverable from the anchor record via the same verification procedure (Article 8 of the OCPP-AI specification) that applies to deployer receipts. This memorandum is, in effect, evidence of itself.</p>
+</div>
+
+<p style="font-size: 0.92em; color: #4b5563; margin-top: 2em;">
+Respectfully submitted,<br><br>
+<strong>Veronica S. Dawkins</strong><br>
+Founder, LedgerProof Foundation (in formation)<br>
+<code>veronica@ledgerproofhq.io</code> · <code>spec.ledgerproofhq.io</code> · <code>github.com/ledgerproof</code><br>
+IETF Datatracker: <code>draft-dawkins-scitt-ai-article50-00</code><br>
+EU AI Office consultation submission (Futurium): filed 2 June 2026
+</p>
+
+</body>
+</html>
