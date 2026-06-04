@@ -207,3 +207,41 @@ Nothing else within Claude's reach to close tonight.
 - **arXiv submission upload** — V to complete in the active arXiv tab (cs.CR + cs.CY + cs.DC, metadata + file upload + preview + submit). The endorsement gate is in flight via Henk.
 - **Track 2 Thursday afternoon review** — calendared
 - **Counterparty replies** — Sarah / Harrison / Stibbe / Lokke / Henk / SCITT WG
+
+---
+
+## Send 11 — Lokke reply with personalized voice + LedgerProof deck attached
+
+- **Sent**: Wed Jun 3, 2026 5:05 PM PDT
+- **To**: LMoerel@mofo.com (verified address from Lokke's 12:34 reply)
+- **From**: veronica@ledgerproofhq.io
+- **Subject**: Re: Two intros, both this week — capacity confirmation (3rd attempt, address now verified)
+- **Body**: V rewrote the draft in her own voice — preserves the "sincere apologies / let me start over" opening, acknowledges the deliverability confusion from V's spam folder, the substantive LedgerProof rundown (entity structure, OCPP-AI, IETF SCITT, EU AI Office consultation), and the two intro asks (Sirma at Allianz, Pieter at Adyen).
+- **Attachment**: LedgerProof-Deck-Lokke-Moerel-MoFo.pdf (741 KB, 12 pages A4 landscape, tailored to Lokke's published expertise on the GDPR↔AI-training intersection)
+- **Status**: Sent — verified in Gmail web (headers confirm correct recipient address, 5:05 PM timestamp)
+
+## Final day total — 11 sends from veronica@ledgerproofhq.io
+
+| # | Time PDT | To | Outcome |
+|---|---|---|---|
+| 1 | 08:53:55 | lokke.moerel@morrisonforerster.com | NXDOMAIN bounce |
+| 2 | 08:54:25 | sarah@conviction.com | Delivered |
+| 3 | 08:55:02 | harrison@langchain.dev | Delivered |
+| 4 | 11:16:32 | laurens.dehoop@stibbe.com | Delivered |
+| 5 | 11:18:43 | scitt@ietf.org | Released after #7 |
+| 6 | 11:18:43 | lokke.moerel@mofo.com | Mailbox-not-found bounce |
+| 7 | 11:26:56 | scitt@mail2.ietf.org | IETF confirmation |
+| 8 | 11:29:29 | lmoerel@mofo.com | Delivered — Lokke replied at 12:34 |
+| 9 | 12:19 | henk.birkholz@sit.fraunhofer.de | arXiv endorsement request (Gmail) |
+| 10 | 12:37:28 | henk.birkholz@sit.fraunhofer.de | spec URLs live correction |
+| 11 | 17:05 | LMoerel@mofo.com | Lokke reply with deck attached |
+
+**1 reply received (Lokke), 1 reply outbound (this Send #11). Ball is in Lokke's court on the two intro asks.**
+
+## Replies expected in the next 24-48 hours window
+
+- Lokke Moerel — yes/no/let's-talk on Sirma + Pieter intros
+- Henk Birkholz — arXiv endorsement decision (cs.CR)
+- Sarah Guo — pressure-test slot
+- Harrison Chase — LangChain partnership response
+- Laurens de Hoop — Stibbe desk-officer sourcing memo (due Fri Jun 6 EOB CET)
