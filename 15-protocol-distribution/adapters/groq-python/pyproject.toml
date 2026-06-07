@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-groq"
+name = "groq-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for the Groq Python SDK. Side-channel cryptographic transparency receipts for EU AI Act Article 50 obligations."
 readme = "README.md"
@@ -45,7 +45,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Issues = "https://github.com/ledgerproof/ledgerproof/issues"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_groq*"]
+include = ["groq_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

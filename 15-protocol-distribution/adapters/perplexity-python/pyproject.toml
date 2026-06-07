@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-perplexity"
+name = "perplexity-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for Perplexity AI (OpenAI-compatible API) — emits Article 50 transparency receipts as a side channel, with citation provenance for public-interest text."
 readme = "README.md"
@@ -52,7 +52,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_perplexity*"]
+include = ["perplexity_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

@@ -51,7 +51,7 @@ Python 3.10+ required.
 
 ```python
 from aleph_alpha_client import Client, CompletionRequest, Prompt
-from ledgerproof_aleph_alpha import LedgerProofAlephAlpha
+from aleph_alpha_ledgerproof import LedgerProofAlephAlpha
 
 upstream = Client(token="YOUR_TOKEN", host="https://api.aleph-alpha.com")
 
@@ -78,7 +78,7 @@ The response object returned by `complete()` is **the exact upstream
 
 ```python
 from aleph_alpha_client import AsyncClient, CompletionRequest, Prompt
-from ledgerproof_aleph_alpha import LedgerProofAsyncAlephAlpha
+from aleph_alpha_ledgerproof import LedgerProofAsyncAlephAlpha
 
 async with AsyncClient(token="YOUR_TOKEN", host="https://api.aleph-alpha.com") as up:
     client = LedgerProofAsyncAlephAlpha(up, article="50(2)")
@@ -88,7 +88,7 @@ async with AsyncClient(token="YOUR_TOKEN", host="https://api.aleph-alpha.com") a
 ## Decorator pattern
 
 ```python
-from ledgerproof_aleph_alpha import lpr_track
+from aleph_alpha_ledgerproof import lpr_track
 
 @lpr_track(article="50(1)", schema="chatbot_session/v1")
 def chat(prompt: str) -> str:
@@ -100,7 +100,7 @@ def chat(prompt: str) -> str:
 ## Manual emission
 
 ```python
-from ledgerproof_aleph_alpha import emit_receipt
+from aleph_alpha_ledgerproof import emit_receipt
 
 emit_receipt(
     article="50(1)",
@@ -147,7 +147,7 @@ The response payload returned to you is byte-identical to upstream.
 ## Local verification (C4)
 
 ```python
-from ledgerproof_aleph_alpha import verify_receipt
+from aleph_alpha_ledgerproof import verify_receipt
 
 ok = verify_receipt(receipt_json)
 assert ok is True

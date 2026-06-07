@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-huggingface"
+name = "huggingface-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for Hugging Face Inference API + Transformers — emits Article 50 transparency receipts as a side channel."
 readme = "README.md"
@@ -54,7 +54,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_huggingface*"]
+include = ["huggingface_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

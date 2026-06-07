@@ -20,7 +20,7 @@ pip install ledgerproof-cerebras
 ## Quickstart
 
 ```python
-from ledgerproof_cerebras import LedgerProofCerebras
+from cerebras_ledgerproof import LedgerProofCerebras
 
 client = LedgerProofCerebras(
     api_key="...",                  # Cerebras API key (or env CEREBRAS_API_KEY)

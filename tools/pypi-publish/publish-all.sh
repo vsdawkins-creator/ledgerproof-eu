@@ -29,35 +29,35 @@ for arg in "$@"; do
 done
 
 ALL_ADAPTERS=(
-  "langchain-python:ledgerproof-langchain"
-  "llamaindex-python:ledgerproof-llamaindex"
-  "openai-python:ledgerproof-openai"
-  "anthropic-python:ledgerproof-anthropic"
-  "mistral-python:ledgerproof-mistral"
-  "aleph-alpha-python:ledgerproof-aleph-alpha"
-  "cohere-python:ledgerproof-cohere"
-  "haystack-python:ledgerproof-haystack"
-  "semantic-kernel-python:ledgerproof-semantic-kernel"
-  "google-ai-python:ledgerproof-google-ai"
-  "vertexai-python:ledgerproof-vertexai"
-  "bedrock-python:ledgerproof-bedrock"
-  "azure-openai-python:ledgerproof-azure-openai"
-  "together-python:ledgerproof-together"
-  "groq-python:ledgerproof-groq"
-  "huggingface-python:ledgerproof-huggingface"
-  "ai21-python:ledgerproof-ai21"
-  "replicate-python:ledgerproof-replicate"
-  "xai-python:ledgerproof-xai"
-  "deepseek-python:ledgerproof-deepseek"
-  "qwen-python:ledgerproof-qwen"
-  "reka-python:ledgerproof-reka"
-  "voyage-python:ledgerproof-voyage"
-  "cerebras-python:ledgerproof-cerebras"
-  "watsonx-python:ledgerproof-watsonx"
-  "snowflake-cortex-python:ledgerproof-snowflake-cortex"
-  "perplexity-python:ledgerproof-perplexity"
-  "fireworks-python:ledgerproof-fireworks"
-  "mistral-codestral-python:ledgerproof-mistral-codestral"
+  "langchain-python:langchain-ledgerproof"
+  "llamaindex-python:llamaindex-ledgerproof"
+  "openai-python:openai-ledgerproof"
+  "anthropic-python:anthropic-ledgerproof"
+  "mistral-python:mistral-ledgerproof"
+  "aleph-alpha-python:aleph-alpha-ledgerproof"
+  "cohere-python:cohere-ledgerproof"
+  "haystack-python:haystack-ledgerproof"
+  "semantic-kernel-python:semantic-kernel-ledgerproof"
+  "google-ai-python:google-ai-ledgerproof"
+  "vertexai-python:vertexai-ledgerproof"
+  "bedrock-python:bedrock-ledgerproof"
+  "azure-openai-python:azure-openai-ledgerproof"
+  "together-python:together-ledgerproof"
+  "groq-python:groq-ledgerproof"
+  "huggingface-python:huggingface-ledgerproof"
+  "ai21-python:ai21-ledgerproof"
+  "replicate-python:replicate-ledgerproof"
+  "xai-python:xai-ledgerproof"
+  "deepseek-python:deepseek-ledgerproof"
+  "qwen-python:qwen-ledgerproof"
+  "reka-python:reka-ledgerproof"
+  "voyage-python:voyage-ledgerproof"
+  "cerebras-python:cerebras-ledgerproof"
+  "watsonx-python:watsonx-ledgerproof"
+  "snowflake-cortex-python:snowflake-cortex-ledgerproof"
+  "perplexity-python:perplexity-ledgerproof"
+  "fireworks-python:fireworks-ledgerproof"
+  "mistral-codestral-python:mistral-codestral-ledgerproof"
 )
 
 mkdir -p "$DIST_DIR"
@@ -107,9 +107,17 @@ for entry in "${ALL_ADAPTERS[@]}"; do
     if uvx --from twine twine upload "$DIST_DIR/$pkg_name"/* >> "$LOG" 2>&1; then
       echo "  ✓ Published to PyPI" | tee -a "$LOG"
       succeeded+=("$pkg_name")
+      # Rate-limit pacing: PyPI new-account creates capped ~5/hour; sleep 12 min between successful uploads
+      # to stay safely under the rolling window. 12 min × 24 = ~5 hours for full overnight run.
+      sleep 720
     else
       echo "  ✗ Upload FAILED — see $LOG" | tee -a "$LOG"
       failed+=("$pkg_name (upload)")
+      # If 429, longer backoff before next attempt
+      if grep -q "429 Too Many Requests" "$LOG"; then
+        echo "  → backing off 90s after 429" | tee -a "$LOG"
+        sleep 90
+      fi
     fi
   fi
 done

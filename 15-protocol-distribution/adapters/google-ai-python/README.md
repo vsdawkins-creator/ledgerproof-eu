@@ -47,7 +47,7 @@ Requires Python 3.10+.
 
 ```python
 import google.generativeai as genai
-from ledgerproof_google_ai import LedgerProofGenerativeModel
+from google_ai_ledgerproof import LedgerProofGenerativeModel
 
 genai.configure(api_key="...")
 
@@ -82,7 +82,7 @@ chat.send_message("What is Article 50?")
 ## Decorator
 
 ```python
-from ledgerproof_google_ai import lpr_track
+from google_ai_ledgerproof import lpr_track
 
 @lpr_track(deployer_id="acme-eu-bank", user_message_kwarg="prompt")
 def ask(prompt: str):
@@ -92,7 +92,7 @@ def ask(prompt: str):
 ## Manual emission
 
 ```python
-from ledgerproof_google_ai import emit_receipt
+from google_ai_ledgerproof import emit_receipt
 
 response = raw_model.generate_content("Hi.")
 signed = emit_receipt(response, deployer_id="acme-eu-bank",

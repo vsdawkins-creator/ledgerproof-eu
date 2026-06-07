@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-google-ai"
+name = "google-ai-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for the Google AI (Gemini) Python SDK. Side-channel transparency receipts for EU AI Act Article 50."
 readme = "README.md"
@@ -42,7 +42,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_google_ai*"]
+include = ["google_ai_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

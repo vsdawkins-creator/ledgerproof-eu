@@ -49,9 +49,9 @@ pip install "ledgerproof-llamaindex[examples]"
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.core.callbacks import CallbackManager
 
-from ledgerproof_llamaindex import LedgerProofCallbackHandler
-from ledgerproof_llamaindex.emitter import LogEmitter
-from ledgerproof_llamaindex.signer import Ed25519Signer
+from llamaindex_ledgerproof import LedgerProofCallbackHandler
+from llamaindex_ledgerproof.emitter import LogEmitter
+from llamaindex_ledgerproof.signer import Ed25519Signer
 
 handler = LedgerProofCallbackHandler(
     deployer_id="acme-bank-eu",
@@ -84,7 +84,7 @@ This adapter respects the LedgerProof protocol invariants:
 ## Emitters
 
 ```python
-from ledgerproof_llamaindex.emitter import LogEmitter, WebhookEmitter, QueueEmitter
+from llamaindex_ledgerproof.emitter import LogEmitter, WebhookEmitter, QueueEmitter
 
 LogEmitter()                                    # writes JSON to a Python logger
 WebhookEmitter("https://receipts.acme.eu/v1")   # POSTs canonical CBOR
@@ -97,7 +97,7 @@ QueueEmitter(my_queue)                          # puts onto any queue.Queue
 - `generated_content/v1` — Article 50(2) generated-content marking.
 - `rag_synthesized_response/v1` — Article 50(1) synthesized response with source attribution.
 
-See `ledgerproof_llamaindex/schema.py`.
+See `llamaindex_ledgerproof/schema.py`.
 
 ## Production hardening checklist
 

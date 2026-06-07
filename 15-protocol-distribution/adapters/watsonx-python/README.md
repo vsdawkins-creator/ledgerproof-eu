@@ -58,7 +58,7 @@ pip install -e .
 
 ```python
 from ibm_watsonx_ai import Credentials
-from ledgerproof_watsonx import LedgerProofModelInference
+from watsonx_ledgerproof import LedgerProofModelInference
 
 credentials = Credentials(
     url="https://eu-de.ml.cloud.ibm.com",   # Frankfurt — EU data residency
@@ -140,7 +140,7 @@ for chunk in stream:
 ## Decorator pattern
 
 ```python
-from ledgerproof_watsonx import lpr_track
+from watsonx_ledgerproof import lpr_track
 
 @lpr_track(
     deployer_id="acme-eu-bank",
@@ -156,7 +156,7 @@ def summarize(prompt: str) -> dict:
 ## Manual emission
 
 ```python
-from ledgerproof_watsonx import emit_receipt
+from watsonx_ledgerproof import emit_receipt
 
 signed = emit_receipt(
     response=watsonx_response_dict,

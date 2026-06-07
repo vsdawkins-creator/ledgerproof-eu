@@ -33,7 +33,7 @@ pip install ledgerproof-snowflake-cortex
 
 ```python
 from snowflake.snowpark import Session
-from ledgerproof_snowflake_cortex import LedgerProofCortex
+from snowflake_cortex_ledgerproof import LedgerProofCortex
 
 session = Session.builder.configs({
     "account": "...",
@@ -88,7 +88,7 @@ hashed retrieval fingerprint so a regulator-facing audit can reconstruct *which*
 governed corpus produced a given answer.
 
 ```python
-from ledgerproof_snowflake_cortex import LedgerProofCortexSearch
+from snowflake_cortex_ledgerproof import LedgerProofCortexSearch
 
 search = LedgerProofCortexSearch(
     session=session,

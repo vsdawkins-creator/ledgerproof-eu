@@ -18,7 +18,7 @@ Python 3.10+.
 
 ```python
 from langchain_openai import ChatOpenAI
-from ledgerproof_langchain import LedgerProofCallbackHandler, LogEmitter
+from langchain_ledgerproof import LedgerProofCallbackHandler, LogEmitter
 
 handler = LedgerProofCallbackHandler(
     deployer_id="acme-corp-eu",

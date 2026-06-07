@@ -78,7 +78,7 @@ pip install "ledgerproof-azure-openai[test]"
 ## 30-second quickstart
 
 ```python
-from ledgerproof_azure_openai import LedgerProofAzureOpenAI
+from azure_openai_ledgerproof import LedgerProofAzureOpenAI
 
 client = LedgerProofAzureOpenAI(
     deployer_id="urn:eu:deployer:contoso-bank",

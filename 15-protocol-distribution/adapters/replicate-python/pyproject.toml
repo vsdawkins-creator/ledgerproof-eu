@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-replicate"
+name = "replicate-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for the Replicate Python SDK. Side-channel transparency receipts for EU AI Act Article 50 (multi-modal generation: image, audio, video, text)."
 readme = "README.md"
@@ -62,7 +62,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_replicate*"]
+include = ["replicate_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

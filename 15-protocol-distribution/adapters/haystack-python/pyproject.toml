@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-haystack"
+name = "haystack-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for Haystack 2.x — side-channel cryptographic receipts for EU AI Act Article 50 transparency."
 readme = "README.md"
@@ -59,7 +59,7 @@ Repository = "https://github.com/ledgerproof-foundation/ledgerproof-haystack"
 Issues = "https://github.com/ledgerproof-foundation/ledgerproof-haystack/issues"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_haystack*"]
+include = ["haystack_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

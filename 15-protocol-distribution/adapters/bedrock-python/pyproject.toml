@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-bedrock"
+name = "bedrock-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for the AWS Bedrock Runtime Python SDK (boto3). Side-channel transparency receipts for EU AI Act Article 50."
 readme = "README.md"
@@ -53,7 +53,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_bedrock*"]
+include = ["bedrock_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

@@ -58,7 +58,7 @@ Python 3.10+.
 ## 60-second quickstart
 
 ```python
-from ledgerproof_fireworks import LedgerProofFireworks, RegulatoryContext
+from fireworks_ledgerproof import LedgerProofFireworks, RegulatoryContext
 
 client = LedgerProofFireworks(
     deployer_id="acme-eu",
@@ -96,7 +96,7 @@ for chunk in stream:
 ## Image generation (FLUX)
 
 ```python
-from ledgerproof_fireworks import LedgerProofFireworks
+from fireworks_ledgerproof import LedgerProofFireworks
 
 client = LedgerProofFireworks(
     deployer_id="acme-eu",
@@ -115,7 +115,7 @@ image = client.image.generate(
 ## Open-model hosted attribution
 
 ```python
-from ledgerproof_fireworks import LedgerProofFireworks, OpenModelAttribution
+from fireworks_ledgerproof import LedgerProofFireworks, OpenModelAttribution
 
 client = LedgerProofFireworks(
     deployer_id="acme-eu",
@@ -193,8 +193,8 @@ Production deployments will swap the signer via the `Signer` protocol.
 
 ```python
 import base64
-from ledgerproof_fireworks import verify
-from ledgerproof_fireworks.canonical import canonical_encode
+from fireworks_ledgerproof import verify
+from fireworks_ledgerproof.canonical import canonical_encode
 
 canonical = canonical_encode(signed["receipt"])
 sig = base64.b64decode(signed["signature_b64"])

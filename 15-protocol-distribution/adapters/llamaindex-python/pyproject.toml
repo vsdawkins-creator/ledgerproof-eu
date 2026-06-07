@@ -3,8 +3,8 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-llamaindex"
-version = "0.1.0"
+name = "llamaindex-ledgerproof"
+version = "0.1.1"
 description = "LedgerProof callback handler for LlamaIndex — Article 50 transparency receipts for RAG and agent workflows."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -59,7 +59,7 @@ Repository = "https://github.com/ledgerproof/protocol"
 Issues = "https://github.com/ledgerproof/protocol/issues"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_llamaindex*"]
+include = ["llamaindex_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

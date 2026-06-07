@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-xai"
+name = "xai-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for xAI Grok (OpenAI-compatible API) — emits Article 50 transparency receipts as a side channel."
 readme = "README.md"
@@ -42,7 +42,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_xai*"]
+include = ["xai_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

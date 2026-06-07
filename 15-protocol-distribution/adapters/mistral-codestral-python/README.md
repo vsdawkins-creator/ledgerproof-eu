@@ -34,7 +34,7 @@ export MISTRAL_CODESTRAL_API_KEY=...
 ```
 
 ```python
-from ledgerproof_mistral_codestral import LedgerProofCodestral, LogEmitter
+from mistral_codestral_ledgerproof import LedgerProofCodestral, LogEmitter
 
 client = LedgerProofCodestral(
     deployer_id="acme-corp-eu",

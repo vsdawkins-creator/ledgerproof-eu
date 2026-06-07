@@ -17,7 +17,7 @@ export REKA_API_KEY=...
 ```
 
 ```python
-from ledgerproof_reka import LedgerProofReka, LogEmitter
+from reka_ledgerproof import LedgerProofReka, LogEmitter
 
 client = LedgerProofReka(
     deployer_id="acme-corp-eu",

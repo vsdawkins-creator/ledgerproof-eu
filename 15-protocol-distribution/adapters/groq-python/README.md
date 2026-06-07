@@ -20,7 +20,7 @@ pip install ledgerproof-groq
 ## Quickstart
 
 ```python
-from ledgerproof_groq import LedgerProofGroq
+from groq_ledgerproof import LedgerProofGroq
 
 client = LedgerProofGroq(
     api_key="...",                  # Groq API key (or env GROQ_API_KEY)

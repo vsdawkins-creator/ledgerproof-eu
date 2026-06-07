@@ -58,7 +58,7 @@ Python 3.10+.
 ## 60-second quickstart
 
 ```python
-from ledgerproof_together import LedgerProofTogether, RegulatoryContext
+from together_ledgerproof import LedgerProofTogether, RegulatoryContext
 
 client = LedgerProofTogether(
     deployer_id="acme-eu",
@@ -95,7 +95,7 @@ for chunk in stream:
 ## Image generation (FLUX)
 
 ```python
-from ledgerproof_together import LedgerProofTogether
+from together_ledgerproof import LedgerProofTogether
 
 client = LedgerProofTogether(
     deployer_id="acme-eu",
@@ -115,7 +115,7 @@ image = client.images.generate(
 ## Open-model attribution
 
 ```python
-from ledgerproof_together import LedgerProofTogether, OpenModelAttribution
+from together_ledgerproof import LedgerProofTogether, OpenModelAttribution
 
 client = LedgerProofTogether(
     deployer_id="acme-eu",
@@ -192,8 +192,8 @@ Production deployments will swap the signer via the `Signer` protocol.
 
 ```python
 import base64
-from ledgerproof_together import verify
-from ledgerproof_together.canonical import canonical_encode
+from together_ledgerproof import verify
+from together_ledgerproof.canonical import canonical_encode
 
 canonical = canonical_encode(signed["receipt"])
 sig = base64.b64decode(signed["signature_b64"])

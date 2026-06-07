@@ -22,7 +22,7 @@ export DASHSCOPE_API_KEY=...
 ```
 
 ```python
-from ledgerproof_qwen import LedgerProofQwen, LogEmitter
+from qwen_ledgerproof import LedgerProofQwen, LogEmitter
 
 client = LedgerProofQwen(
     deployer_id="acme-corp-eu",
@@ -66,7 +66,7 @@ This adapter ships two Qwen-specific schemas to help deployers record those fact
 Article 50 receipt:
 
 ```python
-from ledgerproof_qwen import (
+from qwen_ledgerproof import (
     ChineseInferenceAttestation,
     CrossJurisdictionalRoute,
     LedgerProofQwen,

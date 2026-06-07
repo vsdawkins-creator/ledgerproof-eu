@@ -69,7 +69,7 @@ Runtime dependencies: `replicate>=1.0`, `cryptography>=41`, `cbor2>=5.0`,
 ## Quick start — client wrapper
 
 ```python
-from ledgerproof_replicate import LedgerProofReplicateClient
+from replicate_ledgerproof import LedgerProofReplicateClient
 
 client = LedgerProofReplicateClient(
     deployer_id="acme-eu",
@@ -159,7 +159,7 @@ ends, with `streaming=True` and the SHA-256 of the full concatenated output.
 
 ```python
 import replicate
-from ledgerproof_replicate import lpr_track
+from replicate_ledgerproof import lpr_track
 
 @lpr_track(deployer_id="acme-eu")
 def generate_marketing_image(ref: str, input: dict):
@@ -179,7 +179,7 @@ For non-standard flows (batch, mixed modality, custom hashing of large
 downloaded artifacts) call `emit_receipt` directly:
 
 ```python
-from ledgerproof_replicate import (
+from replicate_ledgerproof import (
     emit_receipt,
     build_model_ref_from_coordinate,
     hash_image_bytes,
@@ -248,7 +248,7 @@ Custom emitters: any object satisfying `Emitter.emit(signed_receipt: dict)`.
 
 ```python
 import base64
-from ledgerproof_replicate import canonical_encode, verify
+from replicate_ledgerproof import canonical_encode, verify
 
 signed = {...}  # loaded from your sink
 canonical = canonical_encode(signed["receipt"])

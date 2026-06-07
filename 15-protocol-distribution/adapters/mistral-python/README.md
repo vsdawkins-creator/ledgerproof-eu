@@ -20,7 +20,7 @@ export MISTRAL_API_KEY=...
 ```
 
 ```python
-from ledgerproof_mistral import LedgerProofMistral, LogEmitter
+from mistral_ledgerproof import LedgerProofMistral, LogEmitter
 
 client = LedgerProofMistral(
     deployer_id="acme-corp-eu",
@@ -59,7 +59,7 @@ Because Mistral is a French / EU-headquartered model provider, this adapter ship
 Article 50 receipt:
 
 ```python
-from ledgerproof_mistral import EuSovereigntyAttestation, LedgerProofMistral
+from mistral_ledgerproof import EuSovereigntyAttestation, LedgerProofMistral
 
 client = LedgerProofMistral(
     deployer_id="acme-bank-eu",

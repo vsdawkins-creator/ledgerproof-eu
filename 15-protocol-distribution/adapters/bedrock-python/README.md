@@ -59,7 +59,7 @@ pip install -e .
 
 ```python
 import boto3, json
-from ledgerproof_bedrock import LedgerProofBedrockClient
+from bedrock_ledgerproof import LedgerProofBedrockClient
 
 raw = boto3.client("bedrock-runtime", region_name="eu-west-1")
 client = LedgerProofBedrockClient(
@@ -86,7 +86,7 @@ response = client.invoke_model(
 ## Converse API
 
 ```python
-from ledgerproof_bedrock import make_client
+from bedrock_ledgerproof import make_client
 
 client = make_client(deployer_id="acme-eu-bank", region_name="eu-west-1")
 
@@ -102,7 +102,7 @@ wired up.
 ## EU region residency
 
 ```python
-from ledgerproof_bedrock import LedgerProofBedrockClient
+from bedrock_ledgerproof import LedgerProofBedrockClient
 
 client = LedgerProofBedrockClient(
     deployer_id="acme-eu-bank",
@@ -119,7 +119,7 @@ region with the region pulled from the boto3 client config to catch drift.
 ## Decorator pattern
 
 ```python
-from ledgerproof_bedrock import lpr_track
+from bedrock_ledgerproof import lpr_track
 
 @lpr_track(
     deployer_id="acme-eu-bank",
@@ -139,7 +139,7 @@ def llama_summarize(prompt: str) -> dict:
 ## Manual emission
 
 ```python
-from ledgerproof_bedrock import emit_receipt
+from bedrock_ledgerproof import emit_receipt
 
 signed = emit_receipt(
     response=decoded_body,

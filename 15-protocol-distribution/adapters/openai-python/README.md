@@ -11,7 +11,7 @@ pip install ledgerproof-openai
 ## 5-minute quickstart
 
 ```python
-from ledgerproof_openai import LedgerProofOpenAI
+from openai_ledgerproof import LedgerProofOpenAI
 
 client = LedgerProofOpenAI(
     deployer_id="urn:eu:deployer:acme-bank-de",
@@ -33,7 +33,7 @@ print(resp.choices[0].message.content)
 ### 1. Client wrapper (recommended)
 
 ```python
-from ledgerproof_openai import LedgerProofOpenAI, LedgerProofAsyncOpenAI
+from openai_ledgerproof import LedgerProofOpenAI, LedgerProofAsyncOpenAI
 
 client = LedgerProofOpenAI(deployer_id="urn:eu:deployer:acme")
 async_client = LedgerProofAsyncOpenAI(deployer_id="urn:eu:deployer:acme")
@@ -47,7 +47,7 @@ over each chunk (constraint **C6**).
 
 ```python
 from openai import OpenAI
-from ledgerproof_openai import lpr_track
+from openai_ledgerproof import lpr_track
 
 client = OpenAI()
 
@@ -63,7 +63,7 @@ def ask(question: str):
 
 ```python
 from openai import OpenAI
-from ledgerproof_openai import emit_receipt
+from openai_ledgerproof import emit_receipt
 
 client = OpenAI()
 resp = client.chat.completions.create(...)
@@ -73,7 +73,7 @@ emit_receipt(resp, deployer_id="urn:eu:deployer:acme")
 ## Custom emitters
 
 ```python
-from ledgerproof_openai import LedgerProofOpenAI, WebhookEmitter, QueueEmitter
+from openai_ledgerproof import LedgerProofOpenAI, WebhookEmitter, QueueEmitter
 
 client = LedgerProofOpenAI(
     deployer_id="urn:eu:deployer:acme",

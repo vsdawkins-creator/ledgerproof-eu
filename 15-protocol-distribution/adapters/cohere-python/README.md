@@ -36,7 +36,7 @@ export COHERE_API_KEY=...
 ```
 
 ```python
-from ledgerproof_cohere import LedgerProofCohere, LogEmitter
+from cohere_ledgerproof import LedgerProofCohere, LogEmitter
 
 client = LedgerProofCohere(
     deployer_id="acme-corp-eu",

@@ -38,7 +38,7 @@ This adapter ships four schemas tuned to Perplexity-specific scenarios:
 ## 5-minute quickstart
 
 ```python
-from ledgerproof_perplexity import LedgerProofPerplexity
+from perplexity_ledgerproof import LedgerProofPerplexity
 
 # Defaults: base_url=https://api.perplexity.ai, api_key=$PPLX_API_KEY
 # (PERPLEXITY_API_KEY is also accepted as a fallback env var.)
@@ -62,7 +62,7 @@ print(resp.choices[0].message.content)
 ### 1. Client wrapper (recommended)
 
 ```python
-from ledgerproof_perplexity import (
+from perplexity_ledgerproof import (
     LedgerProofPerplexity,
     LedgerProofAsyncPerplexity,
 )
@@ -81,7 +81,7 @@ Perplexity attaches to chunks (typically on the final chunk).
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_perplexity import lpr_track
+from perplexity_ledgerproof import lpr_track
 
 client = OpenAI(
     api_key=os.environ["PPLX_API_KEY"],
@@ -98,7 +98,7 @@ def search(question: str, *, messages):
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_perplexity import emit_receipt
+from perplexity_ledgerproof import emit_receipt
 
 client = OpenAI(
     api_key=os.environ["PPLX_API_KEY"],
@@ -121,7 +121,7 @@ the lexicographically-sorted URLs, and writes both `citations_sha256` and
 `citations_count` into the receipt.
 
 ```python
-from ledgerproof_perplexity import LedgerProofPerplexity
+from perplexity_ledgerproof import LedgerProofPerplexity
 
 client = LedgerProofPerplexity(
     deployer_id="urn:eu:deployer:acme-media-de",
@@ -150,7 +150,7 @@ responsible for preserving whatever canonical input produced that hash.
 ## Article 50(4) public-interest text labelling
 
 ```python
-from ledgerproof_perplexity import LedgerProofPerplexity
+from perplexity_ledgerproof import LedgerProofPerplexity
 
 client = LedgerProofPerplexity(
     deployer_id="urn:eu:deployer:acme-media-de",
@@ -177,7 +177,7 @@ to probe.
 ## Custom emitters
 
 ```python
-from ledgerproof_perplexity import (
+from perplexity_ledgerproof import (
     LedgerProofPerplexity,
     WebhookEmitter,
     QueueEmitter,

@@ -43,7 +43,7 @@ Requires Python 3.10+, `haystack-ai>=2.0`, `cryptography>=41`, `cbor2>=5.0`, `py
 ```python
 from haystack import Pipeline
 from haystack.components.generators import OpenAIGenerator
-from ledgerproof_haystack import LedgerProofComponent, load_or_generate_signing_key
+from haystack_ledgerproof import LedgerProofComponent, load_or_generate_signing_key
 
 key = load_or_generate_signing_key()
 

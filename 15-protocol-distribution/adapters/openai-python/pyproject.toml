@@ -3,8 +3,8 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-openai"
-version = "0.1.0"
+name = "openai-ledgerproof"
+version = "0.1.1"
 description = "LedgerProof adapter for the OpenAI Python SDK — emits Article 50 transparency receipts as a side channel."
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -42,7 +42,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_openai*"]
+include = ["openai_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

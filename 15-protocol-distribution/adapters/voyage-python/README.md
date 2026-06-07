@@ -46,7 +46,7 @@ export VOYAGE_API_KEY=...
 ```
 
 ```python
-from ledgerproof_voyage import LedgerProofVoyage, LogEmitter
+from voyage_ledgerproof import LedgerProofVoyage, LogEmitter
 
 client = LedgerProofVoyage(
     deployer_id="acme-corp-eu",

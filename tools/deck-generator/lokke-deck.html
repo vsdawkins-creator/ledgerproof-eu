@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LedgerProof — Prepared for Lokke Moerel, 3 June 2026</title>
+<style>
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --brand-dark: #0b3d2e;
+    --brand-dark-2: #0d4a37;
+    --brand-amber: #f59e0b;
+    --brand-amber-light: #fbbf24;
+    --brand-cream: #fffbeb;
+    --critical: #b91c1c;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --border: #e2e8f0;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: white;
+    line-height: 1.5;
+    font-size: 13pt;
+  }
+  .slide {
+    width: 297mm;
+    height: 210mm;
+    padding: 14mm 18mm;
+    page-break-after: always;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    overflow: hidden;
+  }
+  .slide:last-child { page-break-after: auto; }
+  .letterhead {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 8pt;
+    border-bottom: 2px solid var(--brand-dark);
+    margin-bottom: 16pt;
+    flex-shrink: 0;
+  }
+  .lh-left { display: flex; align-items: center; gap: 8pt; }
+  .lh-mark {
+    width: 28pt; height: 28pt;
+    background: var(--brand-dark); color: var(--brand-amber);
+    font-weight: 800; font-size: 13pt;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 3pt; letter-spacing: -0.5pt;
+  }
+  .lh-text { font-size: 9pt; color: var(--text-muted); }
+  .lh-text strong { color: var(--brand-dark); font-size: 10pt; display: block; line-height: 1.2; }
+  .lh-right { font-size: 8.5pt; color: var(--text-muted); text-align: right; }
+  .slide-body { flex: 1; display: flex; flex-direction: column; }
+  .footer {
+    margin-top: auto;
+    padding-top: 8pt;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 8pt; color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  /* Cover */
+  .slide-cover {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-dark-2) 100%);
+    color: white;
+    padding: 0;
+  }
+  .cover-inner {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 24mm 22mm;
+    background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.10) 0%, transparent 50%);
+  }
+  .cover-top {
+    display: flex; gap: 12pt; align-items: center;
+    margin-bottom: 40pt;
+  }
+  .cover-mark {
+    width: 44pt; height: 44pt;
+    background: var(--brand-amber); color: var(--brand-dark);
+    font-weight: 800; font-size: 20pt;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 5pt; letter-spacing: -1pt;
+  }
+  .cover-brand { font-size: 16pt; font-weight: 700; color: white; }
+  .cover-brand-sub { font-size: 9.5pt; color: rgba(255,255,255,0.65); margin-top: 2pt; letter-spacing: 1pt; text-transform: uppercase; }
+  .cover-title {
+    font-size: 36pt; font-weight: 800; color: white;
+    line-height: 1.1; max-width: 220mm; margin-top: 20pt;
+    text-wrap: balance;
+  }
+  .cover-title .amber { color: var(--brand-amber); }
+  .cover-tagline {
+    font-size: 14pt; color: rgba(255,255,255,0.82);
+    margin-top: 18pt; max-width: 200mm; font-weight: 400;
+    text-wrap: balance;
+  }
+  .cover-meta {
+    margin-top: auto;
+    padding-top: 24pt;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8pt 18pt;
+    font-size: 10pt;
+    color: rgba(255,255,255,0.85);
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .cover-meta .label { color: var(--brand-amber-light); font-weight: 600; text-transform: uppercase; font-size: 8.5pt; letter-spacing: 1pt; }
+
+  /* Standard slide */
+  .slide-title {
+    font-size: 22pt; color: var(--brand-dark); font-weight: 700;
+    line-height: 1.15; margin-bottom: 4pt;
+  }
+  .slide-eyebrow {
+    font-size: 8.5pt; color: var(--brand-amber); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2pt;
+    margin-bottom: 8pt;
+  }
+  .slide-sub {
+    font-size: 11pt; color: var(--text-muted); margin-bottom: 20pt;
+    max-width: 240mm; line-height: 1.5;
+  }
+  .slide-content {
+    font-size: 11pt; color: var(--text); line-height: 1.55;
+  }
+  .slide-content p { margin-bottom: 9pt; max-width: 250mm; }
+  .slide-content strong { color: var(--brand-dark); }
+
+  /* Two-column layout */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18pt;
+  }
+  .col-tile {
+    background: var(--brand-cream);
+    border-left: 3pt solid var(--brand-amber);
+    padding: 10pt 14pt; border-radius: 0 3pt 3pt 0;
+  }
+  .col-tile.tile-green {
+    background: #f0f7f4;
+    border-left-color: var(--brand-dark);
+  }
+  .col-tile h3 {
+    font-size: 11pt; color: var(--brand-dark); margin-bottom: 5pt; font-weight: 700;
+  }
+  .col-tile p { font-size: 10pt; margin-bottom: 4pt; line-height: 1.45; color: var(--text); }
+
+  /* Three-layer stack diagram */
+  .layer-stack {
+    display: flex; flex-direction: column; gap: 8pt; margin-top: 4pt;
+  }
+  .layer {
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    border: 1.5pt solid;
+    display: grid; grid-template-columns: 60pt 1fr; gap: 14pt; align-items: center;
+  }
+  .layer.layer-receipt-schema { background: #e0f2fe; border-color: #0369a1; }
+  .layer.layer-receipt-store { background: #f0f7f4; border-color: var(--brand-dark); }
+  .layer.layer-anchor { background: var(--brand-cream); border-color: var(--brand-amber); }
+  .layer-label {
+    font-size: 8.5pt; text-transform: uppercase; letter-spacing: 1pt; font-weight: 700;
+    color: var(--brand-dark);
+    background: white;
+    padding: 4pt 6pt; border-radius: 2pt; text-align: center;
+  }
+  .layer-detail h3 { font-size: 11pt; color: var(--brand-dark); margin-bottom: 3pt; }
+  .layer-detail p { font-size: 9.5pt; color: var(--text); margin: 0; }
+
+  /* Sub-obligation grid */
+  .subo-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 9pt;
+  }
+  .subo {
+    padding: 9pt 12pt;
+    background: white; border: 1pt solid var(--border); border-radius: 3pt;
+    border-left: 3pt solid var(--brand-amber);
+  }
+  .subo-num {
+    display: inline-block; font-size: 9pt; font-weight: 700;
+    color: white; background: var(--brand-dark);
+    padding: 2pt 6pt; border-radius: 2pt; margin-bottom: 4pt;
+  }
+  .subo h4 { font-size: 10.5pt; color: var(--brand-dark); margin-bottom: 2pt; }
+  .subo p { font-size: 9.5pt; color: var(--text); margin: 0; }
+  .subo.deferred { opacity: 0.7; border-left-color: #94a3b8; }
+  .subo.deferred .subo-num { background: #64748b; }
+
+  /* Lists */
+  ul.brand-list { list-style: none; padding: 0; }
+  ul.brand-list li {
+    padding: 6pt 0 6pt 18pt; position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 10.5pt; line-height: 1.5;
+  }
+  ul.brand-list li:last-child { border-bottom: none; }
+  ul.brand-list li::before {
+    content: '▸'; position: absolute; left: 0; top: 7pt;
+    color: var(--brand-amber); font-weight: 700;
+  }
+  ul.brand-list strong { color: var(--brand-dark); }
+
+  /* Ask cards */
+  .ask-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; }
+  .ask-card {
+    background: white; border: 2pt solid var(--brand-dark); border-radius: 5pt;
+    padding: 14pt 16pt; display: flex; flex-direction: column;
+  }
+  .ask-num {
+    display: inline-block; font-size: 9pt; font-weight: 700;
+    color: var(--brand-dark); background: var(--brand-amber);
+    padding: 3pt 8pt; border-radius: 2pt; margin-bottom: 8pt; align-self: flex-start;
+  }
+  .ask-name { font-size: 14pt; font-weight: 700; color: var(--brand-dark); margin-bottom: 1pt; }
+  .ask-affiliation { font-size: 10pt; color: var(--text-muted); margin-bottom: 10pt; }
+  .ask-flow {
+    font-size: 10pt; color: var(--text); line-height: 1.5;
+    padding: 8pt 10pt; background: var(--brand-cream); border-radius: 3pt;
+    margin-bottom: 8pt;
+  }
+  .ask-commit {
+    font-size: 9.5pt; color: var(--text-muted);
+    padding-top: 6pt; border-top: 1pt solid var(--border);
+  }
+  .ask-commit strong { color: var(--brand-dark); }
+
+  /* Not-asking list */
+  ul.not-asking { list-style: none; padding: 0; }
+  ul.not-asking li {
+    padding: 7pt 0 7pt 24pt; position: relative;
+    font-size: 11pt; line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.not-asking li:last-child { border-bottom: none; }
+  ul.not-asking li::before {
+    content: '✕'; position: absolute; left: 4pt; top: 6pt;
+    color: var(--critical); font-weight: 700; font-size: 11pt;
+  }
+
+  /* Contact slide */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: auto 1fr; gap: 8pt 16pt;
+    font-size: 11pt;
+    margin-bottom: 16pt;
+  }
+  .contact-grid .label {
+    color: var(--brand-amber); font-weight: 700;
+    text-transform: uppercase; font-size: 8.5pt; letter-spacing: 1pt;
+    padding-top: 2pt;
+  }
+  .contact-grid .value { color: var(--text); }
+  .contact-grid .value code {
+    font-family: 'SF Mono', Menlo, monospace; font-size: 10pt;
+    background: var(--brand-cream); padding: 2pt 5pt; border-radius: 2pt;
+  }
+  .verify-note {
+    background: var(--brand-cream); border-left: 3pt solid var(--brand-amber);
+    padding: 10pt 14pt; font-size: 10pt; color: var(--text);
+    line-height: 1.55; border-radius: 0 3pt 3pt 0;
+  }
+
+  code, .mono { font-family: 'SF Mono', Menlo, Consolas, monospace; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — COVER                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-cover">
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="cover-mark">LP</div>
+      <div>
+        <div class="cover-brand">LedgerProof Foundation</div>
+        <div class="cover-brand-sub">In formation · Delaware 501(c)(3) · Stichting EU subsidiary Amsterdam</div>
+      </div>
+    </div>
+
+    <div class="cover-title">A structural answer to the <span class="amber">GDPR-meets-AI-Act</span> question your published work raises.</div>
+
+    <div class="cover-tagline">An open cryptographic provenance protocol for EU AI Act Article 50 transparency, designed so that the immutability the Act requires does not foreclose the erasability the GDPR requires.</div>
+
+    <div class="cover-meta">
+      <span class="label">Prepared for</span>
+      <span>Lokke Moerel · Senior Of Counsel · Morrison &amp; Foerster · Amsterdam</span>
+      <span class="label">Prepared by</span>
+      <span>Veronica S. Dawkins · Founder · LedgerProof Foundation (in formation)</span>
+      <span class="label">Date</span>
+      <span>3 June 2026</span>
+      <span class="label">Verifiable at</span>
+      <span class="mono">spec.ledgerproofhq.io · datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 — WHY YOU SPECIFICALLY                                       -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Why I am writing to you specifically</div>
+    <h2 class="slide-title">Three of your recent publications speak directly to the regulatory tension this protocol is built to resolve.</h2>
+    <div class="slide-sub">I am reaching out because the architectural answer described in the next pages is, in substantive terms, the operational response to the question your work raises. I should have led with this in the first message, not with an unframed introduction request.</div>
+
+    <ul class="brand-list">
+      <li><strong>"Do LLMs &lsquo;store&rsquo; personal data?"</strong> &nbsp;·&nbsp; October 2024 — addresses the core question of whether the cryptographic substrate of AI evidence can be considered to contain personal data within the meaning of GDPR Article 4(1).</li>
+      <li><strong>EU Digital Omnibus Amendments to GDPR to Facilitate AI Training</strong> — addresses the regulatory architecture for reconciling AI-development practice with the GDPR's data-minimisation, lawful-basis, and erasability requirements.</li>
+      <li><strong>Your published commentary on data-subject rights under emerging AI regimes</strong> — addresses the operational implications of GDPR Article 15-22 rights as applied to AI-system output evidence.</li>
+    </ul>
+
+    <p style="margin-top: 18pt; font-size: 11pt; color: var(--text); padding: 10pt 14pt; background: var(--brand-cream); border-left: 3pt solid var(--brand-amber); border-radius: 0 3pt 3pt 0;">
+      <strong>OCPP-AI v1.0</strong> separates the cryptographic-evidence layer from the personal-data layer so that the question your October 2024 paper raises has a structurally negative answer at the substrate: <em>no</em>, the immutable anchor does not store personal data, and the erasable receipt store does not store evidence the AI Office cannot independently verify.
+    </p>
+  </div>
+
+  <div class="footer"><span>2 / 12</span><span>LedgerProof Foundation (in formation) · veronica@ledgerproofhq.io</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — THE TENSION                                                -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">The regulatory tension</div>
+    <h2 class="slide-title">Two regimes, one architectural layer: immutability and erasability appear to be in direct conflict.</h2>
+
+    <div class="two-col" style="margin-top: 14pt;">
+      <div class="col-tile">
+        <h3>GDPR Article 17 — Right to erasure</h3>
+        <p>Personal data must be erasable on legitimate data-subject request. Erasure must be effective, not merely promised. Pseudonymisation is not erasure.</p>
+        <p>Any architecture in which personal data is published to an immutable substrate is, on first read, in tension with this right.</p>
+      </div>
+      <div class="col-tile tile-green">
+        <h3>AI Act Article 50 — Transparency obligations</h3>
+        <p>Evidence of AI-system interaction must survive the deployer's continued cooperation, the vendor's continued cooperation, and any single jurisdiction's hostility.</p>
+        <p>Operationally this requires immutable, independently verifiable evidence — a property vendor-proprietary logging structurally cannot satisfy long-term.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 18pt; font-size: 11pt; padding: 10pt 14pt; background: white; border: 1.5pt solid var(--brand-amber); border-radius: 3pt;">
+      <strong>The default-architecture trap.</strong> Vendor-proprietary AI logging satisfies neither regime sustainably: it is erasable only at the vendor's discretion (failing the data subject), and it is preserved only at the vendor's continuing commercial existence (failing the supervisory authority). Both regimes need an architecture that resolves the tension at the layer below either.
+    </p>
+  </div>
+
+  <div class="footer"><span>3 / 12</span><span>OCPP-AI v1.0 — Open Cryptographic Provenance Protocol for AI System Outputs</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 4 — STRUCTURAL ANSWER                                          -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">The protocol's structural answer</div>
+    <h2 class="slide-title">Three layers, separated by design. GDPR mechanics live at the upper two; evidence integrity lives at the lowest.</h2>
+
+    <div class="layer-stack">
+      <div class="layer layer-receipt-schema">
+        <div class="layer-label">Layer 1<br>Schema</div>
+        <div class="layer-detail">
+          <h3>Receipt schema layer &mdash; GDPR-by-design</h3>
+          <p>Schema validation <em>rejects</em> personal data at write time: email regular expressions, telephone patterns, government identifiers, free-text PII patterns. Fields that could otherwise carry PII (deployer_id, reviewer_role, review_rationale) are bounded to specific identifier formats (LEI, VAT, bounded role vocabulary).</p>
+        </div>
+      </div>
+      <div class="layer layer-receipt-store">
+        <div class="layer-label">Layer 2<br>Store</div>
+        <div class="layer-detail">
+          <h3>Receipt store layer &mdash; GDPR-erasable</h3>
+          <p>Each receipt resides in a controller-operated store and is fully erasable per GDPR Article 17. Erasing one receipt invalidates only that receipt's Merkle proof; remaining receipts in the same batch retain their proof integrity. Erasure mechanics are documented, auditable, and binding.</p>
+        </div>
+      </div>
+      <div class="layer layer-anchor">
+        <div class="layer-label">Layer 3<br>Anchor</div>
+        <div class="layer-detail">
+          <h3>Anchor layer &mdash; immutable, structurally PII-free</h3>
+          <p>Each batch publishes a fixed 36-byte payload: <code>"LPR1"</code> magic prefix &Vert; 32-byte SHA-256 Merkle root. The 32-byte root is cryptographically opaque to underlying receipt content. No party can publish personal data through this layer; the structural exclusion is normative, not policy.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 12pt; font-size: 10.5pt; color: var(--text-muted); line-height: 1.5;">
+      Architecturally, this is the answer to "do LLMs &lsquo;store&rsquo; personal data?" applied to the AI evidence problem: <strong>the immutable substrate does not store personal data, by construction.</strong> The substrate stores integrity commitments. Personal data lives only at the controller-operated layer where Article 17 can act on it.
+    </p>
+  </div>
+
+  <div class="footer"><span>4 / 12</span><span>OCPP-AI v1.0 · Three-layer separation</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 5 — WHAT THE PROTOCOL IS                                       -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">What the protocol is</div>
+    <h2 class="slide-title">OCPP-AI v1.0 — open specification, substrate-neutral, multi-implementation.</h2>
+
+    <ul class="brand-list" style="margin-top: 14pt;">
+      <li><strong>Specification</strong> &nbsp;Open Cryptographic Provenance Protocol for AI System Outputs (OCPP-AI v1.0). Published under <strong>Creative Commons Attribution 4.0 International</strong>. No patent encumbrance asserted by the Foundation. No commercial licensing.</li>
+      <li><strong>Standardisation track</strong> &nbsp;IETF Supply Chain Integrity, Transparency, and Trust Working Group. Internet-Draft <code>draft-dawkins-scitt-ai-article50-00</code> on the IETF Datatracker. Companion arXiv preprint (cs.CR primary classification) submitted today.</li>
+      <li><strong>Substrate-agnostic Anchor Interface</strong> &nbsp;Eight normative properties (I-1 through I-8) defining what any conforming anchor substrate must satisfy. Current reference implementation: <strong>Bitcoin OP_RETURN</strong> (continuous operation since 3 January 2009; satisfies all eight properties). Named alternative: <strong>European Blockchain Services Infrastructure (EBSI)</strong> as the primary EU-sovereign substrate, satisfying seven of eight properties with I-4 under continuing evaluation.</li>
+      <li><strong>Architectural compatibility</strong> &nbsp;W3C Verifiable Credentials 2.0 via published JSON-LD context. eIDAS 2.0 architectural complementarity (not duplication): an OCPP-AI receipt wrapped as a VC may be presented through an established Qualified Trust Service Provider for use cases requiring qualified evidence; OCPP-AI signatures are Ed25519 and do not themselves constitute Qualified Electronic Signatures.</li>
+      <li><strong>Reference implementations</strong> &nbsp;Python, TypeScript, Rust under <strong>Apache License 2.0</strong>. Twenty-nine framework adapters covering principal AI orchestration ecosystems (LangChain, LlamaIndex, OpenAI SDK, Anthropic SDK, Mistral, Cohere, AWS Bedrock, Azure OpenAI, Vertex AI, Hugging Face, and others).</li>
+    </ul>
+  </div>
+
+  <div class="footer"><span>5 / 12</span><span>spec.ledgerproofhq.io · github.com/vsdawkins-creator/ledgerproof-eu</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 6 — SUB-OBLIGATION COVERAGE                                    -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Article 50 sub-obligation coverage</div>
+    <h2 class="slide-title">Four of the five operative sub-obligations are addressed in v1.0. Sub-obligation 50(3) is deferred pending GDPR-coordination consultation.</h2>
+
+    <div class="subo-grid" style="margin-top: 14pt;">
+      <div class="subo">
+        <span class="subo-num">50(1)</span>
+        <h4>Direct user disclosure of AI interaction</h4>
+        <p><strong>ChatbotSession profile.</strong> Captures: ai_system_id, deployer_id, deployer_country, disclosure_text_hash, session_start_timestamp. Schema validation rejects PII in disclosure_text values.</p>
+      </div>
+      <div class="subo">
+        <span class="subo-num">50(2)</span>
+        <h4>Synthetic media machine-readable marking</h4>
+        <p><strong>GeneratedContent profile.</strong> Captures: content_hash, perceptual_hash, generation_type (AI_GENERATED / AI_MANIPULATED / AI_ASSISTED), source_content_hash, transparency_marker.</p>
+      </div>
+      <div class="subo">
+        <span class="subo-num">50(4)</span>
+        <h4>AI-generated text + human-review exemption</h4>
+        <p><strong>HumanReview profile.</strong> Captures: content_hash, reviewer_role (bounded vocabulary), reviewer_organization, review_rationale (bounded vocabulary; PII-rejecting), review_timestamp.</p>
+      </div>
+      <div class="subo">
+        <span class="subo-num">50(6)</span>
+        <h4>Clear &amp; distinguishable manner</h4>
+        <p><strong>transparency_marker field.</strong> Present across ChatbotSession and GeneratedContent. Default <code>"LPR-EU-AI-ACT-50"</code>; localised values admitted for Member State use.</p>
+      </div>
+      <div class="subo deferred">
+        <span class="subo-num">50(3)</span>
+        <h4>Biometric / emotion-recognition notification</h4>
+        <p><strong>Deferred to v1.1.</strong> The notification mechanics interact with GDPR Articles 9 (special categories) and 22 (automated decision-making) in ways that merit dedicated stakeholder consultation before specification, including specifically with privacy counsel in your jurisdiction.</p>
+      </div>
+      <div class="subo deferred">
+        <span class="subo-num">50(5)</span>
+        <h4>Not specified in v1.0</h4>
+        <p>Sub-obligation 50(5) addresses interactive AI categorisation/recommendation transparency; addressed through composition of 50(1) and 50(2) profiles in v1.0.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>6 / 12</span><span>OCPP-AI v1.0 · Article 4 sub-obligation profiles</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 7 — GDPR POSTURE IN DETAIL                                     -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">GDPR conformance posture (your domain)</div>
+    <h2 class="slide-title">Five binding architectural commitments. Each is normative in the specification, not policy.</h2>
+
+    <ul class="brand-list" style="margin-top: 12pt;">
+      <li><strong>Data minimisation by structure (Article 5(1)(c))</strong> &nbsp;Schema bounds field values; bounded vocabularies for reviewer_role and review_rationale; no free-text PII channels permitted at write time.</li>
+      <li><strong>Personal data exclusion at write time</strong> &nbsp;Schema validation MUST reject email-address patterns, telephone-number patterns, government-identifier patterns, and free-text PII regular expressions. A conforming implementation that accepts PII at the receipt schema layer is non-conformant.</li>
+      <li><strong>Erasability preserved (Article 17)</strong> &nbsp;The receipt store is the erasure target. Erasure of a single receipt invalidates that receipt's Merkle proof while preserving proof integrity for other receipts in the same batch. The anchor is unaffected. This separation is essential for joint AI Act / GDPR compliance and is normative.</li>
+      <li><strong>Anchor-layer structural exclusion</strong> &nbsp;The 36-byte anchor payload format MUST NOT permit publication of personal data. Compliance is structural: the 32-byte SHA-256 Merkle root is cryptographically opaque to underlying content. Substrate operators MUST NOT relax this requirement.</li>
+      <li><strong>International transfer posture</strong> &nbsp;Receipts can anchor to EBSI as the EU-sovereign substrate for use cases where Member State competent authorities or controllers require Union-controlled infrastructure. Dual-anchor deployment (Bitcoin + EBSI) is the recommended configuration for deployers under EU jurisdictional reach.</li>
+    </ul>
+
+    <p style="margin-top: 14pt; font-size: 10pt; color: var(--text-muted); padding: 8pt 12pt; border-left: 3pt solid var(--brand-dark); background: #f0f7f4;">
+      <strong>Position on the Article 4(1) question.</strong> The Foundation's position, consistent with the architectural separation above, is that the Bitcoin OP_RETURN substrate (and EBSI when conforming) does not <em>"store"</em> personal data within the meaning of GDPR Article 4(1), because the anchor payload carries cryptographically no recoverable information about underlying receipt content absent access to the full receipt batch — which lives at the controller-operated, erasable layer.
+    </p>
+  </div>
+
+  <div class="footer"><span>7 / 12</span><span>OCPP-AI v1.0 · Article 9 (GDPR compatibility) · Anchor Interface I-8</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 8 — FOUNDATION STRUCTURE                                       -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Entity structure</div>
+    <h2 class="slide-title">Two-jurisdiction Foundation + a separate operating company, designed so the protocol outlives any single entity.</h2>
+
+    <div class="two-col" style="margin-top: 14pt;">
+      <div class="col-tile tile-green">
+        <h3>LedgerProof Foundation &mdash; United States</h3>
+        <p><strong>Form.</strong> 501(c)(3) public charity in formation.</p>
+        <p><strong>Jurisdiction.</strong> Delaware.</p>
+        <p><strong>Counsel.</strong> Adler &amp; Colvin (San Francisco) &mdash; specialist 501(c)(3) governance counsel.</p>
+        <p><strong>Function.</strong> IETF specification stewardship, US regulatory engagement, global open-source release of reference implementations.</p>
+      </div>
+      <div class="col-tile">
+        <h3>LedgerProof Stichting &mdash; European Union</h3>
+        <p><strong>Form.</strong> Stichting in formation under Dutch law.</p>
+        <p><strong>Jurisdiction.</strong> Amsterdam.</p>
+        <p><strong>Counsel.</strong> NautaDutilh (Amsterdam) &mdash; specialist Dutch foundation counsel.</p>
+        <p><strong>Function.</strong> EU regulatory engagement, EU enforcement-authority correspondence, EU-resident receipt-anchoring contracts, Member State competent-authority liaison.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 14pt; padding: 11pt 14pt; background: white; border: 1.5pt solid var(--brand-dark); border-radius: 3pt;">
+      <h3 style="font-size: 11pt; color: var(--brand-dark); margin-bottom: 4pt;">LedgerProof Inc. — separate operating entity</h3>
+      <p style="font-size: 10pt; line-height: 1.5; color: var(--text); margin: 0;">
+        Delaware C-corporation, separate from the Foundation. Builds and sells managed services (cloud-hosted receipt anchoring, enterprise support, premium SLAs). Funds the Foundation via a documented grant agreement (€50K/month from August 2026) structured to avoid private inurement per IRS guidance. <strong>No overlapping board members between Inc. and Foundation other than the founding Executive Director through 31 August 2026; full divergence per charter thereafter.</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer"><span>8 / 12</span><span>Foundation governance structure &mdash; Adler &amp; Colvin (US) &middot; NautaDutilh (NL)</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 9 — OPERATIONAL STATE                                          -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Operational state (independently verifiable)</div>
+    <h2 class="slide-title">Every claim on this page resolves to a URL or a record you can verify without our cooperation.</h2>
+
+    <ul class="brand-list" style="margin-top: 12pt;">
+      <li><strong>IETF SCITT Working Group Internet-Draft</strong> &nbsp; <code>draft-dawkins-scitt-ai-article50-00</code> &nbsp; <span style="color: var(--text-muted);">live on IETF Datatracker · datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/</span></li>
+      <li><strong>EU AI Office consultation submission</strong> &nbsp; Filed via Futurium 2 June 2026 on the draft Article 50 Guidelines. Bitcoin-anchored as Foundation governance event <code>gov-2026-06-02-eu-ai-office-consultation</code>; OpenTimestamps receipt available on request.</li>
+      <li><strong>DG-CNECT memorandum</strong> &nbsp; Delivered 3 June 2026 (today). Stable URL: <code>spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html</code>. Anchored as governance event <code>gov-2026-06-03-dgcnect-memo</code>.</li>
+      <li><strong>Stibbe Brussels engagement</strong> &nbsp; Engaged 3 June 2026 for institutional desk-officer sourcing at the AI Office and EAIB Secretariat, plus priority EAIB national-rep contacts (FR/DE/NL/EE/IE). Deliverable due 6 June 2026 CET.</li>
+      <li><strong>Reference implementations</strong> &nbsp; Apache 2.0 source: <code>github.com/vsdawkins-creator/ledgerproof-eu</code> (public). 29 framework adapters covering principal AI orchestration ecosystems.</li>
+      <li><strong>Specifications + companion artifacts</strong> &nbsp; <code>spec.ledgerproofhq.io</code> &mdash; OCPP-AI v1.0 core specification, Anchor Interface Specification v1.0, W3C VC 2.0 JSON-LD context, conformance test vector index, anchor substrate registry, governance event records.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><span>9 / 12</span><span>Operational state as of 3 June 2026, 13:00 PDT</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 10 — THE ASKS                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">What I am hoping you might consider</div>
+    <h2 class="slide-title">Two warm introductions in support of the Foundation's pre-launch EU counterweight slate, ahead of 6 July public launch.</h2>
+
+    <div class="ask-grid" style="margin-top: 14pt;">
+      <div class="ask-card">
+        <span class="ask-num">Ask 1</span>
+        <div class="ask-name">Sirma Boshnakova</div>
+        <div class="ask-affiliation">Member of the Board of Management · Allianz SE · Munich</div>
+        <div class="ask-flow">
+          Exploratory 30-minute call &rarr; publishable <strong>Letter of Intent to Evaluate</strong>: a twelve-week structured evaluation of the protocol against Allianz's Article 50 use cases.
+        </div>
+        <div class="ask-commit">
+          <strong>Indicative commitment on conversion:</strong> approximately €400K covering evaluation scope.<br>
+          <strong>Strategic value to LedgerProof:</strong> highest-yield insurance-sector counterweight anchor available for the 6 July launch press kit.
+        </div>
+      </div>
+      <div class="ask-card">
+        <span class="ask-num">Ask 2</span>
+        <div class="ask-name">Pieter van der Does</div>
+        <div class="ask-affiliation">Co-founder &amp; Chief Executive Officer · Adyen N.V. · Amsterdam</div>
+        <div class="ask-flow">
+          Exploratory 30-minute call &rarr; <strong>Founding Member anchor conversation</strong>: structured commitment with reciprocal API endpoint integration.
+        </div>
+        <div class="ask-commit">
+          <strong>Indicative commitment on conversion:</strong> approximately €300K plus warrant plus reciprocal API endpoint commitment.<br>
+          <strong>Strategic value to LedgerProof:</strong> Adyen as anchor establishes payments-sector Article 50 implementation pattern.
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 12pt; font-size: 10.5pt; color: var(--text); padding: 9pt 13pt; background: var(--brand-cream); border-left: 3pt solid var(--brand-amber); border-radius: 0 3pt 3pt 0;">
+      If a 20-30 minute call with me first would help you decide whether either ask is appropriate to forward, I would welcome it at your convenience. If you would prefer to start with the technical materials, the OCPP-AI v1.0 core specification and the DG-CNECT memorandum at <code>spec.ledgerproofhq.io</code> are the primary substantive references.
+    </p>
+  </div>
+
+  <div class="footer"><span>10 / 12</span><span>EU counterweight slate &mdash; pre-launch positioning ahead of 6 July 2026</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 11 — WHAT I AM NOT ASKING                                      -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Discipline of the ask</div>
+    <h2 class="slide-title">What I am explicitly NOT asking, and why that matters.</h2>
+
+    <ul class="not-asking" style="margin-top: 16pt;">
+      <li><strong>Not asking for endorsement of LedgerProof specifically.</strong> The protocol is open, vendor-neutral, multi-substrate. Endorsement-of-vendor is the exact pattern an open-protocol Foundation must avoid.</li>
+      <li><strong>Not asking for any commercial entanglement.</strong> No fee, no engagement, no equity, no advisory arrangement of any kind. The asks are warm introductions evaluated on their substantive merit.</li>
+      <li><strong>Not asking you to represent or vouch for technical claims you have not independently verified.</strong> Every technical claim in this document resolves to a URL or a record you can examine directly. The introductions, if you choose to make them, can be limited to facilitation.</li>
+      <li><strong>Not asking for fast-tracking.</strong> An honest no, or a "not now", is more useful to me than a delay. Both asks have documented backup pathways (Brunswick Group EU as the institutional path to Allianz; Mishi Choudhary as the alternate path to Adyen) which I will exercise without hesitation if either fits poorly with your view.</li>
+      <li><strong>Not asking for confidentiality beyond ordinary professional norms.</strong> The Foundation's regulatory engagement is, by design, publicly verifiable. The protocol is published openly. Confidentiality applies only to the specifics of any counterparty discussion you facilitate, and is at the level you and the counterparty would set.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><span>11 / 12</span><span>The "not-asking" list is binding on the Foundation, not aspirational.</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 12 — CONTACT + VERIFICATION                                    -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="letterhead">
+    <div class="lh-left">
+      <div class="lh-mark">LP</div>
+      <div class="lh-text"><strong>LedgerProof Foundation</strong>Prepared for Lokke Moerel · 3 June 2026</div>
+    </div>
+    <div class="lh-right">Internal · For Lokke's review</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="slide-eyebrow">Contact &amp; verification</div>
+    <h2 class="slide-title">Every claim in this document is independently verifiable at the URLs below.</h2>
+
+    <div class="contact-grid" style="margin-top: 16pt;">
+      <span class="label">Author</span>
+      <span class="value">Veronica S. Dawkins &middot; Founder &middot; LedgerProof Foundation (in formation)</span>
+      <span class="label">Email</span>
+      <span class="value"><code>veronica@ledgerproofhq.io</code></span>
+      <span class="label">Specifications</span>
+      <span class="value"><code>spec.ledgerproofhq.io</code> &mdash; OCPP-AI v1.0, Anchor Interface, JSON-LD context, memoranda, governance events</span>
+      <span class="label">IETF</span>
+      <span class="value"><code>datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50/</code></span>
+      <span class="label">Source</span>
+      <span class="value"><code>github.com/vsdawkins-creator/ledgerproof-eu</code> &mdash; Apache 2.0 reference implementations</span>
+      <span class="label">EU consultation</span>
+      <span class="value">Submitted via Futurium on 2 June 2026 to the European Commission AI Office on the draft Article 50 Guidelines</span>
+      <span class="label">DG-CNECT memo</span>
+      <span class="value"><code>spec.ledgerproofhq.io/memos/dgcnect-article-50-reference-architecture-2026-06-03.html</code></span>
+      <span class="label">Counsel of record</span>
+      <span class="value">Adler &amp; Colvin (US 501(c)(3) formation) &middot; NautaDutilh (Dutch Stichting formation) &middot; Stibbe Brussels (EU regulatory engagement)</span>
+    </div>
+
+    <div class="verify-note">
+      <strong>This document is internal preparation for your evaluation.</strong> It is not a marketing artifact. The specifications at <code>spec.ledgerproofhq.io</code> are the canonical, citable Foundation publications. If anything in this document is inconsistent with the published specifications, the published specifications govern.
+    </div>
+
+    <p style="margin-top: 14pt; font-size: 10pt; color: var(--text-muted); font-style: italic; text-align: center;">
+      Thank you for your consideration, Lokke. If neither ask fits, or if I have misread the appropriate way to approach you entirely, please tell me directly. I would rather know than waste your time.
+    </p>
+  </div>
+
+  <div class="footer"><span>12 / 12</span><span>Prepared 3 June 2026 &middot; LedgerProof Foundation (in formation) &middot; <code>veronica@ledgerproofhq.io</code></span></div>
+</section>
+
+</body>
+</html>

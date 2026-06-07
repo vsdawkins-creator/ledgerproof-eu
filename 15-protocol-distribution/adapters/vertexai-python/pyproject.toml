@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-vertexai"
+name = "vertexai-ledgerproof"
 version = "0.1.0"
 description = "LedgerProof adapter for Google Cloud Vertex AI Python SDK — side-channel transparency receipts for EU AI Act Article 50"
 readme = "README.md"
@@ -45,7 +45,7 @@ Repository = "https://github.com/ledgerproof-foundation/ledgerproof"
 Issues = "https://github.com/ledgerproof-foundation/ledgerproof/issues"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_vertexai*"]
+include = ["vertexai_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

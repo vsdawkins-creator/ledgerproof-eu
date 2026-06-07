@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Compliance Stack Map — LedgerProof × the EU AI Act</title>
+<style>
+  @page { size: 11in 17in landscape; margin: 0; }
+  /* Tabloid landscape 17×11 in */
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --brand-dark: #0b3d2e;
+    --brand-dark-2: #0d4a37;
+    --brand-amber: #f59e0b;
+    --brand-amber-light: #fbbf24;
+    --brand-cream: #fffbeb;
+    --critical: #b91c1c;
+    --partial: #d97706;
+    --not-applicable: #94a3b8;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: white;
+    line-height: 1.4;
+    font-size: 10pt;
+    width: 17in;
+    height: 11in;
+    overflow: hidden;
+  }
+  .page {
+    width: 17in; height: 11in;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    padding: 16pt 20pt;
+    gap: 8pt;
+  }
+
+  /* ── Header band ── */
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 6pt;
+    border-bottom: 3px solid var(--brand-dark);
+  }
+  .h-left { display: flex; gap: 12pt; align-items: center; }
+  .h-mark {
+    width: 36pt; height: 36pt;
+    background: var(--brand-dark); color: var(--brand-amber);
+    font-weight: 800; font-size: 16pt;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4pt; letter-spacing: -1pt;
+  }
+  .h-title {
+    font-size: 18pt; font-weight: 800; color: var(--brand-dark);
+    line-height: 1.1; letter-spacing: -0.3pt;
+  }
+  .h-sub { font-size: 10pt; color: var(--text-muted); margin-top: 2pt; }
+  .h-right { text-align: right; font-size: 8.5pt; color: var(--text-muted); line-height: 1.45; }
+  .h-right strong { color: var(--brand-dark); }
+  .h-clock {
+    display: inline-block; padding: 4pt 9pt;
+    background: var(--brand-dark); color: var(--brand-amber);
+    border-radius: 3pt; font-weight: 700; font-size: 9pt; letter-spacing: 0.4pt;
+    margin-top: 3pt;
+  }
+
+  /* ── Risk-tier band ── */
+  .tier-band {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.8fr;
+    gap: 6pt;
+  }
+  .tier {
+    padding: 7pt 9pt; border-radius: 3pt;
+    border-left: 3pt solid;
+    font-size: 8.5pt; line-height: 1.4;
+  }
+  .tier h3 {
+    font-size: 9.5pt; font-weight: 700; margin-bottom: 1pt;
+    text-transform: uppercase; letter-spacing: 0.6pt;
+  }
+  .tier p { font-size: 8.5pt; color: var(--text-muted); }
+  .tier .lpr-fit {
+    margin-top: 3pt; padding-top: 3pt; border-top: 1pt dashed var(--border-strong);
+    font-size: 8pt; font-weight: 600;
+  }
+  .tier.t-unacceptable { background: #fef2f2; border-left-color: var(--critical); }
+  .tier.t-unacceptable h3 { color: var(--critical); }
+  .tier.t-high { background: #fff7ed; border-left-color: var(--partial); }
+  .tier.t-high h3 { color: var(--partial); }
+  .tier.t-limited { background: #ecfdf5; border-left-color: var(--brand-dark); }
+  .tier.t-limited h3 { color: var(--brand-dark); }
+  .tier.t-minimal { background: #f8fafc; border-left-color: var(--text-muted); }
+  .tier.t-minimal h3 { color: var(--text-muted); }
+  .tier.t-gpai { background: #f3f4f6; border-left-color: #4f46e5; }
+  .tier.t-gpai h3 { color: #4f46e5; }
+
+  /* ── Main matrix ── */
+  .matrix {
+    display: grid;
+    grid-template-columns: 2.6fr 1.4fr;
+    gap: 10pt;
+    overflow: hidden;
+  }
+
+  /* Left: Article table */
+  .article-table {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border-strong); border-radius: 3pt;
+    overflow: hidden;
+    font-size: 8.5pt;
+  }
+  .art-header {
+    display: grid;
+    grid-template-columns: 60pt 1fr 110pt 80pt;
+    background: var(--brand-dark); color: var(--brand-amber-light);
+    padding: 4pt 8pt;
+    font-size: 8pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6pt;
+  }
+  .art-row {
+    display: grid;
+    grid-template-columns: 60pt 1fr 110pt 80pt;
+    padding: 5pt 8pt;
+    border-top: 1px solid var(--border);
+    align-items: start;
+    font-size: 8.5pt;
+  }
+  .art-row:nth-child(even) { background: #fafbfc; }
+  .art-row .art-num {
+    font-weight: 700; color: var(--brand-dark);
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 8.5pt;
+  }
+  .art-row .art-topic { font-weight: 600; color: var(--text); }
+  .art-row .art-topic .desc {
+    display: block; font-weight: 400; color: var(--text-muted); font-size: 7.8pt;
+    margin-top: 1pt; line-height: 1.35;
+  }
+  .art-row .art-plugin { font-size: 7.8pt; color: var(--text); line-height: 1.4; }
+  .art-row .art-status {
+    text-align: center; font-weight: 700; font-size: 8pt;
+    padding: 2pt 4pt; border-radius: 2pt;
+    align-self: center; justify-self: center; width: 70pt;
+  }
+  .status-primary { background: #dcfce7; color: #14532d; border: 1.5pt solid var(--brand-dark); }
+  .status-plugin { background: var(--brand-cream); color: var(--brand-dark); border: 1pt solid var(--brand-amber); }
+  .status-partial { background: #fef3c7; color: #78350f; border: 1pt solid #d97706; }
+  .status-na { background: #f1f5f9; color: var(--text-muted); border: 1pt solid var(--border-strong); }
+  .status-gap { background: #fee2e2; color: #991b1b; border: 1pt solid #dc2626; }
+
+  /* Section divider rows */
+  .art-section {
+    background: var(--brand-dark); color: var(--brand-amber-light);
+    padding: 3pt 8pt;
+    font-size: 7.5pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8pt;
+    grid-column: 1 / -1;
+  }
+
+  /* Right: Conformity + Adapters */
+  .right-col {
+    display: flex; flex-direction: column;
+    gap: 8pt;
+  }
+  .panel {
+    border: 1px solid var(--border-strong); border-radius: 3pt;
+    padding: 8pt 10pt; background: white;
+  }
+  .panel h3 {
+    font-size: 9.5pt; color: var(--brand-dark); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5pt;
+    margin-bottom: 4pt;
+    padding-bottom: 2pt; border-bottom: 1.5pt solid var(--brand-amber);
+  }
+  .panel h4 {
+    font-size: 8.5pt; color: var(--brand-dark); font-weight: 700; margin: 4pt 0 2pt;
+  }
+  .panel p, .panel li {
+    font-size: 8pt; color: var(--text); line-height: 1.45;
+  }
+  .panel ul { padding-left: 12pt; }
+  .panel li { margin: 1.5pt 0; }
+
+  /* Conformity assessment paths */
+  .conf-paths { display: flex; flex-direction: column; gap: 5pt; }
+  .conf-path {
+    padding: 6pt 8pt;
+    border-left: 3pt solid;
+    background: #fafbfc;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .conf-path.annex-vi { border-left-color: var(--brand-dark); }
+  .conf-path.annex-vii { border-left-color: var(--brand-amber); }
+  .conf-path strong { color: var(--brand-dark); font-size: 8.5pt; }
+  .conf-path .note { font-size: 7.8pt; color: var(--text-muted); margin-top: 1pt; line-height: 1.4; }
+  .lever {
+    margin-top: 4pt; padding: 5pt 8pt;
+    background: var(--brand-cream); border: 1pt solid var(--brand-amber);
+    border-radius: 2pt; font-size: 8pt; color: var(--brand-dark);
+  }
+  .lever strong { font-weight: 700; }
+
+  /* 29-adapter map */
+  .adapter-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3pt; margin-top: 4pt;
+  }
+  .adapter {
+    background: var(--brand-dark); color: white;
+    padding: 3pt 5pt;
+    font-size: 6.8pt; font-weight: 600;
+    border-radius: 2pt;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .adapter-top { background: var(--brand-amber); color: var(--brand-dark); }
+
+  /* ── Footer band ── */
+  .footer-band {
+    display: grid;
+    grid-template-columns: 1.3fr 1.3fr 1.3fr 1fr;
+    gap: 8pt;
+    padding-top: 6pt;
+    border-top: 1.5pt solid var(--brand-dark);
+  }
+  .institutional, .substrate, .legend, .verify {
+    padding: 6pt 8pt;
+    background: #fafbfc;
+    border-radius: 3pt;
+    font-size: 8pt;
+  }
+  .institutional h4, .substrate h4, .legend h4, .verify h4 {
+    font-size: 8pt; color: var(--brand-dark); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6pt;
+    margin-bottom: 3pt;
+  }
+  .institutional .item, .substrate .item {
+    display: flex; justify-content: space-between; gap: 5pt;
+    padding: 1.5pt 0; border-bottom: 1px dashed var(--border);
+    font-size: 7.8pt;
+  }
+  .institutional .item:last-child, .substrate .item:last-child { border-bottom: none; }
+  .institutional .item .label { color: var(--text-muted); font-size: 7.5pt; }
+  .institutional .item .value { font-weight: 600; color: var(--brand-dark); font-size: 7.8pt; text-align: right; }
+  .legend-row {
+    display: flex; align-items: center; gap: 5pt; padding: 1pt 0;
+    font-size: 7.5pt;
+  }
+  .legend-chip {
+    display: inline-block; padding: 1pt 5pt; border-radius: 2pt;
+    font-size: 7pt; font-weight: 700; min-width: 26pt; text-align: center;
+  }
+  .verify code {
+    font-family: 'SF Mono', Menlo, monospace; font-size: 7.5pt;
+    background: var(--brand-cream); padding: 0.5pt 3pt; border-radius: 1pt;
+    color: var(--brand-dark);
+  }
+  .verify p { font-size: 7.5pt; line-height: 1.45; }
+
+  code { font-family: 'SF Mono', Menlo, monospace; font-size: 0.92em; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- HEADER                                                              -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<header class="header">
+  <div class="h-left">
+    <div class="h-mark">LP</div>
+    <div>
+      <div class="h-title">The Compliance Stack Map &mdash; LedgerProof &times; the EU AI Act</div>
+      <div class="h-sub">Where the open cryptographic provenance protocol plugs into every operative Article, Annex, and conformity-assessment path of Regulation (EU) 2024/1689.</div>
+    </div>
+  </div>
+  <div class="h-right">
+    LedgerProof Foundation <em>(in formation)</em> &middot; Delaware 501(c)(3) &middot; Dutch Stichting EU subsidiary<br>
+    Open specification (CC BY 4.0) &middot; Apache 2.0 reference implementations &middot; IETF SCITT WG track<br>
+    Verifiable at <strong>spec.ledgerproofhq.io</strong> &middot; <strong>datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50</strong>
+    <div class="h-clock">ARTICLE 50 APPLIES &middot; 2 AUGUST 2026</div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- RISK TIER BAND                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="tier-band">
+  <div class="tier t-unacceptable">
+    <h3>Unacceptable Risk</h3>
+    <p>Banned outright. Social scoring, real-time biometric ID in public spaces, voice toys encouraging dangerous behaviour.</p>
+    <div class="lpr-fit" style="color: var(--critical);">N/A &mdash; systems prohibited</div>
+  </div>
+  <div class="tier t-high">
+    <h3>High-Risk</h3>
+    <p>Annex II products + Annex III categories (employment, credit, healthcare, critical infrastructure, law enforcement). Conformity assessment required.</p>
+    <div class="lpr-fit" style="color: var(--partial);">Supporting fit &mdash; Articles 8/11/12/13/14/17 evidence substrate</div>
+  </div>
+  <div class="tier t-limited">
+    <h3>Limited Risk</h3>
+    <p>Article 50 transparency obligations. Chatbots, synthetic media, AI-generated text. Applies <strong>2 August 2026</strong>.</p>
+    <div class="lpr-fit" style="color: var(--brand-dark);">Primary fit &mdash; 5 of 6 sub-obligations in v1.0</div>
+  </div>
+  <div class="tier t-minimal">
+    <h3>Minimal Risk</h3>
+    <p>Spam filters, e-commerce recommenders, game AI. Voluntary codes of conduct only.</p>
+    <div class="lpr-fit" style="color: var(--text-muted);">N/A &mdash; no regulatory trigger</div>
+  </div>
+  <div class="tier t-gpai">
+    <h3>GPAI (separate)</h3>
+    <p>General-purpose models. Provider-side transparency obligations distinct from tier classification.</p>
+    <div class="lpr-fit" style="color: #4f46e5;">Receipts at provider boundary</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- MAIN MATRIX                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="matrix">
+
+  <!-- LEFT: Article-by-article table -->
+  <div class="article-table">
+    <div class="art-header">
+      <div>Article</div>
+      <div>Topic</div>
+      <div>OCPP-AI plug-in</div>
+      <div style="text-align: center;">Status</div>
+    </div>
+
+    <div class="art-row art-section">Chapter II &mdash; Prohibited practices</div>
+    <div class="art-row">
+      <div class="art-num">Art 5</div>
+      <div class="art-topic">Prohibited AI practices<span class="desc">Unacceptable-risk systems banned from the Union market.</span></div>
+      <div class="art-plugin">Not applicable &mdash; OCPP-AI is not for prohibited systems.</div>
+      <div class="art-status status-na">N/A</div>
+    </div>
+
+    <div class="art-row art-section">Chapter III Section 1 &mdash; Classification</div>
+    <div class="art-row">
+      <div class="art-num">Art 6 &middot; (3)</div>
+      <div class="art-topic">Risk classification + Material Impact Exception<span class="desc">Annex I/III tests; downgrade for preparatory-function systems.</span></div>
+      <div class="art-plugin">Receipts can document classification rationale and Material Impact Exception evidence under Art 6(3).</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+
+    <div class="art-row art-section">Chapter III Section 2 &mdash; Requirements for High-Risk AI Systems (Articles 8&ndash;15)</div>
+    <div class="art-row">
+      <div class="art-num">Art 8</div>
+      <div class="art-topic">Compliance with the Requirements<span class="desc">Meta-obligation: AI system satisfies Articles 9&ndash;15.</span></div>
+      <div class="art-plugin">Receipts are the evidentiary artifact demonstrating Article 11&ndash;14 compliance.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 9</div>
+      <div class="art-topic">Risk Management System (RMS)<span class="desc">Continuous, iterative risk identification + mitigation.</span></div>
+      <div class="art-plugin">Not addressed &mdash; OCPP-AI is a substrate; receipts can <em>feed</em> RMS metrics but do not constitute an RMS.</div>
+      <div class="art-status status-gap">GAP</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 10</div>
+      <div class="art-topic">Data and Data Governance<span class="desc">Training/validation data quality controls.</span></div>
+      <div class="art-plugin">Not addressed &mdash; OCPP-AI is downstream of training; client retains data-governance responsibility.</div>
+      <div class="art-status status-gap">GAP</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 11</div>
+      <div class="art-topic">Technical Documentation<span class="desc">Pre-market technical file (Annex IV).</span></div>
+      <div class="art-plugin">Specification + receipt-format documentation forms part of the technical-doc package for any system using the protocol.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 12</div>
+      <div class="art-topic">Record-Keeping<span class="desc">Automatic recording of events ("logs") over system lifetime.</span></div>
+      <div class="art-plugin"><strong>Primary fit.</strong> Cryptographic record-keeping IS the core function. Tamper-evident, Bitcoin-anchored, supervisory-authority verifiable without vendor cooperation.</div>
+      <div class="art-status status-primary">PRIMARY &#10003;&#10003;</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 13</div>
+      <div class="art-topic">Transparency &amp; Provision of Information to Deployers<span class="desc">Instructions for use; capabilities + limitations disclosure.</span></div>
+      <div class="art-plugin">Foundation publishes complete protocol documentation; receipts enable downstream verifiers (including deployers in chain-of-supply scenarios) to audit compliance.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 14</div>
+      <div class="art-topic">Human Oversight<span class="desc">Tools and measures enabling human oversight while in use.</span></div>
+      <div class="art-plugin"><strong>HumanReview</strong> profile captures <code>reviewer_role</code>, <code>reviewer_organization</code>, <code>review_rationale</code>, <code>review_timestamp</code> &mdash; the artifacts that demonstrate Art 14 oversight workflows.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 15</div>
+      <div class="art-topic">Accuracy, Robustness &amp; Cybersecurity<span class="desc">Resilience against errors and adversarial attempts.</span></div>
+      <div class="art-plugin">Partial &mdash; Ed25519 signatures + anchor immutability address <em>cybersecurity of the evidence layer</em>. Model accuracy/robustness are not in scope.</div>
+      <div class="art-status status-partial">PARTIAL</div>
+    </div>
+
+    <div class="art-row art-section">Chapter III Section 3 &mdash; Provider obligations</div>
+    <div class="art-row">
+      <div class="art-num">Art 17</div>
+      <div class="art-topic">Quality Management System (QMS)<span class="desc">Documented compliance strategy, post-market monitoring.</span></div>
+      <div class="art-plugin">Receipts serve as cryptographic QMS records; per VisionAI+ Annex VI internal-assessment path: <em>"QMS complies with Article 17."</em></div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+
+    <div class="art-row art-section">Chapter III Section 5 &mdash; Standards (Articles 40&ndash;42)</div>
+    <div class="art-row">
+      <div class="art-num">Art 40</div>
+      <div class="art-topic">Harmonised Standards<span class="desc">Presumption of conformity via European harmonised standards.</span></div>
+      <div class="art-plugin"><strong>Strategic lever.</strong> OCPP-AI Foundation engaged with CEN-CENELEC JTC 21 to position the protocol as a harmonised standards reference &mdash; converts Annex VII third-party assessment into Annex VI self-certification.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+
+    <div class="art-row art-section">Chapter IV &mdash; Transparency obligations (Article 50 sub-obligations)</div>
+    <div class="art-row">
+      <div class="art-num">Art 50(1)</div>
+      <div class="art-topic">Direct disclosure of AI interaction<span class="desc">Natural person knows they are talking to an AI.</span></div>
+      <div class="art-plugin"><strong>ChatbotSession</strong> profile: ai_system_id, deployer_id, disclosure_text_hash, session_start_timestamp. Schema rejects PII at validation.</div>
+      <div class="art-status status-primary">PRIMARY &#10003;&#10003;</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 50(2)</div>
+      <div class="art-topic">Synthetic content marking<span class="desc">Machine-readable marking of AI-generated/manipulated content.</span></div>
+      <div class="art-plugin"><strong>GeneratedContent</strong> profile: content_hash, perceptual_hash, generation_type, source_content_hash, transparency_marker.</div>
+      <div class="art-status status-primary">PRIMARY &#10003;&#10003;</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 50(3)</div>
+      <div class="art-topic">Emotion recognition &amp; biometric notification<span class="desc">Subjects of biometric/affect AI must be informed.</span></div>
+      <div class="art-plugin"><em>Deferred to v1.1</em> pending GDPR Art 9 / 22 coordination consultation. Documented gap with explicit consultation pathway.</div>
+      <div class="art-status status-partial">DEFERRED</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 50(4)</div>
+      <div class="art-topic">AI-generated text + editorial-review exemption<span class="desc">Public-interest text disclosed unless human-reviewed.</span></div>
+      <div class="art-plugin"><strong>HumanReview</strong> profile evidences the editorial-review exemption with bounded-vocabulary reviewer fields.</div>
+      <div class="art-status status-primary">PRIMARY &#10003;&#10003;</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 50(5)</div>
+      <div class="art-topic">Composition of 50(1) + 50(2)<span class="desc">Cross-cutting disclosure operability.</span></div>
+      <div class="art-plugin">Addressed by composition of ChatbotSession + GeneratedContent profiles.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+    <div class="art-row">
+      <div class="art-num">Art 50(6)</div>
+      <div class="art-topic">Clear &amp; distinguishable manner<span class="desc">Disclosure form requirements.</span></div>
+      <div class="art-plugin"><code>transparency_marker</code> field present across ChatbotSession + GeneratedContent. Default <code>"LPR-EU-AI-ACT-50"</code>; localised values admitted.</div>
+      <div class="art-status status-primary">PRIMARY &#10003;&#10003;</div>
+    </div>
+
+    <div class="art-row art-section">Chapter V &mdash; GPAI provisions (Articles 51&ndash;55)</div>
+    <div class="art-row">
+      <div class="art-num">Art 53+</div>
+      <div class="art-topic">GPAI provider obligations<span class="desc">Transparency, training-data summaries, copyright compliance.</span></div>
+      <div class="art-plugin">Provider-side receipts at the model output boundary; deployers consuming GPAI outputs gain a verifiable trail for downstream Article 50 obligations.</div>
+      <div class="art-status status-plugin">PLUG-IN</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Conformity paths + adapters -->
+  <div class="right-col">
+
+    <div class="panel">
+      <h3>Conformity assessment paths (Annexes VI &amp; VII)</h3>
+      <div class="conf-paths">
+        <div class="conf-path annex-vi">
+          <strong>Annex VI &mdash; Internal Assessment / Self-Certification</strong>
+          <div class="note">QMS conforms to Art 17 &middot; technical documentation per Articles 8&ndash;15 &middot; design / development / post-market monitoring consistent with documentation.</div>
+        </div>
+        <div class="conf-path annex-vii">
+          <strong>Annex VII &mdash; Third-Party Assessment by Notified Body</strong>
+          <div class="note">Required when: (a) safety component of Annex I products; (b) certain Annex III biometric category-1 systems; or (c) <strong>the provider has not applied harmonised technical standards covering all relevant requirements</strong>.</div>
+        </div>
+      </div>
+      <div class="lever">
+        <strong>The harmonised-standards lever.</strong> Annex VII condition (c) is the structural lever. OCPP-AI as a CEN-CENELEC JTC 21 referenced standard would convert Annex VII obligations into Annex VI self-certification &mdash; shortening conformity assessment by months per deployer.
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>29 framework adapters &mdash; distribution shipped</h3>
+      <p style="font-size: 7.8pt; color: var(--text-muted); margin-bottom: 3pt;">Native plug-in at every major AI orchestration framework. <code>pip install &lt;framework&gt;-ledgerproof</code> &mdash; ~3 lines of integration code.</p>
+      <div class="adapter-grid">
+        <div class="adapter adapter-top">langchain</div>
+        <div class="adapter adapter-top">openai</div>
+        <div class="adapter adapter-top">anthropic</div>
+        <div class="adapter adapter-top">vertexai</div>
+        <div class="adapter adapter-top">bedrock</div>
+        <div class="adapter">llamaindex</div>
+        <div class="adapter">azure-openai</div>
+        <div class="adapter">mistral</div>
+        <div class="adapter">cohere</div>
+        <div class="adapter">huggingface</div>
+        <div class="adapter">google-ai</div>
+        <div class="adapter">together</div>
+        <div class="adapter">groq</div>
+        <div class="adapter">ai21</div>
+        <div class="adapter">replicate</div>
+        <div class="adapter">xai</div>
+        <div class="adapter">deepseek</div>
+        <div class="adapter">qwen</div>
+        <div class="adapter">reka</div>
+        <div class="adapter">voyage</div>
+        <div class="adapter">cerebras</div>
+        <div class="adapter">watsonx</div>
+        <div class="adapter">snowflake-cortex</div>
+        <div class="adapter">perplexity</div>
+        <div class="adapter">fireworks</div>
+        <div class="adapter">aleph-alpha</div>
+        <div class="adapter">haystack</div>
+        <div class="adapter">semantic-kernel</div>
+        <div class="adapter">mistral-codestral</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>GDPR &middot; architectural posture</h3>
+      <p style="font-size: 8pt;">Three layers, separated by design. GDPR mechanics live at the upper two; evidence integrity at the lowest.</p>
+      <ul>
+        <li><strong>Schema layer:</strong> Personal data rejected at write time (email/phone/PII regex).</li>
+        <li><strong>Receipt store:</strong> GDPR Art 17 erasure operates per-receipt without invalidating the batch anchor.</li>
+        <li><strong>Anchor layer:</strong> 36-byte <code>LPR1 &Vert; merkle_root_32</code> payload &mdash; cryptographically opaque to underlying content.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER BAND                                                          -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="footer-band">
+  <div class="institutional">
+    <h4>Institutional engagement (verifiable URLs)</h4>
+    <div class="item"><span class="label">IETF SCITT WG draft</span><span class="value">draft-dawkins-scitt-ai-article50-00</span></div>
+    <div class="item"><span class="label">EU AI Office consultation</span><span class="value">Futurium &middot; filed 2 Jun 2026</span></div>
+    <div class="item"><span class="label">DG-CNECT memorandum</span><span class="value">delivered 3 Jun 2026</span></div>
+    <div class="item"><span class="label">Stibbe Brussels engagement</span><span class="value">Annex VI desk-officer sourcing</span></div>
+    <div class="item"><span class="label">arXiv preprint</span><span class="value">cs.CR &middot; submission in flight</span></div>
+    <div class="item"><span class="label">CEN-CENELEC JTC 21</span><span class="value">national mirror committee path (DIN-SME)</span></div>
+  </div>
+  <div class="substrate">
+    <h4>Anchor substrate (Bitcoin + EBSI dual-anchor)</h4>
+    <div class="item"><span class="label">Reference substrate</span><span class="value">Bitcoin OP_RETURN</span></div>
+    <div class="item"><span class="label">Anchor payload</span><span class="value">"LPR1" &Vert; merkle_root_32 (36 bytes)</span></div>
+    <div class="item"><span class="label">EU-sovereign alternative</span><span class="value">European Blockchain Services Infrastructure (EBSI)</span></div>
+    <div class="item"><span class="label">Dual-anchor mode</span><span class="value">Recommended for EU-jurisdictional deployers</span></div>
+    <div class="item"><span class="label">Signature</span><span class="value">Ed25519 over CBOR canonical encoding</span></div>
+    <div class="item"><span class="label">Anchor Interface</span><span class="value">8 normative properties (I-1 through I-8)</span></div>
+  </div>
+  <div class="legend">
+    <h4>Plug-in status legend</h4>
+    <div class="legend-row"><span class="legend-chip status-primary">PRIMARY</span><span>Core function &mdash; the protocol IS the artifact for this Article.</span></div>
+    <div class="legend-row"><span class="legend-chip status-plugin">PLUG-IN</span><span>Direct integration point &mdash; OCPP-AI provides evidence substrate.</span></div>
+    <div class="legend-row"><span class="legend-chip status-partial">PARTIAL</span><span>Bounded coverage &mdash; documented scope limits.</span></div>
+    <div class="legend-row"><span class="legend-chip status-gap">GAP</span><span>Explicit not-addressed &mdash; complementary tooling required.</span></div>
+    <div class="legend-row"><span class="legend-chip status-na">N/A</span><span>Not applicable to scope of OCPP-AI.</span></div>
+  </div>
+  <div class="verify">
+    <h4>Verify everything</h4>
+    <p>Every claim on this page resolves to a public URL or chain record.</p>
+    <p style="margin-top: 3pt;">Specifications: <code>spec.ledgerproofhq.io</code></p>
+    <p>Source: <code>github.com/vsdawkins-creator/ledgerproof-eu</code></p>
+    <p>IETF: <code>datatracker.ietf.org/doc/draft-dawkins-scitt-ai-article50</code></p>
+    <p>PyPI distribution: <code>pip install &lt;framework&gt;-ledgerproof</code></p>
+    <p style="margin-top: 4pt; color: var(--text-muted); font-style: italic;">Prepared 7 June 2026 &middot; v1.0 &middot; Foundation governance event anchored.</p>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>

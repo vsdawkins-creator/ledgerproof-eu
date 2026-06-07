@@ -39,7 +39,7 @@ import asyncio
 from semantic_kernel import Kernel
 from semantic_kernel.functions import kernel_function
 
-from ledgerproof_semantic_kernel import (
+from semantic_kernel_ledgerproof import (
     LedgerProofFunctionFilter, LogEmitter, Ed25519Signer,
 )
 
@@ -72,7 +72,7 @@ A receipt is appended to `./receipts.jsonl` for the function call.
 ## Auto-function-calling agents
 
 ```python
-from ledgerproof_semantic_kernel import LedgerProofAutoFunctionFilter
+from semantic_kernel_ledgerproof import LedgerProofAutoFunctionFilter
 
 kernel.add_filter(
     "auto_function_invocation",
@@ -87,7 +87,7 @@ function filters. Wrap the service for chatbot receipts:
 
 ```python
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
-from ledgerproof_semantic_kernel import LedgerProofChatService
+from semantic_kernel_ledgerproof import LedgerProofChatService
 
 inner = AzureChatCompletion(
     deployment_name="gpt-4o", endpoint=..., api_key=...,

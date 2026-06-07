@@ -3,8 +3,8 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-anthropic"
-version = "0.1.0"
+name = "anthropic-ledgerproof"
+version = "0.1.1"
 description = "LedgerProof adapter for the Anthropic Python SDK. Side-channel transparency receipts for EU AI Act Article 50."
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -43,7 +43,7 @@ Repository = "https://github.com/ledgerproof/ledgerproof"
 Documentation = "https://docs.ledgerproof.org"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_anthropic*"]
+include = ["anthropic_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

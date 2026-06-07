@@ -33,7 +33,7 @@ This adapter ships four schemas tuned to those Grok-specific scenarios:
 ## 5-minute quickstart
 
 ```python
-from ledgerproof_xai import LedgerProofXAI
+from xai_ledgerproof import LedgerProofXAI
 
 # Defaults: base_url=https://api.x.ai/v1, api_key=$XAI_API_KEY
 client = LedgerProofXAI(
@@ -56,7 +56,7 @@ print(resp.choices[0].message.content)
 ### 1. Client wrapper (recommended)
 
 ```python
-from ledgerproof_xai import LedgerProofXAI, LedgerProofAsyncXAI
+from xai_ledgerproof import LedgerProofXAI, LedgerProofAsyncXAI
 
 client = LedgerProofXAI(deployer_id="urn:eu:deployer:acme")
 async_client = LedgerProofAsyncXAI(deployer_id="urn:eu:deployer:acme")
@@ -71,7 +71,7 @@ over each chunk (constraint **C6**).
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_xai import lpr_track
+from xai_ledgerproof import lpr_track
 
 client = OpenAI(
     api_key=os.environ["XAI_API_KEY"],
@@ -88,7 +88,7 @@ def ask(question: str, *, messages):
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_xai import emit_receipt
+from xai_ledgerproof import emit_receipt
 
 client = OpenAI(api_key=os.environ["XAI_API_KEY"], base_url="https://api.x.ai/v1")
 resp = client.chat.completions.create(
@@ -104,7 +104,7 @@ When you rely on Grok's live X-platform / web grounding, switch schemas:
 
 ```python
 import hashlib, json
-from ledgerproof_xai import LedgerProofXAI
+from xai_ledgerproof import LedgerProofXAI
 
 sources = [
     {"url": "https://x.com/example/status/1234", "captured_at": "2026-08-02T09:15:00Z"},
@@ -132,7 +132,7 @@ to reproduce the binding from the materials you preserve.
 ## Vision inference (`grok-2-vision`)
 
 ```python
-from ledgerproof_xai import LedgerProofXAI
+from xai_ledgerproof import LedgerProofXAI
 
 client = LedgerProofXAI(
     deployer_id="urn:eu:deployer:acme",
@@ -158,7 +158,7 @@ via `regulatory_context`.
 ## Custom emitters
 
 ```python
-from ledgerproof_xai import LedgerProofXAI, WebhookEmitter, QueueEmitter
+from xai_ledgerproof import LedgerProofXAI, WebhookEmitter, QueueEmitter
 
 client = LedgerProofXAI(
     deployer_id="urn:eu:deployer:acme",

@@ -19,7 +19,7 @@ export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 ```python
-from ledgerproof_anthropic import LedgerProofAnthropic, LogEmitter
+from anthropic_ledgerproof import LedgerProofAnthropic, LogEmitter
 
 client = LedgerProofAnthropic(
     deployer_id="acme-corp-eu",

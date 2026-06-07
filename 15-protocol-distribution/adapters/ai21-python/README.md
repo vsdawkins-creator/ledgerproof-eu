@@ -21,7 +21,7 @@ export AI21_API_KEY=...
 ```
 
 ```python
-from ledgerproof_ai21 import LedgerProofAI21, LogEmitter
+from ai21_ledgerproof import LedgerProofAI21, LogEmitter
 
 client = LedgerProofAI21(
     deployer_id="acme-corp-eu",
@@ -60,7 +60,7 @@ Deployers exercising this surface (RAG over whole codebases, multi-document lega
 long-form policy synthesis) can opt into the `long_context_inference/v1` schema:
 
 ```python
-from ledgerproof_ai21 import LedgerProofAI21, LongContextAttestation
+from ai21_ledgerproof import LedgerProofAI21, LongContextAttestation
 
 client = LedgerProofAI21(
     deployer_id="acme-legaltech-eu",
@@ -83,7 +83,7 @@ and memory characteristics than pure-Transformer models. Deployers can record th
 architectural family inline with the Article 50 receipt:
 
 ```python
-from ledgerproof_ai21 import JambaHybridAttestation, LedgerProofAI21
+from ai21_ledgerproof import JambaHybridAttestation, LedgerProofAI21
 
 client = LedgerProofAI21(
     deployer_id="acme-corp-eu",

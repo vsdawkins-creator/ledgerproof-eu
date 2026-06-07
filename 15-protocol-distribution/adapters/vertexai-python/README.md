@@ -60,7 +60,7 @@ pip install ledgerproof-vertexai
 
 ```python
 import vertexai
-from ledgerproof_vertexai import LedgerProofGenerativeModel, configure
+from vertexai_ledgerproof import LedgerProofGenerativeModel, configure
 
 vertexai.init(project="my-project", location="europe-west4")
 
@@ -81,7 +81,7 @@ print(resp.text)
 
 ```python
 import vertexai
-from ledgerproof_vertexai import LedgerProofGenerativeModel, configure
+from vertexai_ledgerproof import LedgerProofGenerativeModel, configure
 
 # europe-west4 = Eemshaven, Netherlands
 vertexai.init(project="acme-eu", location="europe-west4")

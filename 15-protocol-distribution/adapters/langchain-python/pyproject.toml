@@ -3,8 +3,8 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ledgerproof-langchain"
-version = "0.1.0"
+name = "langchain-ledgerproof"
+version = "1.0.1"
 description = "LedgerProof adapter for LangChain and LangGraph. Emits EU AI Act Article 50 transparency receipts as a side channel."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -43,7 +43,7 @@ Repository = "https://github.com/ledgerproof/protocol"
 Documentation = "https://ledgerproof.org/docs"
 
 [tool.setuptools.packages.find]
-include = ["ledgerproof_langchain*"]
+include = ["langchain_ledgerproof*"]
 exclude = ["tests*", "examples*"]
 
 [tool.pytest.ini_options]

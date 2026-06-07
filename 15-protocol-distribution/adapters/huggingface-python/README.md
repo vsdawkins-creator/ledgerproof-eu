@@ -27,7 +27,7 @@ the inference ran inside the deployer's controlled perimeter.
 ## 5-minute quickstart (hosted Inference API)
 
 ```python
-from ledgerproof_huggingface import LedgerProofInferenceClient
+from huggingface_ledgerproof import LedgerProofInferenceClient
 
 client = LedgerProofInferenceClient(
     deployer_id="urn:eu:deployer:acme-bank-de",
@@ -53,7 +53,7 @@ print(resp.choices[0].message.content)
 
 ```python
 from transformers import pipeline
-from ledgerproof_huggingface import LedgerProofPipeline
+from huggingface_ledgerproof import LedgerProofPipeline
 
 pipe = pipeline("text-generation", model="meta-llama/Llama-3.1-8B-Instruct")
 
@@ -72,7 +72,7 @@ result = lp_pipe("Hello, world", max_new_tokens=20)
 ### 1. InferenceClient wrapper (hosted API)
 
 ```python
-from ledgerproof_huggingface import (
+from huggingface_ledgerproof import (
     LedgerProofInferenceClient,
     LedgerProofAsyncInferenceClient,
 )
@@ -89,7 +89,7 @@ incremental SHA-256 over each chunk (constraint **C6**).
 
 ```python
 from transformers import pipeline
-from ledgerproof_huggingface import LedgerProofPipeline
+from huggingface_ledgerproof import LedgerProofPipeline
 
 pipe = pipeline("text-generation", model="...")
 lp = LedgerProofPipeline(pipe, deployer_id="urn:eu:deployer:acme")
@@ -100,7 +100,7 @@ out = lp("Hello")
 
 ```python
 from huggingface_hub import InferenceClient
-from ledgerproof_huggingface import lpr_track
+from huggingface_ledgerproof import lpr_track
 
 client = InferenceClient(model="meta-llama/Llama-3.1-70B-Instruct")
 
@@ -115,7 +115,7 @@ def ask(question: str):
 
 ```python
 from huggingface_hub import InferenceClient
-from ledgerproof_huggingface import emit_receipt
+from huggingface_ledgerproof import emit_receipt
 
 client = InferenceClient(model="meta-llama/Llama-3.1-70B-Instruct")
 resp = client.chat_completion(messages=[...])
@@ -134,7 +134,7 @@ emit_receipt(resp, deployer_id="urn:eu:deployer:acme", messages=[...])
 ## Custom emitters
 
 ```python
-from ledgerproof_huggingface import (
+from huggingface_ledgerproof import (
     LedgerProofInferenceClient, WebhookEmitter, QueueEmitter,
 )
 

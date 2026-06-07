@@ -38,7 +38,7 @@ This adapter ships four schemas tuned to those DeepSeek-specific scenarios:
 ## 5-minute quickstart
 
 ```python
-from ledgerproof_deepseek import LedgerProofDeepSeek
+from deepseek_ledgerproof import LedgerProofDeepSeek
 
 # Defaults: base_url=https://api.deepseek.com, api_key=$DEEPSEEK_API_KEY
 client = LedgerProofDeepSeek(
@@ -61,7 +61,7 @@ print(resp.choices[0].message.content)
 ### 1. Client wrapper (recommended)
 
 ```python
-from ledgerproof_deepseek import LedgerProofDeepSeek, LedgerProofAsyncDeepSeek
+from deepseek_ledgerproof import LedgerProofDeepSeek, LedgerProofAsyncDeepSeek
 
 client = LedgerProofDeepSeek(deployer_id="urn:eu:deployer:acme")
 async_client = LedgerProofAsyncDeepSeek(deployer_id="urn:eu:deployer:acme")
@@ -76,7 +76,7 @@ over each chunk (constraint **C6**).
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_deepseek import lpr_track
+from deepseek_ledgerproof import lpr_track
 
 client = OpenAI(
     api_key=os.environ["DEEPSEEK_API_KEY"],
@@ -93,7 +93,7 @@ def ask(question: str, *, messages):
 ```python
 import os
 from openai import OpenAI
-from ledgerproof_deepseek import emit_receipt
+from deepseek_ledgerproof import emit_receipt
 
 client = OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
 resp = client.chat.completions.create(
@@ -111,7 +111,7 @@ text and falls inside the Article 50 transparency surface for any deployer who
 surfaces it to users (or makes downstream decisions based on it).
 
 ```python
-from ledgerproof_deepseek import LedgerProofDeepSeek
+from deepseek_ledgerproof import LedgerProofDeepSeek
 
 client = LedgerProofDeepSeek(
     deployer_id="urn:eu:deployer:acme",
@@ -136,7 +136,7 @@ discards the trace, it is still recorded by hash in the receipt.
 ## Code generation (`deepseek-coder`)
 
 ```python
-from ledgerproof_deepseek import LedgerProofDeepSeek
+from deepseek_ledgerproof import LedgerProofDeepSeek
 
 client = LedgerProofDeepSeek(
     deployer_id="urn:eu:deployer:acme",
@@ -159,7 +159,7 @@ user.
 ## Custom emitters
 
 ```python
-from ledgerproof_deepseek import LedgerProofDeepSeek, WebhookEmitter, MultiEmitter, LogEmitter
+from deepseek_ledgerproof import LedgerProofDeepSeek, WebhookEmitter, MultiEmitter, LogEmitter
 
 client = LedgerProofDeepSeek(
     deployer_id="urn:eu:deployer:acme",
